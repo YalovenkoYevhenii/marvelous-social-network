@@ -32,7 +32,7 @@ const Header = () => {
     arrForRes.push(second + elements)
     return arrForRes
   }
-  const han
+  
   
   return (
     <div style={styles}>
