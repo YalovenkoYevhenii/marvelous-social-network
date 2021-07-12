@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PaginationButton from './PaginationButton';
 
 const Header = () => {
-  const [items, setItems] = useState([0, 4]);
+  const [items] = useState([0, 4]);
 
   const styles = {
     backgroundColor: 'gray',
@@ -25,21 +25,20 @@ const Header = () => {
   addPages();
   const foo = () => {
     const elements = 4;
-    const arrForRes = []
-    let first = items[0];
-    let second = items[1];
-    arrForRes.push(first + elements)
-    arrForRes.push(second + elements)
-    return arrForRes
-  }
-  
-  
+    const arrForRes = [];
+    const first = items[0];
+    const second = items[1];
+    arrForRes.push(first + elements);
+    arrForRes.push(second + elements);
+    return arrForRes;
+  };
+
   return (
     <div style={styles}>
       <strong>Header</strong>
       {arr.map((paginationNumber) => (
         <PaginationButton
-          onClick={}
+          onClick={foo}
           num={paginationNumber}
           key={paginationNumber}
         />
