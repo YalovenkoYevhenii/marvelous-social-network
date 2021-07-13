@@ -1,18 +1,31 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import PrivateRoute from '../../../components/PrivateRoute/PrivateRoute';
-import DashboardPage from '../../../pages/profilePages/DashboardPage/DashboardPage';
-import Header from '../../../components/Header/Header';
+import {
+  rootPath, profilePath, postsPath, settingsPath, authPath,
+} from '../../../utils/routes';
+
+import DashboardPage from '../../../pages/DashboardPage/DashboardPage';
+import PostsPage from '../../../pages/PostsPage/PostsPage';
+import ProfilePage from '../../../pages/ProfilePage/ProfilePage';
+import SettingsPage from '../../../pages/SettingsPage/SettingsPage';
 import AuthentificationPage from '../../../pages/AuthentificationPage/AuthentificationPage';
+
+import NavBar from '../../../components/NavBar/NavBar';
 
 const AppLayoutContent = () => (
   <>
-    <Header />
-    <AuthentificationPage />
+    <header>
+      Приветули
+      <NavBar />
+    </header>
     <Switch>
-      <PrivateRoute exact path="/" component={DashboardPage} />
-
+      <PrivateRoute exact path={rootPath} component={DashboardPage} />
+      <PrivateRoute path={profilePath} component={ProfilePage} />
+      <PrivateRoute path={postsPath} component={PostsPage} />
+      <PrivateRoute path={settingsPath} component={SettingsPage} />
+      <Route path={authPath} component={AuthentificationPage} />
     </Switch>
   </>
 );

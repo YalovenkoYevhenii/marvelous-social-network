@@ -10,7 +10,7 @@ import { isAuthentificated } from '../../utils/helpers/isAuthentificated';
 }; */
 
 // eslint-disable-next-line react/prop-types
-const PrivateRoute = ({ component: Component, ...rest }) => (isAuthentificated ? <Route component={Component} {...rest} /> : <Redirect to="/login" />
+const PrivateRoute = ({ component: Component, ...rest }) => (isAuthentificated ? <Route component={Component} {...rest} /> : <Redirect to="/auth" />
 );
 
 export default PrivateRoute;

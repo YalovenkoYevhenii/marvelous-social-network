@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DashboardPageContent = () => (
-  <div />
+  <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, culpa!  </div>
 );
 
 export default DashboardPageContent;
