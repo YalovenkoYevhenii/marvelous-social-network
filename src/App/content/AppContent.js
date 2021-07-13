@@ -1,9 +1,8 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import AppLayout from './layouts/AppLayout/AppLayout';
+import AppLayout from '../../layouts/AppLayout/AppLayout';
 
-function App() {
+function AppContent() {
   return (
     <Router>
       <AppLayout />
@@ -11,4 +10,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppContent;
