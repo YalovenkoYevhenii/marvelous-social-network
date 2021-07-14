@@ -1,11 +1,17 @@
-/* import React from 'react';
+import React, { useState } from 'react';
 
-import LoginForm from '../../../components/forms/LoginForm/LoginForm';
+import LoginForm from '../../../components/forms/SignInForm/SignInForm';
+import SignUp from '../../../components/forms/SignUpForm/SignUpForm';
+import ButtonGroupOfTwo from '../../../components/ButtonGroupOfTwo/ButtonGroupOfTwo';
 
-const AuthentificationPageContent = () => (
-  <div>
-    <LoginForm />
-  </div>
-);
+const AuthentificationPageContent = () => {
+  const [form, setForm] = useState(true);
+  return (
+    <div>
+      <ButtonGroupOfTwo setFormType={setForm} />
+      { form ? <LoginForm /> : <SignUp /> }
+    </div>
+  );
+};
 
-export default AuthentificationPageContent; */
+export default AuthentificationPageContent;

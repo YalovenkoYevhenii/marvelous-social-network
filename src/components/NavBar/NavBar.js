@@ -2,39 +2,47 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import {
-  rootPath, profilePath, postsPath, settingsPath,
-} from '../../utils/routes';
+  ROOT_PATH, PROFILE_PATH, POSTS_PATH, SETTINGS_PATH,
+} from '../../constants/routes';
+
+import { Ul, Li } from './styled';
 
 const NavBar = () => {
   const probe = 'link to ';
   return (
     <nav>
-      <ul>
-        <li>
-          <Link to={rootPath}>
+      <Ul>
+        <Li>
+          <Link to={ROOT_PATH}>
             {probe}
             dash
           </Link>
-        </li>
-        <li>
-          <Link to={profilePath}>
+        </Li>
+        <Li>
+          <Link to={PROFILE_PATH}>
             {probe}
             profile
           </Link>
-        </li>
-        <li>
-          <Link to={postsPath}>
+        </Li>
+        <Li>
+          <Link to={POSTS_PATH}>
             {probe}
             posts
           </Link>
-        </li>
-        <li>
-          <Link to={settingsPath}>
+        </Li>
+        <Li>
+          <Link to={SETTINGS_PATH}>
             {probe}
             settings
           </Link>
-        </li>
-      </ul>
+        </Li>
+        <Li>
+          <Link to="/auth">
+            {probe}
+            auth
+          </Link>
+        </Li>
+      </Ul>
     </nav>
   );
 };

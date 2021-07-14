@@ -1,7 +1,7 @@
 import React from 'react';
 
 import AppContent from './content/AppContent';
-import { AppProvider } from './context/contextReExport';
+import { AppProvider } from './context';
 
 function App() {
   return (

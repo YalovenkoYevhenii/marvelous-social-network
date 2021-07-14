@@ -1,13 +1,30 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import { AppLayoutProvider } from './context/contextReExports';
+import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
+import {
+  ROOT_PATH, AUTH_PATH, PROFILE_PATH, POSTS_PATH, SETTINGS_PATH,
+} from '../../constants/routes';
 
-import AppLayoutContent from './content/AppLayoutContent';
+import DashboardPage from '../../pages/DashboardPage';
+import PostsPage from '../../pages/PostsPage';
+import ProfilePage from '../../pages/ProfilePage';
+import SettingsPage from '../../pages/SettingsPage';
+import AuthentificationPage from '../../pages/AuthentificationPage';
 
-const AppLayout = () => (
-  <AppLayoutProvider>
-    <AppLayoutContent />
-  </AppLayoutProvider>
+import Header from '../../components/Header/Header';
+
+const AppLayoutContent = () => (
+  <>
+    <Header />
+    <Switch>
+      <PrivateRoute exact path={ROOT_PATH} component={DashboardPage} />
+      <PrivateRoute path={PROFILE_PATH} component={ProfilePage} />
+      <PrivateRoute path={POSTS_PATH} component={PostsPage} />
+      <PrivateRoute path={SETTINGS_PATH} component={SettingsPage} />
+      <Route path={AUTH_PATH} component={AuthentificationPage} />
+    </Switch>
+  </>
 );
 
-export default AppLayout;
+export default AppLayoutContent;

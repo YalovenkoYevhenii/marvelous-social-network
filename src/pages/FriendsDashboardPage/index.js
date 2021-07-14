@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FriendsDashboardPageProvider } from './context/contextReExport';
+import { FriendsDashboardPageProvider } from './context';
 
 import FriendsDashboardPageContens from './content/FriendsDashboardPageContens';
 

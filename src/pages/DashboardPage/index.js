@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DashboardPageProvider } from './context/contextReExport';
+import { DashboardPageProvider } from './context';
 
 import DashboardPageContent from './content/DashboardPageContent';
 

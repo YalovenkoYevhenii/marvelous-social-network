@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PostsPageProvider } from './context/contextReExport';
+import { PostsPageProvider } from './context';
 
 import PostsPageContent from './content/PostsPageContent';
 

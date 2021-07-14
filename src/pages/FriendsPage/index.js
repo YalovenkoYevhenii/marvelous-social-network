@@ -1,5 +1,5 @@
 import React from 'react';
-import { FriendsPageProvider } from './context/contextReExport';
+import { FriendsPageProvider } from './context';
 
 import FriendsPageContent from './content/FriendsPageContent';
 

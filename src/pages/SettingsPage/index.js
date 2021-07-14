@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SettingsPageProvider } from './context/contextReExport';
+import { SettingsPageProvider } from './context';
 
 import SettingsPageContent from './content/SettingsPageContent';
 

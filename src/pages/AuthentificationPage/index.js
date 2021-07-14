@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AuthentificationPageProvider } from './context/contextReExport';
+import { AuthentificationPageProvider } from './context';
 
 import AuthentificationPageContent from './content/AuthentificationPageContent';
 
