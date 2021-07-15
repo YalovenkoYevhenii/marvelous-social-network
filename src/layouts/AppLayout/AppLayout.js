@@ -12,7 +12,8 @@ import ProfilePage from '../../pages/ProfilePage';
 import SettingsPage from '../../pages/SettingsPage';
 import AuthentificationPage from '../../pages/AuthentificationPage';
 
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const AppLayoutContent = () => (
   <>
@@ -24,6 +25,7 @@ const AppLayoutContent = () => (
       <PrivateRoute path={SETTINGS_PATH} component={SettingsPage} />
       <Route path={AUTH_PATH} component={AuthentificationPage} />
     </Switch>
+    <Footer />
   </>
 );
 
