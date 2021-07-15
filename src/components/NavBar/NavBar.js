@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import {
   ROOT_PATH, PROFILE_PATH, POSTS_PATH, SETTINGS_PATH,
 } from '../../constants/routes';
 
-import { Ul, Li } from './styled';
+import { Ul, Li, StyledLink } from './styled';
 
 const NavBar = () => {
   const probe = 'link to ';
@@ -13,34 +12,34 @@ const NavBar = () => {
     <nav>
       <Ul>
         <Li>
-          <Link to={ROOT_PATH}>
+          <StyledLink to={ROOT_PATH}>
             {probe}
             dash
-          </Link>
+          </StyledLink>
         </Li>
         <Li>
-          <Link to={PROFILE_PATH}>
+          <StyledLink to={PROFILE_PATH}>
             {probe}
             profile
-          </Link>
+          </StyledLink>
         </Li>
         <Li>
-          <Link to={POSTS_PATH}>
+          <StyledLink to={POSTS_PATH}>
             {probe}
             posts
-          </Link>
+          </StyledLink>
         </Li>
         <Li>
-          <Link to={SETTINGS_PATH}>
+          <StyledLink to={SETTINGS_PATH}>
             {probe}
             settings
-          </Link>
+          </StyledLink>
         </Li>
         <Li>
-          <Link to="/auth">
+          <StyledLink to="/auth">
             {probe}
             auth
-          </Link>
+          </StyledLink>
         </Li>
       </Ul>
     </nav>

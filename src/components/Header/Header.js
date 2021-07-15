@@ -1,5 +1,6 @@
+/* eslint-disable global-require */
 import React from 'react';
-import { StyledHeader } from './styled';
+import { StyledHeader, HeaderContent } from './styled';
 
 import NavBar from '../NavBar/NavBar';
 
@@ -7,10 +8,12 @@ const Header = () => {
   const probe = 'Logotype';
   return (
     <StyledHeader>
-      <div>
-        {probe}
-      </div>
-      <NavBar />
+      <HeaderContent>
+        <div>
+          {probe}
+        </div>
+        <NavBar />
+      </HeaderContent>
     </StyledHeader>
   );
 };
