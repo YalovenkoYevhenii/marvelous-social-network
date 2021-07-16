@@ -27,14 +27,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+const SignUp = () => {
   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Sign up
+          SIGN UP
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -98,4 +98,6 @@ export default function SignUp() {
       </div>
     </Container>
   );
-}
+};
+
+export default SignUp;

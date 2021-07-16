@@ -1,10 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -22,16 +26,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
-  const classes = useStyles();
+const SignIn = () => {
+  const { paper, form, submit } = useStyles();
+  const [icon, setIcon] = useState(false);
+  const [inputType, setInputType] = useState('password');
+
+  const handlerChangeIcon = () => {
+    if (icon) return setIcon(false);
+    return setIcon(true);
+  };
+  const handlerShowPassword = () => {
+    handlerChangeIcon();
+    if (inputType === 'password') return setInputType('text');
+    return setInputType('password');
+  };
 
   return (
     <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+      <div className={paper}>
         <Typography component="h1" variant="h5">
-          Sign in
+          SIGN IN
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -50,16 +66,25 @@ export default function SignIn() {
             fullWidth
             name="password"
             label="Password"
-            type="password"
+            type={inputType}
             id="password"
             autoComplete="current-password"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment postition="end">
+                  <IconButton onClick={handlerShowPassword}>
+                    { icon ? <VisibilityOff /> : <Visibility /> }
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            className={submit}
           >
             Sign In
           </Button>
@@ -67,4 +92,6 @@ export default function SignIn() {
       </div>
     </Container>
   );
-}
+};
+
+export default SignIn;

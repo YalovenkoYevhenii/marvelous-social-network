@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
-import LoginForm from '../../../components/forms/SignInForm';
-import SignUp from '../../../components/forms/SignUpForm';
-import ButtonGroupOfTwo from '../../../components/ButtonGroupOfTwo';
+import LoginForm from './SignInForm';
+import SignUp from './SignUpForm';
+import ButtonGroupOfTwo from './ButtonGroup';
 import { Main } from './styles';
 
 const AuthentificationPageContent = () => {

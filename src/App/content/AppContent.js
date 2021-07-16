@@ -7,6 +7,13 @@ import AppLayout from '../../layouts/AppLayout/AppLayout';
 
 function AppContent() {
   const theme = createTheme({
+    overrides: {
+      MuiOutlinedInput: {
+        adornedEnd: {
+          paddingRight: 0,
+        },
+      },
+    },
     palette: {
       primary: {
         main: '#257985',
