@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -26,20 +27,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn = () => {
+const SignIn = ({
+  icon, handlerShowPassword, setIcon,
+  inputValues: {
+    email, password, errorEmail, errorPassword, helperTextEmail, helperTextPass,
+  },
+  handlerChange, handlerValidate,
+}) => {
   const { paper, form, submit } = useStyles();
-  const [icon, setIcon] = useState(false);
-  const [inputType, setInputType] = useState('password');
 
-  const handlerChangeIcon = () => {
-    if (icon) return setIcon(false);
-    return setIcon(true);
-  };
-  const handlerShowPassword = () => {
-    handlerChangeIcon();
-    if (inputType === 'password') return setInputType('text');
-    return setInputType('password');
-  };
+  useEffect(() => {
+    setIcon(false);
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -47,8 +46,12 @@ const SignIn = () => {
         <Typography component="h1" variant="h5">
           SIGN IN
         </Typography>
-        <form className={form} noValidate>
+        <form onSubmit={handlerValidate} className={form} noValidate>
           <TextField
+            error={errorEmail}
+            helperText={helperTextEmail}
+            onChange={handlerChange}
+            value={email}
             variant="outlined"
             margin="normal"
             required
@@ -60,20 +63,24 @@ const SignIn = () => {
             autoFocus
           />
           <TextField
+            error={errorPassword}
+            helperText={helperTextPass}
+            onChange={handlerChange}
+            value={password}
             variant="outlined"
             margin="normal"
             required
             fullWidth
             name="password"
             label="Password"
-            type={inputType}
+            type={icon ? 'text' : 'password'}
             id="password"
             autoComplete="current-password"
             InputProps={{
               endAdornment: (
                 <InputAdornment postition="end">
                   <IconButton onClick={handlerShowPassword}>
-                    { icon ? <VisibilityOff /> : <Visibility /> }
+                    { icon ? <Visibility /> : <VisibilityOff /> }
                   </IconButton>
                 </InputAdornment>
               ),

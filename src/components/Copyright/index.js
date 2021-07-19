@@ -9,6 +9,7 @@ const useStyles = makeStyles({
 
   },
 });
+
 const Copyright = () => {
   const { copyright } = useStyles();
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyledFooter } from './styles';
 
+import { StyledFooter } from './styles';
 import Copyright from '../Copyright';
 
 const Footer = () => (
