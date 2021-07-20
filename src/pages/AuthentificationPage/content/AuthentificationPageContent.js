@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useCallback } from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
@@ -5,6 +6,7 @@ import LoginForm from './SignInForm';
 import SignUp from './SignUpForm';
 import ButtonGroupOfTwo from './ButtonGroup';
 import { Main } from './styles';
+import { validationSchema } from '../context/context';
 
 const SignUpTheme = createTheme({
   overrides: {
@@ -25,38 +27,15 @@ const SignUpTheme = createTheme({
 });
 
 const AuthentificationPageContent = () => {
+  const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('');
-  const [inputValues, setInputValues] = useState({
-    email: '', password: '', errorEmail: false, errorPassword: false, helperTextEmail: '', helperTextPass: '',
+  const [userData, setUserData] = useState({
+    firstName: '', lastName: '', email: '', password: '',
   });
-
-  const handlerChange = (e) => {
-    setInputValues({ ...inputValues, [e.target.name]: e.target.value });
-  };
-
-  const validatePassword = (password) => {
-    const regexp = /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$/;
-    return regexp.test(password);
-  };
-
-  const validateEmail = (email) => {
-    const regexp = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
-    return regexp.test(email);
-  };
-
-  const handlerValidate = (e) => {
-    switch (e.target.name) {
-      case 'password':
-        if (!(validatePassword(e.target.value))) setInputValues({ ...inputValues, errorPassword: true, helperTextPass: 'Incorrect entry. Please try again' });
-        if (validatePassword(e.target.value)) setInputValues('');
-        break;
-      case 'email':
-        if (!(validateEmail(e.target.value))) setInputValues({ ...inputValues, errorEmail: true, helperTextEmail: 'Incorrect entry. Please try again' });
-        break;
-      default:
-    }
-  };
+  const [inputErrors, setInputErrors] = useState({
+    firstName: '', lastName: '', email: '', password: '',
+  });
 
   const handlerAuthForm = useCallback((value) => () => setForm(value), []);
 
@@ -65,8 +44,23 @@ const AuthentificationPageContent = () => {
     if (value) setCurrentTheme('');
   }, []);
 
-  const [icon, setIcon] = useState(false);
   const handlerShowPassword = () => setIcon((prev) => !prev);
+  const handlerInputValues = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const handlerValidateForm = (e) => {
+    e.preventDefault();
+    validationSchema.validate(userData, { abortEarly: false })
+      .then((validatedUserData) => console.log(validatedUserData))
+      .catch((err) => {
+        const arr = err.inner;
+        arr.forEach(({ message, path }) => (path in inputErrors) && setInputErrors((prev) => ({ ...prev, [path]: message })));
+      });
+  };
+  setTimeout(() => {
+    console.log(inputErrors);
+  }, 1000);
 
   return (
     <Main>
@@ -74,15 +68,16 @@ const AuthentificationPageContent = () => {
       <ThemeProvider theme={currentTheme}>
         { form ? (
           <LoginForm
-            handlerValidate={handlerValidate}
-            handlerChange={handlerChange}
             setIcon={setIcon}
             icon={icon}
             handlerShowPassword={handlerShowPassword}
-            inputValues={inputValues}
           />
         ) : (
           <SignUp
+            handlerInputValues={handlerInputValues}
+            handlerValidateForm={handlerValidateForm}
+            inputErrors={inputErrors}
+            userData={userData}
             setIcon={setIcon}
             icon={icon}
             handlerShowPassword={handlerShowPassword}

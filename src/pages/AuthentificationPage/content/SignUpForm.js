@@ -32,21 +32,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
+const SignUp = ({
+  icon, handlerShowPassword, setIcon, handlerValidateForm, handlerInputValues, userData: {
+    firstName, lastName, email, password,
+  }, inputErrors: {
+    firstName: firstNameError, lastName: lastNameError, email: emailError, password: passwordError,
+  },
+}) => {
   const classes = useStyles();
   useEffect(() => {
     setIcon(false);
   }, []);
+
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           SIGN UP
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={handlerValidateForm} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+                value={firstName}
+                onChange={handlerInputValues}
+                error={!!firstNameError}
+                helperText={firstNameError}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -59,6 +70,10 @@ const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                value={lastName}
+                onChange={handlerInputValues}
+                error={!!lastNameError}
+                helperText={lastNameError}
                 variant="outlined"
                 required
                 fullWidth
@@ -70,6 +85,10 @@ const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                value={email}
+                onChange={handlerInputValues}
+                error={!!emailError}
+                helperText={emailError}
                 variant="outlined"
                 required
                 fullWidth
@@ -81,6 +100,10 @@ const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                value={password}
+                onChange={handlerInputValues}
+                error={!!passwordError}
+                helperText={passwordError}
                 variant="outlined"
                 required
                 fullWidth

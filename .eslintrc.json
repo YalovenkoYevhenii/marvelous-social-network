@@ -41,4 +41,5 @@
     "globals": {
         "localStorage": true
     }
+
 }

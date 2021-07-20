@@ -27,13 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn = ({
-  icon, handlerShowPassword, setIcon,
-  inputValues: {
-    email, password, errorEmail, errorPassword, helperTextEmail, helperTextPass,
-  },
-  handlerChange, handlerValidate,
-}) => {
+const SignIn = ({ icon, handlerShowPassword, setIcon }) => {
   const { paper, form, submit } = useStyles();
 
   useEffect(() => {
@@ -46,12 +40,8 @@ const SignIn = ({
         <Typography component="h1" variant="h5">
           SIGN IN
         </Typography>
-        <form onSubmit={handlerValidate} className={form} noValidate>
+        <form className={form} noValidate>
           <TextField
-            error={errorEmail}
-            helperText={helperTextEmail}
-            onChange={handlerChange}
-            value={email}
             variant="outlined"
             margin="normal"
             required
@@ -63,10 +53,6 @@ const SignIn = ({
             autoFocus
           />
           <TextField
-            error={errorPassword}
-            helperText={helperTextPass}
-            onChange={handlerChange}
-            value={password}
             variant="outlined"
             margin="normal"
             required
