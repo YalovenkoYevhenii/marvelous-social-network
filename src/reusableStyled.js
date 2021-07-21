@@ -5,6 +5,7 @@ export const Container = styled.div`
   width: 80vw;
   margin: 0 auto;
 `;
+
 export const StyledLink = styled(Link)`
   text-decoration: none;
   display: block;

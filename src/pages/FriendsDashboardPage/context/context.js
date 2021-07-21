@@ -12,6 +12,4 @@ const Provider = ({ children }) => {
   );
 };
 
-export default Provider;
-
 export { Context, useContextPage, Provider };

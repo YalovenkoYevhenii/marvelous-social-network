@@ -1,32 +1,15 @@
 /* eslint-disable max-len */
 import React, { useState, useCallback } from 'react';
-import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 
-import LoginForm from './SignInForm';
+import { useContextAuthentificationPage } from '../context';
+import SignIn from './SignInForm';
 import SignUp from './SignUpForm';
 import ButtonGroupOfTwo from './ButtonGroup';
 import { Main } from './styles';
-import { validationSchema } from '../context/context';
-
-const SignUpTheme = createTheme({
-  overrides: {
-    MuiOutlinedInput: {
-      adornedEnd: {
-        paddingRight: 0,
-      },
-    },
-  },
-  palette: {
-    primary: {
-      main: '#FF4447',
-    },
-    secondary: {
-      main: '#257985',
-    },
-  },
-});
 
 const AuthentificationPageContent = () => {
+  const { SignUpTheme, validationSchema } = useContextAuthentificationPage();
   const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('');
@@ -48,26 +31,22 @@ const AuthentificationPageContent = () => {
   const handlerInputValues = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
-
   const handlerValidateForm = (e) => {
     e.preventDefault();
     validationSchema.validate(userData, { abortEarly: false })
-      .then((validatedUserData) => console.log(validatedUserData))
+      .then((validatedUserData) => validatedUserData)
       .catch((err) => {
         const arr = err.inner;
         arr.forEach(({ message, path }) => (path in inputErrors) && setInputErrors((prev) => ({ ...prev, [path]: message })));
       });
   };
-  setTimeout(() => {
-    console.log(inputErrors);
-  }, 1000);
 
   return (
     <Main>
       <ButtonGroupOfTwo handlerAuthForm={handlerAuthForm} handlerThemeForm={handlerThemeForm} />
       <ThemeProvider theme={currentTheme}>
         { form ? (
-          <LoginForm
+          <SignIn
             setIcon={setIcon}
             icon={icon}
             handlerShowPassword={handlerShowPassword}

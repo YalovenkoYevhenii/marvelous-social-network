@@ -9,5 +9,4 @@ export const Ul = styled.ul`
 
 export const Li = styled.li`
   padding: 1rem;
-
 `;
