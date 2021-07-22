@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {
   createContext, useContext,
 } from 'react';
@@ -7,15 +8,10 @@ const Context = createContext(null);
 const useContextPage = () => useContext(Context);
 const url = 'http://localhost:3000/users';
 
-// eslint-disable-next-line react/prop-types
 const Provider = ({ children }) => {
-  // const [user, setUser] = useState(null);
-
   const { data1 } = useFetch(url, 'GET');
 
-  console.log(data1);
-
-  const data = { user: 1 };
+  const data = { data1 };
   return (
     <Context.Provider value={data}>
       {children}

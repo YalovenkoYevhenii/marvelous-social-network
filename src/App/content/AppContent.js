@@ -19,7 +19,7 @@ function AppContent() {
         main: '#257985',
       },
       secondary: {
-        main: '#FF4447',
+        main: '#5c6bc0',
       },
     },
   });

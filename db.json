@@ -2,9 +2,37 @@
   "users": [
     {
       "id": 1,
-      "firstName": "json-server",
-      "lastName": "typicode",
+      "firstName": "Вася",
+      "lastName": "Головин",
       "email": "doorofroot@yahoo.com",
+      "password": "qwerty1"
+    },
+    {
+      "id": 2,
+      "firstName": "Петя",
+      "lastName": "Красин",
+      "email": "qwe@yahoo.com",
+      "password": "qwerty1"
+    },
+    {
+      "id": 3,
+      "firstName": "Женя",
+      "lastName": "Летин",
+      "email": "asd@yahoo.com",
+      "password": "qwerty1"
+    },
+    {
+      "id": 4,
+      "firstName": "Саша",
+      "lastName": "Федин",
+      "email": "zxc@yahoo.com",
+      "password": "qwerty1"
+    },
+    {
+      "id": 5,
+      "firstName": "Паша",
+      "lastName": "Весин",
+      "email": "rty@yahoo.com",
       "password": "qwerty1"
     }
   ]

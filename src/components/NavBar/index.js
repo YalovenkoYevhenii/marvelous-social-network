@@ -1,39 +1,38 @@
 import React from 'react';
 
 import {
-  ROOT_PATH, PROFILE_PATH, POSTS_PATH, SETTINGS_PATH,
+  ROOT_PATH, PROFILE_PATH, POSTS_PATH, SETTINGS_PATH, AUTH_PATH,
 } from '../../constants/routes';
 
-import { Ul, Li } from './styles';
-import { StyledLink } from '../../reusableStyled';
+import { Ul, Li, NavLinkStyled } from './styles';
 
 const NavBar = () => (
   <nav>
     <Ul>
       <Li>
-        <StyledLink to={ROOT_PATH}>
+        <NavLinkStyled to={ROOT_PATH} exact>
           dash
-        </StyledLink>
+        </NavLinkStyled>
       </Li>
       <Li>
-        <StyledLink to={PROFILE_PATH}>
+        <NavLinkStyled to={PROFILE_PATH}>
           profile
-        </StyledLink>
+        </NavLinkStyled>
       </Li>
       <Li>
-        <StyledLink to={POSTS_PATH}>
+        <NavLinkStyled to={POSTS_PATH}>
           posts
-        </StyledLink>
+        </NavLinkStyled>
       </Li>
       <Li>
-        <StyledLink to={SETTINGS_PATH}>
+        <NavLinkStyled to={SETTINGS_PATH}>
           settings
-        </StyledLink>
+        </NavLinkStyled>
       </Li>
       <Li>
-        <StyledLink to="/auth">
+        <NavLinkStyled to={AUTH_PATH}>
           auth
-        </StyledLink>
+        </NavLinkStyled>
       </Li>
     </Ul>
   </nav>
