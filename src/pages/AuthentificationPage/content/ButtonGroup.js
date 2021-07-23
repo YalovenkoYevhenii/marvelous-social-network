@@ -23,7 +23,7 @@ const ButtonGroupOfTwo = ({ handlerAuthForm, handlerThemeForm }) => {
         color="primary"
         size="large"
       >
-        Sign In
+        <strong>Sign In</strong>
       </Button>
       <Button
         className={button}
@@ -33,7 +33,7 @@ const ButtonGroupOfTwo = ({ handlerAuthForm, handlerThemeForm }) => {
         color="secondary"
         size="large"
       >
-        Sign Up
+        <strong>Sign Up</strong>
       </Button>
     </ButtonGroup>
   );

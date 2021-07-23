@@ -27,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn = ({ icon, handlerShowPassword, setIcon }) => {
+const SignIn = ({
+  icon, handlerShowPassword, setIcon, getUser,
+}) => {
   const { paper, form, submit } = useStyles();
 
   useEffect(() => {
@@ -40,7 +42,7 @@ const SignIn = ({ icon, handlerShowPassword, setIcon }) => {
         <Typography component="h1" variant="h5">
           SIGN IN
         </Typography>
-        <form className={form} noValidate>
+        <form onSubmit={getUser} className={form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"

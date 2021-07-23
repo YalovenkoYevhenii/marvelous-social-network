@@ -8,7 +8,7 @@ import { useContextApp } from '../../../App/context';
 const Context = createContext(null);
 const useContextPage = () => useContext(Context);
 
-const validationSchema = object().shape({
+export const validationSchema = object().shape({
   firstName: string().required('First name is required'),
   lastName: string().required(),
   email: string().email().required(),

@@ -1,13 +1,17 @@
 /* eslint-disable max-len */
 import React, { useState, useCallback } from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 
-import { useContextAuthentificationPage } from '../context';
+/* import { useContextAuthentificationPage } from '../context'; */
+import useFetch from '../../../hooks/useFetch';
+import { ROOT_PATH } from '../../../constants/routes';
+
 import SignIn from './SignInForm';
 import SignUp from './SignUpForm';
 import ButtonGroupOfTwo from './ButtonGroup';
 import { Main } from './styles';
-import useFetch from '../../../hooks/useFetch';
+import { validationSchema } from '../context/context';
 
 const SignUpTheme = createTheme({
   overrides: {
@@ -19,7 +23,7 @@ const SignUpTheme = createTheme({
   },
   palette: {
     primary: {
-      main: '#5c6bc0',
+      main: '#ff7043',
     },
     secondary: {
       main: '#257985',
@@ -30,7 +34,6 @@ const SignUpTheme = createTheme({
 const url = 'http://localhost:3000/users';
 
 const AuthentificationPageContent = () => {
-  const { validationSchema } = useContextAuthentificationPage();
   const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('');
@@ -41,6 +44,10 @@ const AuthentificationPageContent = () => {
     firstName: '', lastName: '', email: '', password: '',
   });
 
+  /*  const { validationSchema } = useContextAuthentificationPage(); */
+  const history = useHistory();
+  const { data, error } = useFetch(url, 'GET');
+
   const handlerAuthForm = useCallback((value) => () => setForm(value), []);
   const handlerThemeForm = useCallback((value) => () => {
     if (!value) setCurrentTheme(SignUpTheme);
@@ -48,29 +55,39 @@ const AuthentificationPageContent = () => {
   }, []);
 
   const handlerShowPassword = () => setIcon((prev) => !prev);
+
   const handlerInputValues = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
   const handlerValidateForm = (e) => {
     e.preventDefault();
     validationSchema.validate(userData, { abortEarly: false })
-      .then((validatedUserData) => validatedUserData)
+      .then((validatedUserData) => console.log(validatedUserData))
       .catch((err) => {
         const arr = err.inner;
         arr.forEach(({ message, path }) => (path in inputErrors) && setInputErrors((prev) => ({ ...prev, [path]: message })));
       });
   };
-  const showSignInError((error) => {
-    console.log(error)
-  })
+
+  const showSignInError = ((err) => {
+    console.log(err);
+  });
+
   const getUser = (e) => {
-    const { data, error } = useFetch(url, 'GET');
-    if (  ) {
-      const result = data.find((item) => {
-        if (item.password === e.target.value && item.email === e.target.email) return item;
-      });
+    e.preventDefault();
+    let User = {};
+    if (error === null) {
+      const result = data.find((item) => item.email === e.target[0].value && item.password === e.target[2].value);
+      if (result) {
+        User = result;
+        console.log(User);
+        history.push(ROOT_PATH);
+      } else {
+        showSignInError('User not found. Please try again');
+      }
     }
-    showSignInError(error);
+    if (!(error === null)) showSignInError(error);
   };
 
   return (
@@ -79,6 +96,7 @@ const AuthentificationPageContent = () => {
       <ThemeProvider theme={currentTheme}>
         { form ? (
           <SignIn
+            getUser={getUser}
             setIcon={setIcon}
             icon={icon}
             handlerShowPassword={handlerShowPassword}

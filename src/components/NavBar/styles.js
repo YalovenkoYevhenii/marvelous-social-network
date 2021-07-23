@@ -16,12 +16,12 @@ export const Li = styled.li`
 export const NavLinkStyled = styled(NavLink).attrs({
   activeStyle: { color: 'red' },
 })`
-  color: #5c6bc0;
+  color: white;
   text-decoration: none;
   display: block;
   font-size: 1.3rem;
   
   &:hover {
-    color: #FF4447;
+    color: orange;
   }
 `;

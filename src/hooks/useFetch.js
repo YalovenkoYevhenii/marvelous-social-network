@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const useFetch = (url, request) => {
-  const [data, setData1] = useState(null);
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ const useFetch = (url, request) => {
       method: request,
     })
       .then((response) => response.json())
-      .then((response) => setData1(response))
+      .then((response) => setData(response))
       .catch((errorResponse) => setError(errorResponse));
   }, [url, request]);
 
