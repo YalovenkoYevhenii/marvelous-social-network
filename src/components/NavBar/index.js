@@ -39,3 +39,5 @@ const NavBar = () => (
 );
 
 export default NavBar;
+
+// TODO: remove AUTH from the header

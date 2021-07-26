@@ -5,6 +5,8 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 import AppLayout from '../../layouts/AppLayout/AppLayout';
 
+// TODO: move theme from the scope of function
+
 function AppContent() {
   const theme = createTheme({
     overrides: {

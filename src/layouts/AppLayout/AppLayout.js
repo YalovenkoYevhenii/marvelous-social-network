@@ -30,3 +30,5 @@ const AppLayoutContent = () => (
 );
 
 export default AppLayoutContent;
+
+// TODO: add react.lazy for the routes

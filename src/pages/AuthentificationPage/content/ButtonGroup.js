@@ -40,3 +40,5 @@ const ButtonGroupOfTwo = ({ handlerAuthForm, handlerThemeForm }) => {
 };
 
 export default ButtonGroupOfTwo;
+
+// TODO: make vissible tabs

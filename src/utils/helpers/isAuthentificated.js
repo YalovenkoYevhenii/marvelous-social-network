@@ -1,1 +1,3 @@
-export const isAuthentificated = true;
+export const isAuthentificated = false;
+
+// TODO: delete utils folder
