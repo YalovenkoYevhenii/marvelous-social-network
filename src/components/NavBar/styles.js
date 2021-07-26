@@ -25,3 +25,5 @@ export const NavLinkStyled = styled(NavLink).attrs({
     color: orange;
   }
 `;
+
+// TODO: why do you need the rule for the eslint on the begining of the file?

@@ -6,3 +6,5 @@ const useRedirectTo = (PATH) => {
 };
 
 export default useRedirectTo;
+
+// TODO: Do you really need this hook?

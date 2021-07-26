@@ -31,6 +31,8 @@ const SignUpTheme = createTheme({
   },
 });
 
+// TODO: const url move to .env
+
 const url = 'http://localhost:3000/users';
 
 const AuthentificationPageContent = () => {
@@ -46,6 +48,8 @@ const AuthentificationPageContent = () => {
 
   /*  const { validationSchema } = useContextAuthentificationPage(); */
   const history = useHistory();
+  // TODO: why do you need history here?
+
   const { data, error } = useFetch(url, 'GET');
 
   const handlerAuthForm = useCallback((value) => () => setForm(value), []);
@@ -54,11 +58,16 @@ const AuthentificationPageContent = () => {
     if (value) setCurrentTheme('');
   }, []);
 
+  // TODO: use useCallback for handlerShowPassword
+
   const handlerShowPassword = () => setIcon((prev) => !prev);
 
   const handlerInputValues = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
+  // TODO: handlerValidateForm looks like util function and I think that you missed userData in props.
+  // TODO: remove console.log from the function
 
   const handlerValidateForm = (e) => {
     e.preventDefault();
@@ -70,9 +79,20 @@ const AuthentificationPageContent = () => {
       });
   };
 
+  // TODO: for what do you need showSignInError?
+
   const showSignInError = ((err) => {
     console.log(err);
   });
+
+  // TODO: let user in getUser? Are ou sure that you can reuse this let in other components?
+  // TODO: if error === null ??? if(!error)
+
+  // TODO: fou user use state and move it to the app context. If you use let and const, all of them should to start from lowwer case
+  // TODO: with history push logic of app will not work correct (use Redirect)
+
+  // TODO:   if (!(error === null)) showSignInError(error);?????????
+  // TODO: do not use else, use es6 AIRBNB style guide
 
   const getUser = (e) => {
     e.preventDefault();

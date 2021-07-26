@@ -5,6 +5,8 @@ import { StyledHeader, HeaderContent, Logo } from './styles';
 import logo from '../../assets/icons/logo.svg';
 import { StyledLink } from '../../reusableStyled';
 
+// TODO: add space betwwen imports
+
 import NavBar from '../NavBar';
 
 const Header = () => (
