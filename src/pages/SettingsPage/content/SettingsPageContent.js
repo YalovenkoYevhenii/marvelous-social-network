@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SettingsPageContent = () => {
+export const SettingsPageContent = () => {
   const probe = 'this is ';
 
   return (
@@ -10,5 +10,3 @@ const SettingsPageContent = () => {
     </div>
   );
 };
-
-export default SettingsPageContent;

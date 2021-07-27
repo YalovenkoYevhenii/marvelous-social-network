@@ -2,7 +2,7 @@ import React from 'react';
 
 import { SettingsPageProvider } from './context';
 
-import SettingsPageContent from './content/SettingsPageContent';
+import { SettingsPageContent } from './content/SettingsPageContent';
 
 const SettingsPage = () => (
   <SettingsPageProvider>

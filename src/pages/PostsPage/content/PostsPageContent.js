@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PostsPageContent = () => {
+export const PostsPageContent = () => {
   const probe = 'this is ';
   return (
     <div>
@@ -9,5 +9,3 @@ const PostsPageContent = () => {
     </div>
   );
 };
-
-export default PostsPageContent;

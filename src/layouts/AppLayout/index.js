@@ -16,7 +16,7 @@ const ProfilePage = lazy(() => import('../../pages/ProfilePage'));
 const SettingsPage = lazy(() => import('../../pages/SettingsPage'));
 const AuthentificationPage = lazy(() => import('../../pages/AuthentificationPage'));
 
-const AppLayoutContent = () => (
+const AppLayout = () => (
   <>
     <Header />
     <Suspence fallback={<Preloader />}>
@@ -32,4 +32,4 @@ const AppLayoutContent = () => (
   </>
 );
 
-export default AppLayoutContent;
+export default AppLayout;

@@ -33,7 +33,7 @@ const SignUpTheme = createTheme({
 
 const url = 'http://localhost:3000/users';
 
-const AuthentificationPageContent = () => {
+export const AuthentificationPageContent = () => {
   const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('');
@@ -117,5 +117,3 @@ const AuthentificationPageContent = () => {
     </Main>
   );
 };
-
-export default AuthentificationPageContent;

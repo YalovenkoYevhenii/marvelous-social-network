@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProfilePageContent = () => {
+export const ProfilePageContent = () => {
   const probe = 'this is ';
 
   return (
@@ -10,5 +10,3 @@ const ProfilePageContent = () => {
     </div>
   );
 };
-
-export default ProfilePageContent;

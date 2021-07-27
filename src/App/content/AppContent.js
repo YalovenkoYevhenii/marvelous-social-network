@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
-import AppLayout from '../../layouts/AppLayout/AppLayout';
+import AppLayout from '../../layouts/AppLayout';
 
 const theme = createTheme({
   overrides: {
@@ -22,15 +22,13 @@ const theme = createTheme({
     },
   },
 });
-function AppContent() {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <AppLayout />
-      </Router>
-    </ThemeProvider>
-  );
-}
+const AppContent = () => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Router>
+      <AppLayout />
+    </Router>
+  </ThemeProvider>
+);
 
 export default AppContent;
