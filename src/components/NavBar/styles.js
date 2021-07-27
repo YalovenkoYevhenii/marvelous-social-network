@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 

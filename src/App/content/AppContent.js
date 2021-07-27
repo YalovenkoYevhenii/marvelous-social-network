@@ -5,24 +5,24 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 import AppLayout from '../../layouts/AppLayout/AppLayout';
 
+const theme = createTheme({
+  overrides: {
+    MuiOutlinedInput: {
+      adornedEnd: {
+        paddingRight: 0,
+      },
+    },
+  },
+  palette: {
+    primary: {
+      main: '#257985',
+    },
+    secondary: {
+      main: '#ff7043',
+    },
+  },
+});
 function AppContent() {
-  const theme = createTheme({
-    overrides: {
-      MuiOutlinedInput: {
-        adornedEnd: {
-          paddingRight: 0,
-        },
-      },
-    },
-    palette: {
-      primary: {
-        main: '#257985',
-      },
-      secondary: {
-        main: '#ff7043',
-      },
-    },
-  });
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

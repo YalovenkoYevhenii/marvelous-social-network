@@ -40,6 +40,10 @@
     },
     "globals": {
         "localStorage": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
     }
-
 }

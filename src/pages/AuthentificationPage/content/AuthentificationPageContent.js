@@ -77,17 +77,18 @@ const AuthentificationPageContent = () => {
   const getUser = (e) => {
     e.preventDefault();
     let User = {};
-    if (error === null) {
+    if (!error) {
       const result = data.find((item) => item.email === e.target[0].value && item.password === e.target[2].value);
       if (result) {
         User = result;
         console.log(User);
         history.push(ROOT_PATH);
-      } else {
+      }
+      if (!result) {
         showSignInError('User not found. Please try again');
       }
     }
-    if (!(error === null)) showSignInError(error);
+    if (error) showSignInError(error);
   };
 
   return (

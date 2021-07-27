@@ -5,7 +5,7 @@ import React, {
 import useFetch from '../../hooks/useFetch';
 
 const Context = createContext(null);
-const useContextPage = () => useContext(Context);
+export const useContextPage = () => useContext(Context);
 const url = 'http://localhost:3000/users';
 
 const Provider = ({ children }) => {
@@ -20,5 +20,3 @@ const Provider = ({ children }) => {
 };
 
 export default Provider;
-
-export { Context, useContextPage, Provider };
