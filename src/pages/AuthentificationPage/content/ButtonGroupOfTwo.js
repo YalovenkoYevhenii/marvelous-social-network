@@ -11,26 +11,26 @@ const useStyles = makeStyles({
     padding: '0.5rem 3rem',
   },
 });
-const ButtonGroupOfTwo = ({ handlerAuthForm, handlerThemeForm }) => {
+const ButtonGroupOfTwo = ({ handlerChangeForm, handlerThemeForm, form }) => {
   const { buttonGroup, button } = useStyles();
   return (
     <ButtonGroup className={buttonGroup}>
       <Button
         className={button}
-        onClick={handlerAuthForm(true)}
+        onClick={handlerChangeForm(true)}
         onMouseDown={handlerThemeForm(true)}
         variant="contained"
-        color="primary"
+        color={form ? 'primary' : 'white'}
         size="large"
       >
         <strong>Sign In</strong>
       </Button>
       <Button
         className={button}
-        onClick={handlerAuthForm(false)}
+        onClick={handlerChangeForm(false)}
         onMouseDown={handlerThemeForm(false)}
         variant="contained"
-        color="secondary"
+        color={form ? 'white' : 'secondary'}
         size="large"
       >
         <strong>Sign Up</strong>

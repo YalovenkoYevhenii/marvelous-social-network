@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
 
 const Context = createContext(null);
-const useContextPage = () => useContext(Context);
+export const useContextPage = () => useContext(Context);
 
 // eslint-disable-next-line react/prop-types
-const Provider = ({ children }) => {
+export const Provider = ({ children }) => {
   const [data, useData] = useState({});
   return (
     <Context.Provider value={[data, useData]}>
@@ -12,5 +12,3 @@ const Provider = ({ children }) => {
     </Context.Provider>
   );
 };
-
-export { Context, useContextPage, Provider };

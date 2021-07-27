@@ -1,4 +1,4 @@
-import React, { Suspence, lazy } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
@@ -8,26 +8,23 @@ import {
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import Preloader from './Preloader';
 
-const DashboardPage = lazy(() => import('../../pages/DashboardPage'));
-const PostsPage = lazy(() => import('../../pages/PostsPage'));
-const ProfilePage = lazy(() => import('../../pages/ProfilePage'));
-const SettingsPage = lazy(() => import('../../pages/SettingsPage'));
-const AuthentificationPage = lazy(() => import('../../pages/AuthentificationPage'));
+import DashboardPage from '../../pages/DashboardPage';
+import PostsPage from '../../pages/PostsPage';
+import ProfilePage from '../../pages/ProfilePage';
+import SettingsPage from '../../pages/SettingsPage';
+import AuthentificationPage from '../../pages/AuthentificationPage';
 
 const AppLayout = () => (
   <>
     <Header />
-    <Suspence fallback={<Preloader />}>
-      <Switch>
-        <PrivateRoute exact path={ROOT_PATH} component={DashboardPage} />
-        <PrivateRoute path={PROFILE_PATH} component={ProfilePage} />
-        <PrivateRoute path={POSTS_PATH} component={PostsPage} />
-        <PrivateRoute path={SETTINGS_PATH} component={SettingsPage} />
-        <Route path={AUTH_PATH} component={AuthentificationPage} />
-      </Switch>
-    </Suspence>
+    <Switch>
+      <PrivateRoute exact path={ROOT_PATH} component={DashboardPage} />
+      <PrivateRoute path={PROFILE_PATH} component={ProfilePage} />
+      <PrivateRoute path={POSTS_PATH} component={PostsPage} />
+      <PrivateRoute path={SETTINGS_PATH} component={SettingsPage} />
+      <Route path={AUTH_PATH} component={AuthentificationPage} />
+    </Switch>
     <Footer />
   </>
 );

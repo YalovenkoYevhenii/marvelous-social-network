@@ -16,16 +16,16 @@ export const validationSchema = object().shape({
 });
 
 const Provider = ({ children }) => {
-  const { user } = useContextApp();
+  const { user, setUser } = useContextApp();
   const data = {
-    validationSchema, user,
+    validationSchema, user, setUser,
   };
 
   return (
-    <Context.Provider value={{ data }}>
+    <Context.Provider value={data}>
       {children}
     </Context.Provider>
   );
 };
 
-export { Context, useContextPage, Provider };
+export { useContextPage, Provider };

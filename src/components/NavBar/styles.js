@@ -13,14 +13,15 @@ export const Li = styled.li`
 `;
 
 export const NavLinkStyled = styled(NavLink).attrs({
-  activeStyle: { color: 'red' },
+  activeStyle: { transform: 'scale(1.25)' },
 })`
   color: white;
   text-decoration: none;
   display: block;
   font-size: 1.3rem;
+  transition: all .05s;
   
   &:hover {
-    color: orange;
+    transform: scale(1.2);
   }
 `;

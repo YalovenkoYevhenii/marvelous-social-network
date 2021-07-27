@@ -3,13 +3,13 @@ import React, { useState, useCallback } from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
-/* import { useContextAuthentificationPage } from '../context'; */
+import { useContextAuthentificationPage } from '../context';
 import useFetch from '../../../hooks/useFetch';
 import { ROOT_PATH } from '../../../constants/routes';
 
 import SignIn from './SignInForm';
 import SignUp from './SignUpForm';
-import ButtonGroupOfTwo from './ButtonGroup';
+import ButtonGroupOfTwo from './ButtonGroupOfTwo';
 import { Main } from './styles';
 import { validationSchema } from '../context/context';
 
@@ -23,17 +23,17 @@ const SignUpTheme = createTheme({
   },
   palette: {
     primary: {
-      main: '#ff7043',
+      main: '#3949AB',
     },
     secondary: {
-      main: '#257985',
+      main: '#7e57c2',
     },
   },
 });
 
 const url = 'http://localhost:3000/users';
 
-export const AuthentificationPageContent = () => {
+const AuthentificationPageContent = () => {
   const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('');
@@ -43,12 +43,13 @@ export const AuthentificationPageContent = () => {
   const [inputErrors, setInputErrors] = useState({
     firstName: '', lastName: '', email: '', password: '',
   });
+  const { user, setUser } = useContextAuthentificationPage();
 
   /*  const { validationSchema } = useContextAuthentificationPage(); */
   const history = useHistory();
   const { data, error } = useFetch(url, 'GET');
 
-  const handlerAuthForm = useCallback((value) => () => setForm(value), []);
+  const handlerChangeForm = useCallback((value) => () => setForm(value), []);
   const handlerThemeForm = useCallback((value) => () => {
     if (!value) setCurrentTheme(SignUpTheme);
     if (value) setCurrentTheme('');
@@ -76,12 +77,11 @@ export const AuthentificationPageContent = () => {
 
   const getUser = (e) => {
     e.preventDefault();
-    let User = {};
     if (!error) {
       const result = data.find((item) => item.email === e.target[0].value && item.password === e.target[2].value);
       if (result) {
-        User = result;
-        console.log(User);
+        setUser(result);
+        console.log(user);
         history.push(ROOT_PATH);
       }
       if (!result) {
@@ -93,7 +93,7 @@ export const AuthentificationPageContent = () => {
 
   return (
     <Main>
-      <ButtonGroupOfTwo handlerAuthForm={handlerAuthForm} handlerThemeForm={handlerThemeForm} />
+      <ButtonGroupOfTwo handlerChangeForm={handlerChangeForm} handlerThemeForm={handlerThemeForm} form={form} />
       <ThemeProvider theme={currentTheme}>
         { form ? (
           <SignIn
@@ -117,3 +117,5 @@ export const AuthentificationPageContent = () => {
     </Main>
   );
 };
+
+export default AuthentificationPageContent;

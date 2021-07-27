@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
-  background-color: #5EA8A7;
+  background-color: #3949AB;
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
 `;
@@ -14,5 +14,7 @@ export const HeaderContent = styled.div`
 `;
 
 export const Logo = styled.img`
-  height: 6rem;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 `;
