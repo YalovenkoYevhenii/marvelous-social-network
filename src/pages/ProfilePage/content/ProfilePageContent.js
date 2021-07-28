@@ -1,14 +1,22 @@
 import React from 'react';
 
-const ProfilePageContent = () => {
-  const probe = 'this is ';
+import { Main, Container } from '../../../reusableStyles';
 
-  return (
-    <div>
-      {probe}
-      ProfilePage
-    </div>
-  );
-};
+import AvatarBlock from './AvatarBlock';
+import InfoBlock from './InfoBlock';
+import PostsBlock from './PostsBlock';
+import { ProfileHeading } from './styles';
+
+const ProfilePageContent = () => (
+  <Main>
+    <Container>
+      <ProfileHeading>
+        <AvatarBlock />
+        <InfoBlock />
+      </ProfileHeading>
+      <PostsBlock />
+    </Container>
+  </Main>
+);
 
 export default ProfilePageContent;

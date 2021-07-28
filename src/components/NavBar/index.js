@@ -1,41 +1,55 @@
 import React from 'react';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import {
-  ROOT_PATH, PROFILE_PATH, POSTS_PATH, SETTINGS_PATH, AUTH_PATH,
+  ROOT_PATH, PROFILE_PATH, POSTS_PATH, SETTINGS_PATH,
 } from '../../constants/routes';
+import { useContextApp } from '../../App/context';
 
-import { Ul, Li, NavLinkStyled } from './styles';
+import {
+  Ul, Li, NavLinkStyled, StyledButton,
+} from './styles';
 
-const NavBar = () => (
-  <nav>
-    <Ul>
-      <Li>
-        <NavLinkStyled to={ROOT_PATH} exact>
-          dash
-        </NavLinkStyled>
-      </Li>
-      <Li>
-        <NavLinkStyled to={PROFILE_PATH}>
-          profile
-        </NavLinkStyled>
-      </Li>
-      <Li>
-        <NavLinkStyled to={POSTS_PATH}>
-          posts
-        </NavLinkStyled>
-      </Li>
-      <Li>
-        <NavLinkStyled to={SETTINGS_PATH}>
-          settings
-        </NavLinkStyled>
-      </Li>
-      <Li>
-        <NavLinkStyled to={AUTH_PATH}>
-          auth
-        </NavLinkStyled>
-      </Li>
-    </Ul>
-  </nav>
-);
+const NavBar = () => {
+  const { user, handlerSignOut } = useContextApp();
+  return (
+    <nav>
+      <Ul>
+        <Li>
+          <NavLinkStyled to={ROOT_PATH} exact>
+            dash
+          </NavLinkStyled>
+        </Li>
+        <Li>
+          <NavLinkStyled to={PROFILE_PATH}>
+            profile
+          </NavLinkStyled>
+        </Li>
+        <Li>
+          <NavLinkStyled to={POSTS_PATH}>
+            posts
+          </NavLinkStyled>
+        </Li>
+        <Li>
+          <NavLinkStyled to={SETTINGS_PATH}>
+            settings
+          </NavLinkStyled>
+        </Li>
+        {user
+          ? (
+            <Li>
+              <StyledButton
+                endIcon={<ExitToAppIcon />}
+                onClick={handlerSignOut}
+              >
+                <span>sign out</span>
+              </StyledButton>
+            </Li>
+          )
+          : null}
+      </Ul>
+    </nav>
+  );
+};
 
 export default NavBar;

@@ -11,6 +11,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
+import { StyledErrorMessage } from './styles';
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = ({
-  icon, handlerShowPassword, setIcon, getUser,
+  icon, handlerShowPassword, setIcon, getUser, signInError,
 }) => {
   const { paper, form, submit } = useStyles();
 
@@ -42,6 +44,13 @@ const SignIn = ({
         <Typography component="h1" variant="h5">
           SIGN IN
         </Typography>
+        { signInError
+          ? (
+            <StyledErrorMessage>
+              {signInError}
+            </StyledErrorMessage>
+          )
+          : null }
         <form onSubmit={getUser} className={form} noValidate>
           <TextField
             variant="outlined"

@@ -16,3 +16,7 @@ export const StyledLink = styled(Link)`
     color: #FF4447;
   }
 `;
+
+export const Main = styled.main`
+  display: flex;
+`;
