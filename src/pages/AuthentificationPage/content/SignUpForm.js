@@ -33,9 +33,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = ({
-  icon, handlerShowPassword, setIcon, handlerValidateForm, handlerInputValues, userData: {
+  icon, handlerShowPassword, setIcon, handlerValidateForm, handlerInputValues,
+  userData: {
     firstName, lastName, email, password,
-  }, inputErrors: {
+  },
+  inputErrors: {
     firstName: firstNameError, lastName: lastNameError, email: emailError, password: passwordError,
   },
 }) => {

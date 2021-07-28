@@ -31,23 +31,24 @@ const SignUpTheme = createTheme({
   },
 });
 
-const url = 'http://localhost:3000/users';
+const initUserData = {
+  firstName: '', lastName: '', email: '', password: '',
+};
+const initInputErrors = {
+  firstName: '', lastName: '', email: '', password: '',
+};
 
 const AuthentificationPageContent = () => {
   const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('');
-  const [userData, setUserData] = useState({
-    firstName: '', lastName: '', email: '', password: '',
-  });
-  const [inputErrors, setInputErrors] = useState({
-    firstName: '', lastName: '', email: '', password: '',
-  });
+  const [userData, setUserData] = useState(initUserData);
+  const [inputErrors, setInputErrors] = useState(initInputErrors);
   const { user, setUser } = useContextAuthentificationPage();
 
   /*  const { validationSchema } = useContextAuthentificationPage(); */
   const history = useHistory();
-  const { data, error } = useFetch(url, 'GET');
+  const { data, error } = useFetch(process.env.REACT_APP_USERS_URL, 'GET');
 
   const handlerChangeForm = useCallback((value) => () => setForm(value), []);
   const handlerThemeForm = useCallback((value) => () => {
@@ -63,11 +64,11 @@ const AuthentificationPageContent = () => {
 
   const handlerValidateForm = (e) => {
     e.preventDefault();
+    setInputErrors(initInputErrors);
     validationSchema.validate(userData, { abortEarly: false })
       .then((validatedUserData) => console.log(validatedUserData))
       .catch((err) => {
-        const arr = err.inner;
-        arr.forEach(({ message, path }) => (path in inputErrors) && setInputErrors((prev) => ({ ...prev, [path]: message })));
+        err.inner.forEach(({ message, path }) => (path in inputErrors) && setInputErrors((prev) => ({ ...prev, [path]: message })));
       });
   };
 
