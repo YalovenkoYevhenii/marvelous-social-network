@@ -2,10 +2,10 @@
   "users": [
     {
       "id": 1,
-      "firstName": "Вася",
-      "lastName": "Головин",
+      "firstName": "Евгений",
+      "lastName": "Яловенко",
       "email": "doorofroot@yahoo.com",
-      "password": "qwerty1"
+      "password": "qweqwe"
     },
     {
       "id": 2,

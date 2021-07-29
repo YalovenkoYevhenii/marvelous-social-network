@@ -4,19 +4,19 @@ import { Link } from 'react-router-dom';
 export const Container = styled.div`
   width: 80vw;
   margin: 0 auto;
+  padding: 0 4rem;
 `;
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
   display: block;
-  color: #0d0c0a;
-  width: 12rem;
-  font-size: 1.3rem;
+  color: #3949AB;
+  font-size: 1rem;
   &:hover {
     color: #FF4447;
   }
 `;
 
 export const Main = styled.main`
-  display: flex;
+  flex: 1;
 `;

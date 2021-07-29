@@ -1,21 +1,47 @@
 import React from 'react';
 
-import { useContextApp } from '../../../App/context';
+import {
+  InfoBlockWrapper, InfoBlockRow, InfoBlockRowElement, InfoBlockHeading,
+} from './styles';
 
-import { NameBlock, StyledInfoBlock } from './styles';
+const ProfileInfoBlock = () => (
+  <InfoBlockWrapper>
+    <InfoBlockRow>
+      <InfoBlockHeading>Информация</InfoBlockHeading>
+    </InfoBlockRow>
+    <InfoBlockRow>
+      <InfoBlockRowElement>
+        Должность:
+      </InfoBlockRowElement>
+      <InfoBlockRowElement>
+        JavaScript Trainee
+      </InfoBlockRowElement>
+    </InfoBlockRow>
+    <InfoBlockRow>
+      <InfoBlockRowElement>
+        Образование:
+      </InfoBlockRowElement>
+      <InfoBlockRowElement>
+        ХНТУ
+      </InfoBlockRowElement>
+    </InfoBlockRow>
+    <InfoBlockRow>
+      <InfoBlockRowElement>
+        Родился:
+      </InfoBlockRowElement>
+      <InfoBlockRowElement>
+        27.10.1999
+      </InfoBlockRowElement>
+    </InfoBlockRow>
+    <InfoBlockRow>
+      <InfoBlockRowElement>
+        Город:
+      </InfoBlockRowElement>
+      <InfoBlockRowElement>
+        Херсон
+      </InfoBlockRowElement>
+    </InfoBlockRow>
+  </InfoBlockWrapper>
+);
 
-const InfoBlock = () => {
-  const { user: { firstName, lastName } } = useContextApp();
-  return (
-    <StyledInfoBlock>
-      <NameBlock>
-        <div>{firstName}</div>
-        <div>{lastName}</div>
-      </NameBlock>
-      <div>г. Херсон</div>
-      <div>г. Херсон</div>
-    </StyledInfoBlock>
-  );
-};
-
-export default InfoBlock;
+export default ProfileInfoBlock;

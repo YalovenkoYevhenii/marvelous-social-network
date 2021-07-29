@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const PostsBlock = () => {
   return (
@@ -8,4 +8,4 @@ const PostsBlock = () => {
   )
 }
 
-export default PostsBlock
+export default PostsBlock;

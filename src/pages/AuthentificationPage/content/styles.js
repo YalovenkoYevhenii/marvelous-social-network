@@ -13,4 +13,5 @@ export const AuthMain = styled(Main)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  display: flex;
 `;
