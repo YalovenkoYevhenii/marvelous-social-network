@@ -1,11 +1,14 @@
 import React from 'react';
 
-const PostsBlock = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+import { StyledColumnBlockPosts } from './styles';
+import PostBlock from './PostBlock';
+import SendPostBlock from './SendPostBlock';
+
+const PostsBlock = () => (
+  <StyledColumnBlockPosts>
+    <SendPostBlock />
+    <PostBlock />
+  </StyledColumnBlockPosts>
+);
 
 export default PostsBlock;

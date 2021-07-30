@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { StyledAdditionalBlock } from './styles';
-import InfoBlock from './InfoBlock';
+import { StyledColumnBlock } from './styles';
+import ProfileInfoBlock from './InfoBlock';
 import PreviewFriendsBlock from './PreviewFriendsBlock';
 
 const AdditionalBlock = () => (
-  <StyledAdditionalBlock>
-    <InfoBlock />
+  <StyledColumnBlock>
+    <ProfileInfoBlock />
     <PreviewFriendsBlock />
-  </StyledAdditionalBlock>
+  </StyledColumnBlock>
 );
 
 export default AdditionalBlock;

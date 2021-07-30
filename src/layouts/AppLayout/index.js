@@ -17,17 +17,19 @@ const SettingsPage = lazy(() => import('../../pages/SettingsPage'));
 const AuthentificationPage = lazy(() => import('../../pages/AuthentificationPage'));
 
 const AppLayout = () => (
-  <Suspense fallback={<Preloader />}>
+  <>
     <Header />
-    <Switch>
-      <PrivateRoute exact path={ROOT_PATH} component={DashboardPage} />
-      <PrivateRoute path={PROFILE_PATH} component={ProfilePage} />
-      <PrivateRoute path={POSTS_PATH} component={PostsPage} />
-      <PrivateRoute path={SETTINGS_PATH} component={SettingsPage} />
-      <Route path={AUTH_PATH} component={AuthentificationPage} />
-    </Switch>
+    <Suspense fallback={<Preloader />}>
+      <Switch>
+        <PrivateRoute exact path={ROOT_PATH} component={DashboardPage} />
+        <PrivateRoute path={PROFILE_PATH} component={ProfilePage} />
+        <PrivateRoute path={POSTS_PATH} component={PostsPage} />
+        <PrivateRoute path={SETTINGS_PATH} component={SettingsPage} />
+        <Route path={AUTH_PATH} component={AuthentificationPage} />
+      </Switch>
+    </Suspense>
     <Footer />
-  </Suspense>
+  </>
 );
 
 export default AppLayout;

@@ -44,7 +44,7 @@ const AuthentificationPageContent = () => {
   const [inputErrors, setInputErrors] = useState(initInputErrors);
   const [signInError, setSignInError] = useState('');
   const { user, setUser, validationSchema } = useContextAuthentificationPage();
-  const { data, error } = useFetch(process.env.REACT_APP_USERS_URL, 'GET');
+  const { requestData, error } = useFetch(process.env.REACT_APP_USERS_URL, 'GET');
 
   const handlerChangeForm = useCallback((value) => () => setForm(value), []);
   const handlerThemeForm = useCallback((value) => () => {
@@ -57,12 +57,20 @@ const AuthentificationPageContent = () => {
   const handlerInputValues = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
-
+  const postValidatedUser = (userToSignUp) => {
+    fetch(process.env.REACT_APP_USERS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userToSignUp),
+    })
+      .then((res) => console.log(`new user added: ${res}`));
+  };
   const handlerValidateForm = useCallback(
     (e) => {
       e.preventDefault();
       setInputErrors(initInputErrors);
       validationSchema.validate(userData, { abortEarly: false })
+        .then((validatedData) => postValidatedUser(validatedData))
         .catch((err) => {
           err.inner.forEach(({ message, path }) => (
             (path in inputErrors) && setInputErrors((prev) => ({ ...prev, [path]: message }))
@@ -74,10 +82,13 @@ const AuthentificationPageContent = () => {
   const getUser = (e) => {
     e.preventDefault();
     if (!error) {
-      const result = data.find((item) => (
+      const result = requestData.find((item) => (
         item.email === e.target[0].value && item.password === e.target[2].value
       ));
-      if (result) setUser(result);
+      if (result) {
+        setUser(result);
+        localStorage.setItem('userID', result.id);
+      }
       if (!result) setSignInError('User not found. Please try again');
     }
     if (error) setSignInError(error);

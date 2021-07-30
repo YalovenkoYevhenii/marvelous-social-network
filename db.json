@@ -34,6 +34,13 @@
       "lastName": "Весин",
       "email": "rty@yahoo.com",
       "password": "qwerty1"
+    },
+    {
+      "firstName": "Джонни",
+      "lastName": "Дэпп",
+      "email": "really@mail.ru",
+      "password": "12345678",
+      "id": 6
     }
   ]
 }
