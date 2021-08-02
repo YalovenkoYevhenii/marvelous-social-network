@@ -7,7 +7,7 @@ import useFetch from '../../../hooks/useFetch';
 import HeadingBlock from './HeadingBlock';
 import AdditionalBlock from './AdditionalBlock';
 import PostsBlock from './PostsBlock';
-import { ProfileHeaderImage, ProfileInnerContainer } from './styles';
+import { ProfileHeaderImage, ProfileContentContainer } from './styles';
 
 const ProfilePageContent = () => {
   const { requestData } = useFetch('http://localhost:3000/users?_page=2&_limit=2', 'GET');
@@ -17,11 +17,10 @@ const ProfilePageContent = () => {
       <ProfileHeaderImage />
       <Container>
         <HeadingBlock />
-        <ProfileInnerContainer>
+        <ProfileContentContainer>
           <AdditionalBlock />
           <PostsBlock />
-        </ProfileInnerContainer>
-
+        </ProfileContentContainer>
       </Container>
     </Main>
   );

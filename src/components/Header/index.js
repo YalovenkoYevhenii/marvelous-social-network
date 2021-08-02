@@ -1,15 +1,16 @@
 import React from 'react';
 
-import { StyledHeader, HeaderContent, Logo } from './styles';
 import logo from '../../assets/icons/logo.svg';
 import { StyledLink } from '../../reusableStyles';
-
+import { PROFILE_PATH } from '../../constants/routes';
 import NavBar from '../NavBar';
+
+import { StyledHeader, HeaderContent, Logo } from './styles';
 
 const Header = () => (
   <StyledHeader>
     <HeaderContent>
-      <StyledLink>
+      <StyledLink to={PROFILE_PATH}>
         <Logo src={logo} alt="logotype" />
       </StyledLink>
       <NavBar />

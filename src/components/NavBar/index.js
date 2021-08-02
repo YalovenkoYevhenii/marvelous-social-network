@@ -2,7 +2,7 @@ import React from 'react';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import {
-  ROOT_PATH, PROFILE_PATH, POSTS_PATH, SETTINGS_PATH,
+  ROOT_PATH, PROFILE_PATH, FRIENDS_PATH, SETTINGS_PATH,
 } from '../../constants/routes';
 import { useContextApp } from '../../App/context';
 
@@ -26,8 +26,8 @@ const NavBar = () => {
           </NavLinkStyled>
         </Li>
         <Li>
-          <NavLinkStyled to={POSTS_PATH}>
-            posts
+          <NavLinkStyled to={FRIENDS_PATH}>
+            friends
           </NavLinkStyled>
         </Li>
         <Li>

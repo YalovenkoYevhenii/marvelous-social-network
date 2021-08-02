@@ -3,7 +3,7 @@ import React from 'react';
 import {
   BlockWrapper, BlockRow, PostAvatar, PostBlockUserBlock,
   PostUserName, PostContent, PostDate,
-} from '../../../reusableStyles';
+} from '../../reusableStyles';
 
 const PostBlock = () => (
   <BlockWrapper>

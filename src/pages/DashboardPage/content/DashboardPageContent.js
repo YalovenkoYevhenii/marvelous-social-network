@@ -1,5 +1,16 @@
 import React from 'react';
 
+import { Main, Container } from '../../../reusableStyles';
+import PostBlock from '../../../components/PostBlock';
+
+import { DashboardContentContainer } from './styles';
+
 export const DashboardPageContent = () => (
-  <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, culpa!  </div>
+  <Main>
+    <Container>
+      <DashboardContentContainer>
+        <PostBlock />
+      </DashboardContentContainer>
+    </Container>
+  </Main>
 );

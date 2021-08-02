@@ -1,15 +1,17 @@
 import React from 'react';
 
+import { FRIENDS_PATH } from '../../../constants/routes';
+import { BlockWrapper, BlockRow } from '../../../reusableStyles';
+
 import {
-  InfoBlockWrapper, InfoBlockRow, InfoBlockHeading,
-  StyledAvatarGroup, StyledAvatar, CenteredStyledLink,
+  InfoBlockHeading, StyledAvatarGroup, StyledAvatar, CenteredStyledLink,
 } from './styles';
 
 const PreviewFriendsBlock = () => (
-  <InfoBlockWrapper>
-    <InfoBlockRow>
+  <BlockWrapper>
+    <BlockRow>
       <InfoBlockHeading>Друзья</InfoBlockHeading>
-    </InfoBlockRow>
+    </BlockRow>
     <StyledAvatarGroup>
       <StyledAvatar alt="name" />
       <StyledAvatar alt="name" />
@@ -17,12 +19,12 @@ const PreviewFriendsBlock = () => (
       <StyledAvatar alt="name" />
       <StyledAvatar alt="name" />
     </StyledAvatarGroup>
-    <InfoBlockRow>
-      <CenteredStyledLink>
+    <BlockRow>
+      <CenteredStyledLink to={FRIENDS_PATH}>
         Все друзья
       </CenteredStyledLink>
-    </InfoBlockRow>
-  </InfoBlockWrapper>
+    </BlockRow>
+  </BlockWrapper>
 );
 
 export default PreviewFriendsBlock;

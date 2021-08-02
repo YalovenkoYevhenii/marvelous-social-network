@@ -1,47 +1,49 @@
 import React from 'react';
 
+import { BlockWrapper, BlockRow } from '../../../reusableStyles';
+
 import {
-  InfoBlockWrapper, InfoBlockRow, InfoBlockRowElement, InfoBlockHeading,
+  InfoBlockRowElement, InfoBlockHeading,
 } from './styles';
 
 const ProfileInfoBlock = () => (
-  <InfoBlockWrapper>
-    <InfoBlockRow>
+  <BlockWrapper>
+    <BlockRow>
       <InfoBlockHeading>Информация</InfoBlockHeading>
-    </InfoBlockRow>
-    <InfoBlockRow>
+    </BlockRow>
+    <BlockRow>
       <InfoBlockRowElement>
         Должность:
       </InfoBlockRowElement>
       <InfoBlockRowElement>
         JavaScript Trainee
       </InfoBlockRowElement>
-    </InfoBlockRow>
-    <InfoBlockRow>
+    </BlockRow>
+    <BlockRow>
       <InfoBlockRowElement>
         Образование:
       </InfoBlockRowElement>
       <InfoBlockRowElement>
         ХНТУ
       </InfoBlockRowElement>
-    </InfoBlockRow>
-    <InfoBlockRow>
+    </BlockRow>
+    <BlockRow>
       <InfoBlockRowElement>
         Родился:
       </InfoBlockRowElement>
       <InfoBlockRowElement>
         27.10.1999
       </InfoBlockRowElement>
-    </InfoBlockRow>
-    <InfoBlockRow>
+    </BlockRow>
+    <BlockRow>
       <InfoBlockRowElement>
         Город:
       </InfoBlockRowElement>
       <InfoBlockRowElement>
         Херсон
       </InfoBlockRowElement>
-    </InfoBlockRow>
-  </InfoBlockWrapper>
+    </BlockRow>
+  </BlockWrapper>
 );
 
 export default ProfileInfoBlock;

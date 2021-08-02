@@ -1,15 +1,15 @@
 import React from 'react';
 
-import {
-  InfoBlockWrapper, InfoBlockRow, PostAvatar, StyledTextField, SendPostHeading,
-} from './styles';
+import { BlockWrapper, BlockRow, PostAvatar } from '../../../reusableStyles';
+
+import { StyledTextField, SendPostHeading } from './styles';
 
 const SendPostBlock = () => (
-  <InfoBlockWrapper>
-    <InfoBlockRow>
+  <BlockWrapper>
+    <BlockRow>
       <SendPostHeading>Добавить пост</SendPostHeading>
-    </InfoBlockRow>
-    <InfoBlockRow>
+    </BlockRow>
+    <BlockRow>
       <PostAvatar />
       <StyledTextField
         label="Напиши что-то умное"
@@ -19,8 +19,8 @@ const SendPostBlock = () => (
         multiline
         rows={4}
       />
-    </InfoBlockRow>
-  </InfoBlockWrapper>
+    </BlockRow>
+  </BlockWrapper>
 );
 
 export default SendPostBlock;
