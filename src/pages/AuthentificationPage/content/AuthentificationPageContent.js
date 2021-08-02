@@ -3,7 +3,7 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 
 import { useContextAuthentificationPage } from '../context';
-import useFetch from '../../../hooks/useFetch';
+import useRequest from '../../../hooks/useRequest';
 import { ROOT_PATH } from '../../../constants/routes';
 
 import SignIn from './SignInForm';
@@ -36,6 +36,21 @@ const initInputErrors = {
   firstName: '', lastName: '', email: '', password: '',
 };
 
+const initPostOptions = {
+  method: 'POST',
+  url: process.env.REACT_APP_USERS_URL,
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json;charset=UTF-8',
+  },
+  data: {},
+};
+
+/* const initGetOptions = {
+  method: 'GET',
+  url: process.env.REACT_APP_USERS_URL,
+}; */
+
 const AuthentificationPageContent = () => {
   const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
@@ -44,45 +59,51 @@ const AuthentificationPageContent = () => {
   const [inputErrors, setInputErrors] = useState(initInputErrors);
   const [signInError, setSignInError] = useState('');
   const { user, setUser, validationSchema } = useContextAuthentificationPage();
-  const { requestData, error } = useFetch(process.env.REACT_APP_USERS_URL, 'GET');
-
-  const handlerChangeForm = useCallback((value) => () => setForm(value), []);
-  const handlerThemeForm = useCallback((value) => () => {
+  const {
+    requestData, error, setOptions,
+  } = useRequest();
+  const handlerChangeForm = useCallback(value => () => setForm(value), []);
+  const handlerThemeForm = useCallback(value => () => {
     if (!value) setCurrentTheme(SignUpTheme);
     if (value) setCurrentTheme('');
   }, []);
 
-  const handlerShowPassword = () => setIcon((prev) => !prev);
+  const handlerShowPassword = () => setIcon(prev => !prev);
 
   const handlerInputValues = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
-  const postValidatedUser = (userToSignUp) => {
-    fetch(process.env.REACT_APP_USERS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userToSignUp),
-    })
-      .then((res) => console.log(`new user added: ${res}`));
-  };
+
   const handlerValidateForm = useCallback(
     (e) => {
       e.preventDefault();
       setInputErrors(initInputErrors);
       validationSchema.validate(userData, { abortEarly: false })
-        .then((validatedData) => postValidatedUser(validatedData))
+        .then(validatedData => setOptions({ ...initPostOptions, data: validatedData }))
         .catch((err) => {
           err.inner.forEach(({ message, path }) => (
-            (path in inputErrors) && setInputErrors((prev) => ({ ...prev, [path]: message }))
+            (path in inputErrors) && setInputErrors(prev => ({ ...prev, [path]: message }))
           ));
         });
-    }, [userData, inputErrors, validationSchema],
+    }, [userData, inputErrors, validationSchema, setOptions],
   );
-
+  const [resNew, setResNew] = useState(null);
   const getUser = (e) => {
     e.preventDefault();
-    if (!error) {
-      const result = requestData.find((item) => (
+
+    fetch(process.env.REACT_APP_USERS_URL, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then((response) => {
+        setResNew(response);
+        console.log('res', response);
+      });
+
+    console.log('-->', resNew);
+    if (!error && resNew) {
+      console.log(111111);
+      const result = resNew.find(item => (
         item.email === e.target[0].value && item.password === e.target[2].value
       ));
       if (result) {
@@ -92,8 +113,10 @@ const AuthentificationPageContent = () => {
       if (!result) setSignInError('User not found. Please try again');
     }
     if (error) setSignInError(error);
+    console.log('-->', resNew);
   };
 
+  console.log(requestData);
   if (user) return <Redirect to={ROOT_PATH} />;
 
   return (

@@ -11,5 +11,5 @@ export const FriendsPageContentContainer = styled(PageContentContainer)`
 `;
 
 export const StyledSearchBar = styled(SearchBar)`
-  align-self: stretch;
+align-self: stretch;
 `;

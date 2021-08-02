@@ -1,10 +1,10 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
 
 import { Main, Container } from '../../../reusableStyles';
 
 import {
-  SettingsPageContentContainer, SettingPageHeading, SettingPageForm, SettingsBlockWrapper,
+  SettingsPageContentContainer, SettingPageHeading, SettingPageForm,
+  SettingsBlockWrapper, StyledTextField,
 } from './styles';
 
 export const SettingsPageContent = () => {
@@ -19,10 +19,10 @@ export const SettingsPageContent = () => {
               Изменить мои данные:
             </SettingPageHeading>
             <SettingPageForm>
-              <TextField />
-              <TextField />
-              <TextField />
-              <TextField />
+              <StyledTextField variant="outlined" label="Имя" />
+              <StyledTextField variant="outlined" label="Фамилия" />
+              <StyledTextField variant="outlined" label="Город" />
+              <StyledTextField variant="outlined" label="Профессия" />
             </SettingPageForm>
             {probe}
           </SettingsBlockWrapper>

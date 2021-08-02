@@ -13,7 +13,7 @@ const ProfileInfoBlock = () => (
     </BlockRow>
     <BlockRow>
       <InfoBlockRowElement>
-        Должность:
+        Профессия:
       </InfoBlockRowElement>
       <InfoBlockRowElement>
         JavaScript Trainee

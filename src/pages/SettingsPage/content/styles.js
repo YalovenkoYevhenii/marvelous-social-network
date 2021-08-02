@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import TextField from '@material-ui/core/TextField';
 
 import { PageContentContainer, BlockWrapper } from '../../../reusableStyles';
 
@@ -23,4 +24,8 @@ export const SettingPageForm = styled.form`
 
 export const SettingsBlockWrapper = styled(BlockWrapper)`
   align-self: stretch;
+`;
+
+export const StyledTextField = styled(TextField)`
+  margin: 1rem;
 `;
