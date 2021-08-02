@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 
@@ -59,9 +59,7 @@ const AuthentificationPageContent = () => {
   const [inputErrors, setInputErrors] = useState(initInputErrors);
   const [signInError, setSignInError] = useState('');
   const { user, setUser, validationSchema } = useContextAuthentificationPage();
-  const {
-    requestData, error, setOptions,
-  } = useRequest();
+  const { error, setOptions } = useRequest();
   const handlerChangeForm = useCallback(value => () => setForm(value), []);
   const handlerThemeForm = useCallback(value => () => {
     if (!value) setCurrentTheme(SignUpTheme);
@@ -88,25 +86,19 @@ const AuthentificationPageContent = () => {
     }, [userData, inputErrors, validationSchema, setOptions],
   );
   const [resNew, setResNew] = useState(null);
-  const getUser = (e) => {
-    e.preventDefault();
 
-    fetch(process.env.REACT_APP_USERS_URL, {
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then((response) => {
-        setResNew(response);
-        console.log('res', response);
-      });
+  const [megaData, setMegaData] = useState({ email: '', password: '' });
 
-    console.log('-->', resNew);
+  const handleMegaData = e => setMegaData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  console.log(megaData);
+  useEffect(() => {
     if (!error && resNew) {
       console.log(111111);
       const result = resNew.find(item => (
-        item.email === e.target[0].value && item.password === e.target[2].value
+        item.email === megaData.email && item.password === megaData.password
       ));
       if (result) {
+        console.log(result);
         setUser(result);
         localStorage.setItem('userID', result.id);
       }
@@ -114,9 +106,24 @@ const AuthentificationPageContent = () => {
     }
     if (error) setSignInError(error);
     console.log('-->', resNew);
+  }, [resNew]);
+
+  console.log('this user', user);
+  const getUser = (e) => {
+    e.preventDefault();
+
+    fetch(process.env.REACT_APP_USERS_URL, {
+      method: 'GET',
+    })
+      .then(responsed => responsed.json())
+      .then((responsed) => {
+        setResNew(responsed);
+        console.log('res', responsed);
+      });
+
+    console.log('-->', resNew);
   };
 
-  console.log(requestData);
   if (user) return <Redirect to={ROOT_PATH} />;
 
   return (
@@ -129,6 +136,8 @@ const AuthentificationPageContent = () => {
       <ThemeProvider theme={currentTheme}>
         { form ? (
           <SignIn
+            handleMegaData={handleMegaData}
+            megaData={megaData}
             signInError={signInError}
             getUser={getUser}
             setIcon={setIcon}
