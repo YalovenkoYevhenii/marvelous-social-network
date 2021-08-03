@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 
@@ -36,34 +36,31 @@ const initInputErrors = {
   firstName: '', lastName: '', email: '', password: '',
 };
 
-const initPostOptions = {
-  method: 'POST',
-  url: process.env.REACT_APP_USERS_URL,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json;charset=UTF-8',
-  },
-  data: {},
-};
-
-/* const initGetOptions = {
-  method: 'GET',
-  url: process.env.REACT_APP_USERS_URL,
-}; */
-
 const AuthentificationPageContent = () => {
+  const {
+    user, setUser, validationSchema, getRequestOptions, postRequestOptions,
+  } = useContextAuthentificationPage();
+
   const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('');
   const [userData, setUserData] = useState(initUserData);
   const [inputErrors, setInputErrors] = useState(initInputErrors);
   const [signInError, setSignInError] = useState('');
-  const { user, setUser, validationSchema } = useContextAuthentificationPage();
-  const { error, setOptions } = useRequest();
-  const handlerChangeForm = useCallback(value => () => setForm(value), []);
-  const handlerThemeForm = useCallback(value => () => {
-    if (!value) setCurrentTheme(SignUpTheme);
-    if (value) setCurrentTheme('');
+  const [requestOptions, setRequestOptions] = useState(getRequestOptions);
+
+  const { requestData, requestError } = useRequest(requestOptions);
+
+  console.log(requestData);
+
+  const handlerThemeForm = (value) => {
+    if (value) return setCurrentTheme('');
+    return setCurrentTheme(SignUpTheme);
+  };
+
+  const handlerChangeForm = useCallback(value => () => {
+    setForm(value);
+    handlerThemeForm(value);
   }, []);
 
   const handlerShowPassword = () => setIcon(prev => !prev);
@@ -72,56 +69,32 @@ const AuthentificationPageContent = () => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  const handlerValidateForm = useCallback(
-    (e) => {
-      e.preventDefault();
-      setInputErrors(initInputErrors);
-      validationSchema.validate(userData, { abortEarly: false })
-        .then(validatedData => setOptions({ ...initPostOptions, data: validatedData }))
-        .catch((err) => {
-          err.inner.forEach(({ message, path }) => (
-            (path in inputErrors) && setInputErrors(prev => ({ ...prev, [path]: message }))
-          ));
-        });
-    }, [userData, inputErrors, validationSchema, setOptions],
-  );
-  const [resNew, setResNew] = useState(null);
+  const handlerValidateForm = useCallback((e) => {
+    e.preventDefault();
+    setInputErrors(initInputErrors);
+    validationSchema.validate(userData, { abortEarly: false })
+      .then(validatedData => setRequestOptions({ ...postRequestOptions, data: validatedData }))
+      .catch((err) => {
+        err.inner.forEach(({ message, path }) => (
+          (path in inputErrors) && setInputErrors(prev => ({ ...prev, [path]: message }))
+        ));
+      });
+  }, [userData, inputErrors, validationSchema]);
 
-  const [megaData, setMegaData] = useState({ email: '', password: '' });
-
-  const handleMegaData = e => setMegaData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  console.log(megaData);
-  useEffect(() => {
-    if (!error && resNew) {
-      console.log(111111);
-      const result = resNew.find(item => (
-        item.email === megaData.email && item.password === megaData.password
+  const handlerGetUser = (e) => {
+    e.preventDefault();
+    setRequestOptions(getRequestOptions);
+    if (!requestError) {
+      const result = requestData.find(item => (
+        item.email === e.target[0].value && item.password === e.target[2].value
       ));
       if (result) {
-        console.log(result);
         setUser(result);
         localStorage.setItem('userID', result.id);
       }
-      if (!result) setSignInError('User not found. Please try again');
+      if (!result) setSignInError('Invalid username or password');
     }
-    if (error) setSignInError(error);
-    console.log('-->', resNew);
-  }, [resNew]);
-
-  console.log('this user', user);
-  const getUser = (e) => {
-    e.preventDefault();
-
-    fetch(process.env.REACT_APP_USERS_URL, {
-      method: 'GET',
-    })
-      .then(responsed => responsed.json())
-      .then((responsed) => {
-        setResNew(responsed);
-        console.log('res', responsed);
-      });
-
-    console.log('-->', resNew);
+    if (requestError) setSignInError(requestError);
   };
 
   if (user) return <Redirect to={ROOT_PATH} />;
@@ -136,10 +109,8 @@ const AuthentificationPageContent = () => {
       <ThemeProvider theme={currentTheme}>
         { form ? (
           <SignIn
-            handleMegaData={handleMegaData}
-            megaData={megaData}
             signInError={signInError}
-            getUser={getUser}
+            handlerGetUser={handlerGetUser}
             setIcon={setIcon}
             icon={icon}
             handlerShowPassword={handlerShowPassword}

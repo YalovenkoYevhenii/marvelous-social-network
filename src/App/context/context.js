@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 /* eslint-disable react/prop-types */
 import React, {
   createContext, useContext, useState, useCallback, useEffect,
@@ -7,14 +8,29 @@ import useRequest from '../../hooks/useRequest';
 
 const Context = createContext(null);
 const useContextPage = () => useContext(Context);
-const initGetOptions = {
-  method: 'GET',
-  url: process.env.REACT_APP_USERS_URL,
-  responseType: 'json',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json;charset=UTF-8',
-  },
+
+const getRequestOptions = {
+  method: 'get',
+  url: 'http://localhost:3000/users',
+};
+const postRequestOptions = {
+  method: 'post',
+  url: 'http://localhost:3000/users',
+  data: {},
+};
+const putRequestOptions = {
+  method: 'put',
+  url: '/users',
+  data: {},
+};
+const patchRequestOptions = {
+  method: 'put',
+  url: '/users',
+  data: {},
+};
+const deleteRequestOptions = {
+  method: 'delete',
+  url: '/users',
 };
 
 const Provider = ({ children }) => {
@@ -23,7 +39,7 @@ const Provider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('userID');
   }, []);
-  const { requestData } = useRequest(initGetOptions);
+  const { requestData } = useRequest(getRequestOptions);
 
   useEffect(() => {
     if (localStorage.getItem('userID') && requestData) {
@@ -32,7 +48,16 @@ const Provider = ({ children }) => {
     }
   }, [requestData, user]);
 
-  const data = { user, setUser, handlerSignOut };
+  const data = {
+    user,
+    setUser,
+    handlerSignOut,
+    postRequestOptions,
+    getRequestOptions,
+    putRequestOptions,
+    patchRequestOptions,
+    deleteRequestOptions,
+  };
   return (
     <Context.Provider value={data}>
       {children}

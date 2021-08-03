@@ -30,8 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SignIn = ({
-  icon, handlerShowPassword, setIcon, getUser,
-  signInError, megaData: { megaEmail, megaPass }, handleMegaData,
+  icon, handlerShowPassword, setIcon, handlerGetUser, signInError,
 }) => {
   const { paper, form, submit } = useStyles();
 
@@ -52,10 +51,8 @@ const SignIn = ({
             </StyledErrorMessage>
           )
           : null }
-        <form onSubmit={getUser} className={form} noValidate>
+        <form onSubmit={handlerGetUser} className={form} noValidate>
           <TextField
-            onChange={handleMegaData}
-            value={megaEmail}
             variant="outlined"
             margin="normal"
             required
@@ -67,8 +64,6 @@ const SignIn = ({
             autoFocus
           />
           <TextField
-            onChange={handleMegaData}
-            value={megaPass}
             variant="outlined"
             margin="normal"
             required

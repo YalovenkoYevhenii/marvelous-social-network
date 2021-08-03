@@ -10,15 +10,33 @@ const useContextPage = () => useContext(Context);
 
 export const validationSchema = object().shape({
   firstName: string().required('First name is required'),
-  lastName: string().required(),
+  lastName: string().required('Last name is required'),
   email: string().email().required(),
   password: string().min(8).max(24).required(),
 });
 
 const Provider = ({ children }) => {
-  const { user, setUser } = useContextApp();
+  const {
+    user,
+    setUser,
+    setUserpostRequestOptions,
+    getRequestOptions,
+    postRequestOptions,
+    putRequestOptions,
+    patchRequestOptions,
+    deleteRequestOptions,
+  } = useContextApp();
+
   const data = {
-    validationSchema, user, setUser,
+    validationSchema,
+    user,
+    setUser,
+    setUserpostRequestOptions,
+    getRequestOptions,
+    postRequestOptions,
+    putRequestOptions,
+    patchRequestOptions,
+    deleteRequestOptions,
   };
 
   return (

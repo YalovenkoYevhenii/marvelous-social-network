@@ -2,25 +2,21 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: process.env.REACT_APP_USERS_URL,
+const axiosAPI = axios.create({
+  baseURL: process.env.REACT_APP_URL,
 });
-const useRequest = () => {
+
+const useRequest = (options) => {
   const [requestData, setRequestData] = useState(null);
-  const [error, setError] = useState(null);
-  const [options, setOptions] = useState({});
-  console.log(options);
+  const [requestError, setRequestError] = useState(null);
   useEffect(() => {
-    api(options)
-      .then((res) => {
-        setRequestData(res.data);
-        console.log(res);
-      })
-      .catch((err) => { setError(err.message); console.log(err); });
+    axiosAPI(options)
+      .then(res => setRequestData(res.data))
+      .catch(err => setRequestError(err.message));
   }, [options]);
 
   return {
-    requestData, error, setOptions, options,
+    requestData, requestError,
   };
 };
 
