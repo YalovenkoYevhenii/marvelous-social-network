@@ -1,7 +1,7 @@
 import React from 'react';
 
 import photo from '../../../assets/img/avatar.jfif';
-import { useContextApp } from '../../../App/context';
+import { useContextProfilePage } from '../context';
 
 import {
   StyledProfileHeadingBlock, ProfileHeadingButtons, StyledImage,
@@ -9,7 +9,7 @@ import {
 } from './styles';
 
 const HeadingBlock = () => {
-  const { user: { firstName, lastName } } = useContextApp();
+  const { user: { firstName, lastName } } = useContextProfilePage();
   return (
     <StyledProfileHeadingBlock>
       <ProfileHeadingUser>

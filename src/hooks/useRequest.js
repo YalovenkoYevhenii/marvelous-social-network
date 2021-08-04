@@ -6,9 +6,14 @@ const axiosAPI = axios.create({
   baseURL: process.env.REACT_APP_URL,
 });
 
-const useRequest = (options) => {
+const useRequest = () => {
   const [requestData, setRequestData] = useState(null);
   const [requestError, setRequestError] = useState(null);
+  const [options, setOptions] = useState({
+    method: 'get',
+    url: 'http://localhost:3000/users',
+  });
+
   useEffect(() => {
     axiosAPI(options)
       .then(res => setRequestData(res.data))
@@ -16,7 +21,7 @@ const useRequest = (options) => {
   }, [options]);
 
   return {
-    requestData, requestError,
+    requestData, requestError, setOptions,
   };
 };
 

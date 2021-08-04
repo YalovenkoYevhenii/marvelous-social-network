@@ -47,11 +47,10 @@ const AuthentificationPageContent = () => {
   const [userData, setUserData] = useState(initUserData);
   const [inputErrors, setInputErrors] = useState(initInputErrors);
   const [signInError, setSignInError] = useState('');
-  const [requestOptions, setRequestOptions] = useState(getRequestOptions);
 
-  const { requestData, requestError } = useRequest(requestOptions);
-
-  console.log(requestData);
+  const {
+    requestData, requestError, setOptions,
+  } = useRequest();
 
   const handlerThemeForm = (value) => {
     if (value) return setCurrentTheme('');
@@ -73,7 +72,9 @@ const AuthentificationPageContent = () => {
     e.preventDefault();
     setInputErrors(initInputErrors);
     validationSchema.validate(userData, { abortEarly: false })
-      .then(validatedData => setRequestOptions({ ...postRequestOptions, data: validatedData }))
+      .then((validatedData) => {
+        setOptions({ ...postRequestOptions, data: validatedData });
+      })
       .catch((err) => {
         err.inner.forEach(({ message, path }) => (
           (path in inputErrors) && setInputErrors(prev => ({ ...prev, [path]: message }))
@@ -83,14 +84,15 @@ const AuthentificationPageContent = () => {
 
   const handlerGetUser = (e) => {
     e.preventDefault();
-    setRequestOptions(getRequestOptions);
+    setOptions(getRequestOptions);
+
     if (!requestError) {
       const result = requestData.find(item => (
         item.email === e.target[0].value && item.password === e.target[2].value
       ));
       if (result) {
-        setUser(result);
         localStorage.setItem('userID', result.id);
+        setUser(result);
       }
       if (!result) setSignInError('Invalid username or password');
     }
