@@ -3,7 +3,6 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 
 import { useContextAuthentificationPage } from '../context';
-import useRequest from '../../../hooks/useRequest';
 import { ROOT_PATH } from '../../../constants/routes';
 
 import SignIn from './SignInForm';
@@ -29,28 +28,12 @@ const SignUpTheme = createTheme({
   },
 });
 
-const initUserData = {
-  firstName: '', lastName: '', email: '', password: '',
-};
-const initInputErrors = {
-  firstName: '', lastName: '', email: '', password: '',
-};
-
 const AuthentificationPageContent = () => {
-  const {
-    user, setUser, validationSchema, getRequestOptions, postRequestOptions,
-  } = useContextAuthentificationPage();
-
   const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('');
-  const [userData, setUserData] = useState(initUserData);
-  const [inputErrors, setInputErrors] = useState(initInputErrors);
-  const [signInError, setSignInError] = useState('');
 
-  const {
-    requestData, requestError, setOptions,
-  } = useRequest();
+  const { user } = useContextAuthentificationPage();
 
   const handlerThemeForm = (value) => {
     if (value) return setCurrentTheme('');
@@ -64,41 +47,6 @@ const AuthentificationPageContent = () => {
 
   const handlerShowPassword = () => setIcon(prev => !prev);
 
-  const handlerInputValues = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
-
-  const handlerValidateForm = useCallback((e) => {
-    e.preventDefault();
-    setInputErrors(initInputErrors);
-    validationSchema.validate(userData, { abortEarly: false })
-      .then((validatedData) => {
-        setOptions({ ...postRequestOptions, data: validatedData });
-      })
-      .catch((err) => {
-        err.inner.forEach(({ message, path }) => (
-          (path in inputErrors) && setInputErrors(prev => ({ ...prev, [path]: message }))
-        ));
-      });
-  }, [userData, inputErrors, validationSchema]);
-
-  const handlerGetUser = (e) => {
-    e.preventDefault();
-    setOptions(getRequestOptions);
-
-    if (!requestError) {
-      const result = requestData.find(item => (
-        item.email === e.target[0].value && item.password === e.target[2].value
-      ));
-      if (result) {
-        localStorage.setItem('userID', result.id);
-        setUser(result);
-      }
-      if (!result) setSignInError('Invalid username or password');
-    }
-    if (requestError) setSignInError(requestError);
-  };
-
   if (user) return <Redirect to={ROOT_PATH} />;
 
   return (
@@ -111,18 +59,12 @@ const AuthentificationPageContent = () => {
       <ThemeProvider theme={currentTheme}>
         { form ? (
           <SignIn
-            signInError={signInError}
-            handlerGetUser={handlerGetUser}
             setIcon={setIcon}
             icon={icon}
             handlerShowPassword={handlerShowPassword}
           />
         ) : (
           <SignUp
-            handlerInputValues={handlerInputValues}
-            handlerValidateForm={handlerValidateForm}
-            inputErrors={inputErrors}
-            userData={userData}
             setIcon={setIcon}
             icon={icon}
             handlerShowPassword={handlerShowPassword}

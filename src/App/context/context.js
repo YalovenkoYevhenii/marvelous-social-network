@@ -1,4 +1,3 @@
-/* eslint-disable quote-props */
 /* eslint-disable react/prop-types */
 import React, {
   createContext, useContext, useState, useCallback, useEffect,
@@ -35,11 +34,13 @@ const deleteRequestOptions = {
 
 const Provider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  const { requestData } = useRequest(getRequestOptions);
+
   const handlerSignOut = useCallback(() => {
     setUser(null);
     localStorage.removeItem('userID');
   }, []);
-  const { requestData } = useRequest(getRequestOptions);
 
   useEffect(() => {
     if (localStorage.getItem('userID') && requestData) {
@@ -49,6 +50,7 @@ const Provider = ({ children }) => {
   }, [requestData, user]);
 
   const data = {
+    requestData,
     user,
     setUser,
     handlerSignOut,

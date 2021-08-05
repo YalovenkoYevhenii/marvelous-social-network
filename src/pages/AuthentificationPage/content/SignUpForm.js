@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +10,9 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+
+import { useContextAuthentificationPage } from '../context';
+import useRequest from '../../../hooks/useRequest';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -32,19 +34,43 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SignUp = ({
-  icon, handlerShowPassword, setIcon, handlerValidateForm, handlerInputValues,
-  userData: {
-    firstName, lastName, email, password,
-  },
-  inputErrors: {
-    firstName: firstNameError, lastName: lastNameError, email: emailError, password: passwordError,
-  },
-}) => {
+const initUserData = {
+  firstName: '', lastName: '', email: '', password: '',
+};
+
+const initInputErrors = {
+  firstName: '', lastName: '', email: '', password: '',
+};
+
+const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
+  const [userData, setUserData] = useState(initUserData);
+  const [inputErrors, setInputErrors] = useState(initInputErrors);
+
+  const { validationSchema, postRequestOptions } = useContextAuthentificationPage();
+  const { setOptions } = useRequest();
+
   const classes = useStyles();
   useEffect(() => {
     setIcon(false);
   }, []);
+
+  const handlerInputValues = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const handlerValidateForm = useCallback((e) => {
+    e.preventDefault();
+    setInputErrors(initInputErrors);
+    validationSchema.validate(userData, { abortEarly: false })
+      .then((validatedData) => {
+        setOptions({ ...postRequestOptions, data: validatedData });
+      })
+      .catch((err) => {
+        err.inner.forEach(({ message, path }) => (
+          (path in inputErrors) && setInputErrors(prev => ({ ...prev, [path]: message }))
+        ));
+      });
+  }, [userData, inputErrors, validationSchema]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -56,10 +82,10 @@ const SignUp = ({
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                value={firstName}
+                value={userData.firstName}
                 onChange={handlerInputValues}
-                error={!!firstNameError}
-                helperText={firstNameError}
+                error={!!inputErrors.firstName}
+                helperText={inputErrors.firstName}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -72,10 +98,10 @@ const SignUp = ({
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                value={lastName}
+                value={userData.lastName}
                 onChange={handlerInputValues}
-                error={!!lastNameError}
-                helperText={lastNameError}
+                error={!!inputErrors.lastName}
+                helperText={inputErrors.lastName}
                 variant="outlined"
                 required
                 fullWidth
@@ -87,10 +113,10 @@ const SignUp = ({
             </Grid>
             <Grid item xs={12}>
               <TextField
-                value={email}
+                value={userData.email}
                 onChange={handlerInputValues}
-                error={!!emailError}
-                helperText={emailError}
+                error={!!inputErrors.email}
+                helperText={inputErrors.email}
                 variant="outlined"
                 required
                 fullWidth
@@ -102,10 +128,10 @@ const SignUp = ({
             </Grid>
             <Grid item xs={12}>
               <TextField
-                value={password}
+                value={userData.password}
                 onChange={handlerInputValues}
-                error={!!passwordError}
-                helperText={passwordError}
+                error={!!inputErrors.password}
+                helperText={inputErrors.password}
                 variant="outlined"
                 required
                 fullWidth

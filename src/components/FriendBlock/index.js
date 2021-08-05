@@ -1,16 +1,19 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import {
   FriendBlockLink, FriendBlockAvatar, FriendBlockInfo, FriendBlockInfoName, FriendBlockWrapper,
 } from '../../reusableStyles';
 
-const FriendBlock = () => (
+const FriendBlock = ({
+  firstName, lastName, id, url,
+}) => (
   <FriendBlockWrapper>
-    <FriendBlockLink>
+    <FriendBlockLink to={`${url}/${id}`}>
       <FriendBlockAvatar />
       <FriendBlockInfo>
         <FriendBlockInfoName>
-          Евгений Яловенко
+          {`${firstName} ${lastName}`}
         </FriendBlockInfoName>
       </FriendBlockInfo>
     </FriendBlockLink>

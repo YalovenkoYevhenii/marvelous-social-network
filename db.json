@@ -9,23 +9,37 @@
       "profession": "Javascript Trainee",
       "education": "ХНТУ",
       "birthDate": "27.10.1999",
-      "city": "Kherson"
+      "city": "Kherson",
+      "friends": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
     },
     {
       "id": 2,
-      "firstName": "Петя",
-      "lastName": "Красин",
+      "firstName": "Уилл",
+      "lastName": "Смит",
       "email": "qwe@yahoo.com",
       "password": "qwerty1",
       "profession": "Javascript Trainee",
       "education": "UCLA",
       "birthDate": "27.10.1999",
-      "city": "Kherson"
+      "city": "Kherson",
+      "friends": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ]
     },
     {
       "id": 3,
-      "firstName": "Женя",
-      "lastName": "Летин",
+      "firstName": "Эмбер",
+      "lastName": "Хёрд",
       "email": "asd@yahoo.com",
       "password": "qwerty1",
       "profession": "Javascript Trainee",
@@ -35,8 +49,8 @@
     },
     {
       "id": 4,
-      "firstName": "Саша",
-      "lastName": "Федин",
+      "firstName": "Брэд",
+      "lastName": "Питт",
       "email": "zxc@yahoo.com",
       "password": "qwerty1",
       "profession": "Javascript Trainee",
@@ -46,8 +60,8 @@
     },
     {
       "id": 5,
-      "firstName": "Паша",
-      "lastName": "Весин",
+      "firstName": "Хелена",
+      "lastName": "Бонем Картер",
       "email": "rty@yahoo.com",
       "password": "qwerty1",
       "profession": "Javascript Trainee",
@@ -64,133 +78,14 @@
       "profession": "Javascript Trainee",
       "education": "ХНТУ",
       "birthDate": "27.10.1999",
-      "city": "Kherson"
-    },
-    {
-      "firstName": "ffasdf",
-      "lastName": "dewegq",
-      "email": "ffsfaerr@sldlris.fff",
-      "password": "tyererpasldf",
-      "id": 7
-    },
-    {
-      "firstName": "Уилл",
-      "lastName": "Смит",
-      "email": "will@smith.com",
-      "password": "willsmith1",
-      "id": 8
-    },
-    {
-      "firstName": "fdasfas",
-      "lastName": "ssdsfa",
-      "email": "ddfafewgfw@ndaskas.rrj",
-      "password": "aodafehajdkvna",
-      "id": 9
-    },
-    {
-      "firstName": "qwe",
-      "lastName": "qwe",
-      "email": "qwe@rewq.rrr",
-      "password": "fffadsfasd",
-      "id": 10
-    },
-    {
-      "firstName": "qwe",
-      "lastName": "eeeee",
-      "email": "ggggg@asdf.cj",
-      "password": "joafwehtandfale",
-      "id": 11
-    },
-    {
-      "firstName": "eeqwe",
-      "lastName": "wwwqeqf",
-      "email": "dafewf@aejaoej.fofo",
-      "password": "ajoienaeuoovi",
-      "id": 12
-    },
-    {
-      "firstName": "qweewq",
-      "lastName": "eeqwe",
-      "email": "wweqweq@adfa.erj",
-      "password": "jaoenaoibneoq",
-      "id": 13
-    },
-    {
-      "firstName": "qweq",
-      "lastName": "eeeqwe1",
-      "email": "feraefe@ajfiej.rj",
-      "password": "jioanceoipewb",
-      "id": 14
-    },
-    {
-      "firstName": "aefaefae",
-      "lastName": "raesaeczae",
-      "email": "aefadsvrea@jiejs.rj",
-      "password": "ajiohejglaiheic",
-      "id": 15
-    },
-    {
-      "firstName": "dfaspu",
-      "lastName": "qrewu",
-      "email": "ewrqu@qewrrew.ru",
-      "password": "reqwuirqewuirewreworueiw",
-      "id": 16
-    },
-    {
-      "firstName": "asdf",
-      "lastName": "fdasdsfasd",
-      "email": "kjasdfioe@hofehai.rur",
-      "password": "faojejai.zsioqq",
-      "id": 17
-    },
-    {
-      "firstName": "qweqwedasfe",
-      "lastName": "eadcragfa",
-      "email": "wwqdacfarga@ajeija.rur",
-      "password": "aijoencvauirghf",
-      "id": 18
-    },
-    {
-      "firstName": "qweqwedsw",
-      "lastName": "daeea",
-      "email": "aefefaes@aewjia.rjrjr",
-      "password": "ajiejoaesfja",
-      "id": 19
-    },
-    {
-      "firstName": "qweqwesdq",
-      "lastName": "waefa",
-      "email": "ijaeieohfa@fjaa.rjj",
-      "password": "aijeoaifhef",
-      "id": 20
-    },
-    {
-      "firstName": "qweqwesdq",
-      "lastName": "waefa",
-      "email": "ijaeieohfa@fjaa.rjj",
-      "password": "aijeoaifhef",
-      "id": 21
-    },
-    {
-      "firstName": "qweqwesdq",
-      "lastName": "waefa",
-      "email": "ijaeieohfa@fjaa.rjj",
-      "password": "aijeoaifhef",
-      "id": 22
-    },
-    {
-      "firstName": "qweqwesdq",
-      "lastName": "waefa",
-      "email": "ijaeieohfa@fjaa.rjj",
-      "password": "aijeoaifhef",
-      "id": 23
-    },
-    {
-      "firstName": "qweqwesdq",
-      "lastName": "waefa",
-      "email": "ijaeieohfa@fjaa.rjj",
-      "password": "aijeoaifhef",
-      "id": 24
+      "city": "Kherson",
+      "friends": [
+        2,
+        3,
+        4,
+        5,
+        1
+      ]
     }
   ]
 }

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -11,6 +10,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
+import useRequest from '../../../hooks/useRequest';
+
+import { useContextAuthentificationPage } from '../context';
 import { StyledErrorMessage } from './styles';
 
 const useStyles = makeStyles(theme => ({
@@ -29,14 +31,31 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SignIn = ({
-  icon, handlerShowPassword, setIcon, handlerGetUser, signInError,
-}) => {
+const SignIn = ({ icon, handlerShowPassword, setIcon }) => {
+  const [signInError, setSignInError] = useState('');
   const { paper, form, submit } = useStyles();
+  const { requestData, requestError } = useRequest();
+  const { setUser } = useContextAuthentificationPage();
 
   useEffect(() => {
     setIcon(false);
   }, []);
+
+  const handlerGetUser = (e) => {
+    e.preventDefault();
+
+    if (!requestError) {
+      const result = requestData.find(item => (
+        item.email === e.target[0].value && item.password === e.target[2].value
+      ));
+      if (result) {
+        localStorage.setItem('userID', result.id);
+        setUser(result);
+      }
+      if (!result) setSignInError('Invalid username or password');
+    }
+    if (requestError) setSignInError(requestError);
+  };
 
   return (
     <Container component="main" maxWidth="xs">

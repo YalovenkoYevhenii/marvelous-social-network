@@ -20,9 +20,7 @@ const useRequest = () => {
       .catch(err => setRequestError(err.message));
   }, [options]);
 
-  return {
-    requestData, requestError, setOptions,
-  };
+  return { requestData, requestError, setOptions };
 };
 
 export default useRequest;
