@@ -31,7 +31,7 @@ export const PageContentContainer = styled.div`
 
 // PostBlock
 
-export const BlockWrapper = styled.section`
+export const BlockWrapper = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -40,6 +40,7 @@ export const BlockWrapper = styled.section`
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
   margin: 1rem;
   padding: 1rem;
+  align-self: stretch;
 `;
 
 export const BlockRow = styled.div`
