@@ -9,15 +9,14 @@ const axiosAPI = axios.create({
 const useRequest = () => {
   const [requestData, setRequestData] = useState(null);
   const [requestError, setRequestError] = useState(null);
-  const [options, setOptions] = useState({
-    method: 'get',
-    url: '/users',
-  });
+  const [options, setOptions] = useState(null);
 
   useEffect(() => {
-    axiosAPI(options)
-      .then(res => setRequestData(res.data))
-      .catch(err => setRequestError(err.message));
+    if (options) {
+      axiosAPI(options)
+        .then(res => setRequestData(res.data))
+        .catch(err => setRequestError(err.message));
+    }
   }, [options]);
 
   return { requestData, requestError, setOptions };

@@ -1,31 +1,38 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 import { Main, Container } from '../../../reusableStyles';
 import PostBlock from '../../../components/PostBlock';
 import useRequest from '../../../hooks/useRequest';
+import { useContextDashboardPage } from '../context';
 
 import { DashboardContentContainer } from './styles';
 
-const a = {
-  method: 'get',
-  url: '/users/1/posts',
-}
-const b = {
-  method: 'get',
-  url: '/users/2/posts',
-}
-
 export const DashboardPageContent = () => {
-  const { requestData, requestError, setOptions } = useRequest();
-  console.log(res);
-  console.log(requestData, requestError);
+  const { getRequestOptions, user } = useContextDashboardPage();
+  const { requestData, setOptions } = useRequest();
+
+  useEffect(() => {
+    setOptions({ ...getRequestOptions, url: process.env.REACT_APP_URL_POSTS });
+  }, []);
+
+  /*   const friendsPosts = requestData && requestData.filter(post => (
+    user.friends.find(friendId => friendId === post.userId))); */
+
+  const [friendsPosts, setFriendsPosts] = useState();
+  useEffect(() => {
+    if (requestData) {
+      setFriendsPosts(requestData.filter(post => (
+        user?.friends?.find(friendId => friendId === post.userId))));
+    }
+  }, [requestData]);
+
   return (
     <Main>
       <Container>
         <DashboardContentContainer>
-          <PostBlock />
+          { friendsPosts ? friendsPosts.map(({ body, time, userId }) => (
+            <PostBlock body={body} time={time} userId={userId} />
+          )) : <div>loading...</div>}
         </DashboardContentContainer>
       </Container>
     </Main>

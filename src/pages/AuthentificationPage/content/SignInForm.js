@@ -34,16 +34,17 @@ const useStyles = makeStyles(theme => ({
 const SignIn = ({ icon, handlerShowPassword, setIcon }) => {
   const [signInError, setSignInError] = useState('');
   const { paper, form, submit } = useStyles();
-  const { requestData, requestError } = useRequest();
-  const { setUser } = useContextAuthentificationPage();
+  const { requestData, requestError, setOptions } = useRequest();
+  const { setUser, getRequestOptions } = useContextAuthentificationPage();
 
   useEffect(() => {
     setIcon(false);
+    setOptions(getRequestOptions);
+    console.log(1111);
   }, []);
-
   const handlerGetUser = (e) => {
     e.preventDefault();
-
+    console.log(requestData);
     if (!requestError) {
       const result = requestData.find(item => (
         item.email === e.target[0].value && item.password === e.target[2].value

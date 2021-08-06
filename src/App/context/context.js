@@ -35,11 +35,15 @@ const deleteRequestOptions = {
 const Provider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const { requestData } = useRequest(getRequestOptions);
+  const { requestData, setOptions } = useRequest();
 
   const handlerSignOut = useCallback(() => {
     setUser(null);
     localStorage.removeItem('userID');
+  }, []);
+
+  useEffect(() => {
+    setOptions(getRequestOptions);
   }, []);
 
   useEffect(() => {

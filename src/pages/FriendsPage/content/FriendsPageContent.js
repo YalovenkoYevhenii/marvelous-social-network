@@ -12,7 +12,7 @@ const FriendsPageContent = () => {
   const { url } = useRouteMatch();
 
   const userFriendsList = requestData.filter(item => (
-    user.friends.find(userFriendId => item.id === userFriendId)
+    user?.friends?.find(userFriendId => item.id === userFriendId)
   ));
   return (
     <Main>
@@ -21,7 +21,7 @@ const FriendsPageContent = () => {
           <StyledSearchBar placeholder="Искать друзей" />
         </FriendsPageContentContainer>
         <FriendsPageContentContainer>
-          {userFriendsList?.map(({ firstName, lastName, id }) => (
+          {userFriendsList.map(({ firstName, lastName, id }) => (
             <FriendBlock
               firstName={firstName}
               lastName={lastName}

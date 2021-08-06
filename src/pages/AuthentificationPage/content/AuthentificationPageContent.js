@@ -49,14 +49,6 @@ const AuthentificationPageContent = () => {
 
   if (user) return <Redirect to={ROOT_PATH} />;
 
-  fetch('http://localhost:3000/users/1/posts')
-    .then(res => res.json())
-    .then(res => console.log(res));
-
-  fetch('http://localhost:3000/users/2/posts')
-    .then(res => res.json())
-    .then(res => console.log(res));
-
   return (
     <AuthMain>
       <ButtonGroupOfTwo
