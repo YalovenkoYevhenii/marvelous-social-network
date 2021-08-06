@@ -11,7 +11,7 @@ const useRequest = () => {
   const [requestError, setRequestError] = useState(null);
   const [options, setOptions] = useState({
     method: 'get',
-    url: 'http://localhost:3000/users',
+    url: '/users',
   });
 
   useEffect(() => {

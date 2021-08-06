@@ -32,7 +32,6 @@ const PostBlock = () => (
     </BlockRow>
     <hr />
     <BlockRow>
-
       <PostDate>
         30.07.2021
       </PostDate>
