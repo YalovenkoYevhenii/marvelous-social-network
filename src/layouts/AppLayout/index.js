@@ -22,7 +22,7 @@ const AppLayout = () => (
     <Suspense fallback={<Preloader />}>
       <Switch>
         <PrivateRoute exact path={ROOT_PATH} component={DashboardPage} />
-        <PrivateRoute path={PROFILE_PATH} component={ProfilePage} />
+        <PrivateRoute path={`${PROFILE_PATH}/:profileId`} component={ProfilePage} />
         <PrivateRoute path={FRIENDS_PATH} component={FriendsPage} />
         <PrivateRoute path={SETTINGS_PATH} component={SettingsPage} />
         <Route path={AUTH_PATH} component={AuthentificationPage} />

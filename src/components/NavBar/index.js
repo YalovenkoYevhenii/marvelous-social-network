@@ -21,7 +21,7 @@ const NavBar = () => {
           </NavLinkStyled>
         </Li>
         <Li>
-          <NavLinkStyled to={PROFILE_PATH}>
+          <NavLinkStyled to={`${PROFILE_PATH}/${user?.id}`}>
             profile
           </NavLinkStyled>
         </Li>

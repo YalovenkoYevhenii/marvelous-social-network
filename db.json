@@ -26,7 +26,7 @@
       "password": "qwerty1",
       "profession": "Javascript Trainee",
       "education": "UCLA",
-      "birthDate": "27.10.1999",
+      "birthDate": "25.10.1979",
       "city": "Kherson",
       "friends": [
         1,
@@ -42,10 +42,16 @@
       "lastName": "Хёрд",
       "email": "asd@yahoo.com",
       "password": "qwerty1",
-      "profession": "Javascript Trainee",
+      "profession": "Actor",
       "education": "MIT",
-      "birthDate": "27.10.1999",
-      "city": "Kherson"
+      "birthDate": "20.10.1984",
+      "city": "Kherson",
+      "friends": [
+        1,
+        4,
+        5,
+        6
+      ]
     },
     {
       "id": 4,
@@ -53,10 +59,16 @@
       "lastName": "Питт",
       "email": "zxc@yahoo.com",
       "password": "qwerty1",
-      "profession": "Javascript Trainee",
+      "profession": "Actor",
       "education": "CalTech",
-      "birthDate": "27.10.1999",
-      "city": "Kherson"
+      "birthDate": "17.10.1982",
+      "city": "Hollywood",
+      "friends": [
+        1,
+        3,
+        5,
+        6
+      ]
     },
     {
       "id": 5,
@@ -64,10 +76,16 @@
       "lastName": "Бонем Картер",
       "email": "rty@yahoo.com",
       "password": "qwerty1",
-      "profession": "Javascript Trainee",
-      "education": "ХНТУ",
-      "birthDate": "27.10.1999",
-      "city": "Kherson"
+      "profession": "Actor",
+      "education": "South Hampstead High School",
+      "birthDate": "27.10.1987",
+      "city": "London",
+      "friends": [
+        1,
+        3,
+        4,
+        6
+      ]
     },
     {
       "firstName": "Джонни",
@@ -75,10 +93,10 @@
       "email": "really@mail.ru",
       "password": "12345678",
       "id": 6,
-      "profession": "Javascript Trainee",
+      "profession": "Actor",
       "education": "ХНТУ",
-      "birthDate": "27.10.1999",
-      "city": "Kherson",
+      "birthDate": "15.10.1985",
+      "city": "Hollywood",
       "friends": [
         2,
         3,

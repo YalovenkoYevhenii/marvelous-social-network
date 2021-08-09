@@ -40,7 +40,6 @@ export const BlockWrapper = styled.article`
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
   margin: 1rem;
   padding: 1rem;
-  align-self: stretch;
 `;
 
 export const BlockRow = styled.div`
