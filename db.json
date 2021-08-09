@@ -86,13 +86,6 @@
         5,
         1
       ]
-    },
-    {
-      "firstName": "Джон",
-      "lastName": "Лок",
-      "email": "lock@some.ru",
-      "password": "triggerme",
-      "id": 7
     }
   ],
   "posts": [
