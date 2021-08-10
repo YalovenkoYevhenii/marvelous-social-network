@@ -41,6 +41,7 @@ const SignIn = ({ icon, handlerShowPassword, setIcon }) => {
     setIcon(false);
     setOptions(getRequestOptions);
   }, []);
+
   const handlerGetUser = (e) => {
     e.preventDefault();
     if (!requestError) {

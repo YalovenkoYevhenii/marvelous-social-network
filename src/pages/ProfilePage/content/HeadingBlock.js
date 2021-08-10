@@ -25,6 +25,7 @@ const HeadingBlock = () => {
     if (+profileId === 6) return logo6;
     return null;
   };
+
   return (
     <StyledProfileHeadingBlock>
       <ProfileHeadingUser>

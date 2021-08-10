@@ -10,11 +10,11 @@ const useContextPage = () => useContext(Context);
 
 const getRequestOptions = {
   method: 'get',
-  url: 'http://localhost:3000/users',
+  url: '/users',
 };
 const postRequestOptions = {
   method: 'post',
-  url: 'http://localhost:3000/users',
+  url: '/users',
   data: {},
 };
 const putRequestOptions = {

@@ -50,6 +50,7 @@ const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
   const { setOptions } = useRequest();
 
   const classes = useStyles();
+
   useEffect(() => {
     setIcon(false);
   }, []);

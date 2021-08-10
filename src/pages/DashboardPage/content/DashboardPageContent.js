@@ -22,7 +22,7 @@ export const DashboardPageContent = () => {
   useEffect(() => {
     if (requestData) {
       setFriendsPosts(requestData.filter(post => (
-        user?.friends?.find(friendId => friendId === post.userId))));
+        user?.friends?.find(friendId => friendId === post.userId))).reverse());
     }
   }, [requestData]);
 

@@ -40,6 +40,7 @@ export const BlockWrapper = styled.article`
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
   margin: 1rem;
   padding: 1rem;
+  align-self: stretch;
 `;
 
 export const BlockRow = styled.div`
@@ -105,7 +106,7 @@ export const FriendBlockAvatar = styled.img`
   width: 10rem;
   border-radius: 50%;
   object-fit: cover;
-  border: 0.25rem solid grey;
+  border: 0.25rem solid Gainsboro;
 `;
 
 export const FriendBlockInfo = styled.div`

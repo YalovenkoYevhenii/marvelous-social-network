@@ -45,6 +45,10 @@ const AuthentificationPageContent = () => {
     handlerThemeForm(value);
   }, []);
 
+  fetch('http://localhost:3000/users/1/posts')
+    .then(res => res.json())
+    .then(res => console.log(res));
+
   const handlerShowPassword = () => setIcon(prev => !prev);
 
   if (user) return <Redirect to={ROOT_PATH} />;

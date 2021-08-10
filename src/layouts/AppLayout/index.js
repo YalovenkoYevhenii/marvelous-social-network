@@ -8,7 +8,7 @@ import {
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import Preloader from './Preloader';
+import Preloader from '../../components/Preloader';
 
 const DashboardPage = lazy(() => import('../../pages/DashboardPage'));
 const FriendsPage = lazy(() => import('../../pages/FriendsPage'));

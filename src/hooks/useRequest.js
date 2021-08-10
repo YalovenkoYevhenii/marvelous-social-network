@@ -10,16 +10,22 @@ const useRequest = () => {
   const [requestData, setRequestData] = useState(null);
   const [requestError, setRequestError] = useState(null);
   const [options, setOptions] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (options) {
+      setLoading(true);
+      setRequestError(null);
       axiosAPI(options)
         .then(res => setRequestData(res.data))
-        .catch(err => setRequestError(err.message));
+        .catch(err => setRequestError(err.message))
+        .finally(() => setLoading(false));
     }
   }, [options]);
 
-  return { requestData, requestError, setOptions };
+  return {
+    requestData, requestError, setOptions, loading,
+  };
 };
 
 export default useRequest;

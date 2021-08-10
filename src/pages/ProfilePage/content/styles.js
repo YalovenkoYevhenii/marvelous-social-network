@@ -124,6 +124,8 @@ export const InfoBlockRowElement = styled.div`
 
 export const StyledAvatarGroup = styled(AvatarGroup)`
   padding: 1rem 1rem 1rem 1rem;
+  display: flex;
+  justify-content: center;
 `;
 
 export const StyledAvatar = styled(Avatar)`
