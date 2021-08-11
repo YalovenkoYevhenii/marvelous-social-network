@@ -10,23 +10,20 @@ import SendPostBlock from './SendPostBlock';
 
 const PostsBlock = () => {
   const { getRequestOptions, profileId } = useContextProfilePage();
-  const { requestData, loading, setOptions } = useRequest();
+  const { requestData, setOptions } = useRequest();
 
   useEffect(() => {
     setOptions({ ...getRequestOptions, url: `/users/${profileId}/posts` });
   }, []);
-  console.log(requestData);
-  console.log({ ...getRequestOptions, url: `/users/${profileId}/posts` });
-  console.log('looook', requestData?.reverse());
 
   return (
     <StyledColumnBlockPosts>
       <SendPostBlock />
-      {loading ? <Preloader /> : (
-        requestData?.reverse().map(({ userId, body, time }) => (
-          <PostBlock userId={userId} body={body} time={time} />
-        ))
-      )}
+      {requestData ? (
+        requestData.map(({ body, time }) => (
+          <PostBlock body={body} time={time} />
+        )).reverse()
+      ) : <Preloader />}
     </StyledColumnBlockPosts>
   );
 };
