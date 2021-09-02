@@ -1,0 +1,75 @@
+/* eslint-disable react/prop-types */
+import React, {
+  createContext, useContext, useState, useCallback, useEffect,
+} from 'react';
+
+import useRequest from 'hooks/useRequest';
+
+const Context = createContext(null);
+const useContextPage = () => useContext(Context);
+
+const getRequestOptions = {
+  method: 'get',
+  url: process.env.REACT_APP_URL_AUTH_USERS,
+};
+const postRequestOptions = {
+  method: 'post',
+  url: process.env.REACT_APP_URL_AUTH_USERS,
+  data: {},
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+const putRequestOptions = {
+  method: 'put',
+  url: process.env.REACT_APP_URL_AUTH_USERS,
+  data: {},
+};
+const patchRequestOptions = {
+  method: 'put',
+  url: process.env.REACT_APP_URL_AUTH_USERS,
+  data: {},
+};
+const deleteRequestOptions = {
+  method: 'delete',
+  url: process.env.REACT_APP_URL_AUTH_USERS,
+};
+
+const Provider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  const { setOptions, requestData } = useRequest();
+
+  const handlerSignOut = useCallback(() => {
+    setUser(false);
+    localStorage.removeItem('token');
+    setOptions({ ...deleteRequestOptions, url: process.env.REACT_APP_URL_AUTH_SIGN_OUT });
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) setOptions({ ...getRequestOptions, url: '/current' });
+  }, []);
+
+  useEffect(() => {
+    console.log(requestData);
+    if (requestData) setUser(requestData);
+  }, [requestData]);
+
+  const data = {
+    user,
+    setUser,
+    handlerSignOut,
+    postRequestOptions,
+    getRequestOptions,
+    putRequestOptions,
+    patchRequestOptions,
+    deleteRequestOptions,
+  };
+  return (
+    <Context.Provider value={data}>
+      {children}
+    </Context.Provider>
+  );
+};
+
+export { useContextPage, Provider };
