@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator');
 
-const path = require('path');
 const AuthService = require('../services/AuthService');
 const ApiError = require('../exceptions/ApiError');
 

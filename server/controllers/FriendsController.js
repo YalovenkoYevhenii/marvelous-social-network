@@ -3,7 +3,6 @@ const FriendsService = require('../services/FriendsService');
 class FriendsController {
   async getFriends(req, res, next) {
     try {
-      console.log(1);
       const { userId } = req.user;
       const { page = 1, limit = 5 } = req.query;
       const friendsList = await FriendsService.getFriends(userId, page, limit);

@@ -7,9 +7,10 @@ class PostsService {
   async getFriendsPosts(userId, page, limit) {
     const { friends } = await User.findById(userId);
     const options = { userId: { $in: friends } };
+    const populateOptions = ['userId', { firstName: 1, lastName: 2, avatar: 3 }];
 
-    const arrOfFriendsPosts = await PaginationService.getPaginatedData(Post, options, page, limit);
-
+    const arrOfFriendsPosts = await PaginationService
+      .getPaginatedData(Post, options, page, limit, true, populateOptions);
     return arrOfFriendsPosts;
   }
 

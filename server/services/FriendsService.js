@@ -6,7 +6,8 @@ class FriendsService {
     const { friends } = await User.findById(userId);
     const options = { _id: { $in: friends } };
 
-    const friendsList = await PaginationService.getPaginatedData(User, options, page, limit);
+    const friendsList = await PaginationService
+      .getPaginatedData(User, options, page, limit);
     return friendsList;
   }
 
