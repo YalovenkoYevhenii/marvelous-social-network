@@ -46,7 +46,7 @@ export const BlockWrapper = styled.article`
 export const BlockRow = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-self: stretch;
 `;
 
 export const PostAvatar = styled(Avatar)`

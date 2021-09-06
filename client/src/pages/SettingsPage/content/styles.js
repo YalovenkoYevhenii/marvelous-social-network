@@ -11,9 +11,9 @@ export const SettingsPageContentContainer = styled(PageContentContainer)`
   flex: 1;
 `;
 
-export const SettingPageHeading = styled.h2`
-  margin: 0 auto;
+export const SettingPageHeading = styled.h1`
   padding: .5rem;
+  text-transform: uppercase;
 `;
 
 export const SettingPageForm = styled.form`
@@ -28,4 +28,10 @@ export const SettingsBlockWrapper = styled(BlockWrapper)`
 
 export const StyledTextField = styled(TextField)`
   margin: 1rem;
+  flex-basis: 25rem;
+`;
+
+export const StyledSettingsSection = styled.section`
+  display: flex;
+  justify-content: flex-start;
 `;

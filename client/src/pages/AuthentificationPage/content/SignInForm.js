@@ -36,7 +36,7 @@ const SignIn = ({ icon, handlerShowPassword, setIcon }) => {
   const { paper, form, submit } = useStyles();
   const { requestData, requestError, setOptions } = useRequest();
   const { setUser, postRequestOptions } = useContextAuthentificationPage();
-
+  console.log(requestError);
   useEffect(() => {
     setIcon(false);
   }, []);

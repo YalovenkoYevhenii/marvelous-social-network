@@ -20,7 +20,6 @@ const AuthentificationPage = lazy(() => import('pages/AuthentificationPage'));
 
 const AppLayout = () => {
   const { user } = useContextApp();
-  console.log(user);
   return (
     <>
       <Header />

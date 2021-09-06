@@ -45,14 +45,12 @@ const Provider = ({ children }) => {
     localStorage.removeItem('token');
     setOptions({ ...deleteRequestOptions, url: process.env.REACT_APP_URL_AUTH_SIGN_OUT });
   }, []);
-
   useEffect(() => {
     if (localStorage.getItem('token')) setOptions({ ...getRequestOptions, url: '/current' });
   }, []);
 
   useEffect(() => {
-    console.log(requestData);
-    if (requestData) setUser(requestData);
+    if (requestData?.email) setUser(requestData);
   }, [requestData]);
 
   const data = {
