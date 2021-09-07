@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Main, Container, FriendBlockAvatar } from 'reusableStyles';
+import { Main, Container } from 'reusableStyles';
 
 import {
-  SettingsPageContentContainer, SettingPageHeading, SettingPageForm,
-  SettingsBlockWrapper, StyledSettingsSection,
+  SettingsPageContentContainer, SettingPageHeading, SettingsBlockWrapper,
 } from './styles';
+
+import SettingPageForm from './SettingPageForm';
 
 export const SettingsPageContent = () => (
   <Main>
@@ -13,11 +14,8 @@ export const SettingsPageContent = () => (
       <SettingsPageContentContainer>
         <SettingsBlockWrapper>
           <SettingPageHeading>
-            Настройки
+            Настройки профиля
           </SettingPageHeading>
-          <StyledSettingsSection>
-            <FriendBlockAvatar />
-          </StyledSettingsSection>
           <SettingPageForm />
         </SettingsBlockWrapper>
       </SettingsPageContentContainer>

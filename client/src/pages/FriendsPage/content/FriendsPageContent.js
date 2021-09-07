@@ -17,8 +17,7 @@ const FriendsPageContent = () => {
   useEffect(() => {
     setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=1&limit=4` });
   }, []);
-  // eslint-disable-next-line no-eval
-  console.log(requestError);
+
   return (
     <Main>
       <Container>
