@@ -17,20 +17,22 @@ const SettingPageForm = () => {
   const {
     firstInput, setFirstInput, secondInput, setSecondInput, areEqual,
   } = useAreInputsEqual();
+
   const { setOptions } = useRequest();
 
   const handlerSubmitSettingsForm = (e) => {
     e.preventDefault();
 
-    const data = new FormData(e.target);
-    console.log(e.target);
     setOptions({
-      ...postRequestOptions, url: 'probe', headers: { 'Content-type': 'multipart/form-data' }, body: data,
+      ...postRequestOptions,
+      url: process.env.REACT_APP_URL_SETTINGS,
+      headers: { 'Content-type': 'multipart/form-data; boundary=ffffff', type: 'formData' },
+      body: new FormData(e.target),
     });
   };
 
   return (
-    <SettingPageFormCol enctype="multipart/form-data" onSubmit={handlerSubmitSettingsForm}>
+    <SettingPageFormCol method="post" encType="multipart/form-data" onSubmit={handlerSubmitSettingsForm}>
       <ChangeAvatarBlock />
       <StyledSectionHeading>
         Личные данные

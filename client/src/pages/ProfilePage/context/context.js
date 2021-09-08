@@ -16,7 +16,6 @@ export const Provider = ({ children }) => {
   const {
     setOptions, requestData, requestError, loading,
   } = useRequest();
-  console.log(requestData);
   useEffect(() => {
     setOptions({ ...getRequestOptions, url: `/${profileId}` });
   }, []);

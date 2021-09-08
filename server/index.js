@@ -11,7 +11,7 @@ const friendsRouter = require('./routes/friends');
 const userRouter = require('./routes/user');
 const ErrorMiddleware = require('./middlewares/ErrorMiddleware');
 const AuthMiddleware = require('./middlewares/AuthMiddleware');
-const SettingsService = require('./services/SettingsService');
+const SettingsController = require('./controllers/SettingsController');
 
 const app = express();
 
@@ -23,12 +23,12 @@ app.use(cors({
 app.options('*', cors()); */
 app.use(express.json({ extended: true }));
 app.use(express.static('static'));
-app.use(fileUpload({}));
+app.use(fileUpload());
 app.use(cookieParser());
 app.use('/auth', authRouter);
 app.use('/posts', postsRouter);
 app.use('/friends', friendsRouter);
-app.post('/settings', AuthMiddleware, SettingsService.changeProperties);
+app.post('/settings', AuthMiddleware, SettingsController.changeProperties);
 app.use('/', userRouter);
 app.use(ErrorMiddleware);
 
