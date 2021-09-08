@@ -5,7 +5,6 @@ const axiosAPI = axios.create({
   withCredentials: true,
   baseURL: process.env.REACT_APP_URL,
 });
-
 axiosAPI.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
@@ -58,7 +57,7 @@ const useRequest = () => {
   }, [options]);
 
   return {
-    requestData, requestError, setOptions, loading,
+    requestData, requestError, setOptions, loading, axiosAPI,
   };
 };
 

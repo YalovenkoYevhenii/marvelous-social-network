@@ -1,13 +1,15 @@
-import React, { createContext, useContext, useState } from 'react';
+/* eslint-disable react/prop-types */
+import React, { createContext, useContext } from 'react';
+import { useContextApp } from 'App/context';
 
 const Context = createContext(null);
 const useContextPage = () => useContext(Context);
 
-// eslint-disable-next-line react/prop-types
 const Provider = ({ children }) => {
-  const [data, useData] = useState({});
+  const { postRequestOptions } = useContextApp();
+  const data = { postRequestOptions };
   return (
-    <Context.Provider value={[data, useData]}>
+    <Context.Provider value={data}>
       {children}
     </Context.Provider>
   );

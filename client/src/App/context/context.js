@@ -16,9 +16,6 @@ const postRequestOptions = {
   method: 'post',
   url: process.env.REACT_APP_URL_AUTH_USERS,
   data: {},
-  headers: {
-    'Content-Type': 'application/json',
-  },
 };
 const putRequestOptions = {
   method: 'put',
