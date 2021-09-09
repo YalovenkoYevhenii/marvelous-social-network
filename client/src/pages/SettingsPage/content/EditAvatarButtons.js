@@ -26,7 +26,7 @@ const EditAvatarButtons = ({ setImageUrl }) => {
       >
         загрузить
         <input
-          name="image"
+          name="avatar"
           type="file"
           accept="image/*"
           onChange={handlerImageInput}

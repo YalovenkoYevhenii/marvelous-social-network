@@ -5,13 +5,15 @@ const axiosAPI = axios.create({
   withCredentials: true,
   baseURL: process.env.REACT_APP_URL,
 });
+
 axiosAPI.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
 });
+
 axiosAPI.interceptors.response.use(config => config, async (err) => {
   const originalRequest = err.config;
-  if (err.response.status === 401 && err.config && !err.config.isRetry) {
+  if (err.response.status === 401 && originalRequest && !originalRequest.isRetry) {
     try {
       originalRequest.isRetry = true;
       const res = await axios.get(`${process.env.REACT_APP_URL}/auth/refresh`, { withCredentials: true });

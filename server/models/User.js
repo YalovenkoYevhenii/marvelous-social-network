@@ -12,7 +12,7 @@ const schema = new Schema({
   profession: { type: String, required: false },
   education: { type: String, required: false },
   city: { type: String, required: false },
-  birthDate: { type: String, required: false },
+  birthday: { type: String, required: false },
 });
 
 module.exports = model('User', schema);
