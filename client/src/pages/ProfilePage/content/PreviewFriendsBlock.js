@@ -19,6 +19,7 @@ const PreviewFriendsBlock = () => {
   useEffect(() => {
     setOptions({ ...getRequestOptions, url: process.env.REACT_APP_URL_FRIENDS });
   }, []);
+  console.log(requestData);
   return (
     <BlockWrapper>
       <BlockRow>
@@ -26,11 +27,11 @@ const PreviewFriendsBlock = () => {
       </BlockRow>
       {loading ? <Preloader /> : (
         <StyledAvatarGroup>
-          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[0].avatar}` && null} />
-          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[1].avatar}` && null} />
-          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[2].avatar}` && null} />
-          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[3].avatar}` && null} />
-          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[4].avatar}` && null} />
+          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[0]?.avatar}` && null} />
+          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[1]?.avatar}` && null} />
+          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[2]?.avatar}` && null} />
+          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[3]?.avatar}` && null} />
+          <StyledAvatar alt="friend_photo" src={`${process.env.REACT_APP_URL}/${requestData?.content[4]?.avatar}` && null} />
         </StyledAvatarGroup>
       )}
       <BlockRow>

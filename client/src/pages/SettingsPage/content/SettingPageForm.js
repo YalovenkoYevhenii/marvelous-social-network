@@ -25,7 +25,6 @@ const SettingPageForm = () => {
 
   return (
     <SettingPageFormCol
-      action="http://localhost:8000/settings"
       method="post"
       encType="multipart/form-data"
       onSubmit={handlerSubmitSettingsForm}

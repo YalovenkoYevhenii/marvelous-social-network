@@ -9,10 +9,10 @@ const schema = new Schema({
   activationLink: { type: String },
   avatar: { type: String, default: '' },
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  profession: { type: String, required: false },
-  education: { type: String, required: false },
-  city: { type: String, required: false },
-  birthday: { type: String, required: false },
+  profession: { type: String, required: false, default: '' },
+  education: { type: String, required: false, default: '' },
+  city: { type: String, required: false, default: '' },
+  birthday: { type: String, required: false, default: '' },
 });
 
 module.exports = model('User', schema);

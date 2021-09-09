@@ -15,7 +15,7 @@ import { useContextAuthentificationPage } from '../context';
 
 const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
   const {
-    validateForm, initInputErrors, initUserData, classes, setUser, postRequestOptions,
+    validateForm, initInputErrors, initUserData, classes, setUser,
   } = useContextAuthentificationPage();
 
   const { setOptions, requestData } = useRequest();
@@ -36,11 +36,9 @@ const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
     validateForm(userData)
       .then((res) => {
         if (!Array.isArray(res)) {
-          return setOptions({
-            ...postRequestOptions,
-            url: process.env.REACT_APP_URL_AUTH_SIGN_UP,
-            data: res,
-          });
+          console.log(res);
+
+          return setOptions(res);
         }
 
         return res.forEach(({ message, path }) => (

@@ -17,7 +17,7 @@ const HeadingBlock = () => {
   return (
     <StyledProfileHeadingBlock>
       <ProfileHeadingUser>
-        <StyledImage src={`${process.env.REACT_APP_URL}/${avatar}` && null} />
+        <StyledImage src={avatar ? `${process.env.REACT_APP_URL}/${avatar}` : `${process.env.REACT_APP_URL}/default.png`} />
         <ProfileHeadingName>
           {`${firstName} ${lastName}`}
         </ProfileHeadingName>

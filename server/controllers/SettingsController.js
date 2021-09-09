@@ -1,15 +1,14 @@
-const User = require('../models/User');
+const SettingsService = require('../services/SettingsService');
 
 class SettingsController {
   async changeProperties(req, res, next) {
     try {
       const { userId } = req.user;
-      
-      console.log('req.body', req.body);
-      console.log('req.files', req.files);
+      const { body, files = null } = req;
 
+      await SettingsService.changeProperties(userId, body, files?.avatar);
 
-      res.status(200).send('changed');
+      res.status(200).json({ message: 'Your personal properties were successfully changed' });
     } catch (e) {
       next(e);
     }

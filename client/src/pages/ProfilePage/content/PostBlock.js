@@ -13,7 +13,7 @@ const PostBlock = ({ body, time }) => {
   console.log(requestData);
   console.log(profileId);
   const firstName = 'somebody';
-  const lastName = 'somebodys lastname';
+  const lastName = 'somebody\'s lastname';
   return (
     <BlockWrapper>
       <BlockRow>
