@@ -3,7 +3,6 @@ import SaveIcon from '@material-ui/icons/Save';
 
 import useAreInputsEqual from 'hooks/useAreInputsEqual';
 import useRequest from 'hooks/useRequest';
-import { useContextSettingsPage } from '../context';
 
 import {
   StyledSettingsSection, StyledSectionHeading,
@@ -13,26 +12,26 @@ import ChangeAvatarBlock from './ChangeAvatarBlock';
 import SecurityBlock from './SecurityBlock';
 
 const SettingPageForm = () => {
-  const { postRequestOptions } = useContextSettingsPage();
   const {
     firstInput, setFirstInput, secondInput, setSecondInput, areEqual,
   } = useAreInputsEqual();
-
-  const { setOptions } = useRequest();
+  const { axiosAPI } = useRequest();
 
   const handlerSubmitSettingsForm = (e) => {
     e.preventDefault();
 
-    setOptions({
-      ...postRequestOptions,
-      url: process.env.REACT_APP_URL_SETTINGS,
-      headers: { 'Content-type': 'multipart/form-data; boundary=ffffff', type: 'formData' },
-      body: new FormData(e.target),
-    });
+    const form = new FormData(e.target);
+
+    axiosAPI.post('http://localhost:7000/settings', form);
   };
 
   return (
-    <SettingPageFormCol method="post" encType="multipart/form-data" onSubmit={handlerSubmitSettingsForm}>
+    <SettingPageFormCol
+      action="http://localhost:8000/settings"
+      method="post"
+      encType="multipart/form-data"
+      onSubmit={handlerSubmitSettingsForm}
+    >
       <ChangeAvatarBlock />
       <StyledSectionHeading>
         Личные данные
