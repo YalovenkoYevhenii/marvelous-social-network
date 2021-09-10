@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import { Main, Container } from 'reusableStyles';
 import FriendBlock from 'components/FriendBlock';
@@ -6,23 +7,51 @@ import useRequest from 'hooks/useRequest';
 import Preloader from 'components/Preloader';
 
 import { useContextFriendsPage } from '../context';
-import { FriendsPageContentContainer, StyledSearchBar } from './styles';
+import { FriendsPageContentContainer, StyledSearchBar, StyledButton } from './styles';
 
 const FriendsPageContent = () => {
   const { getRequestOptions } = useContextFriendsPage();
   const {
     requestData, requestError, loading, setOptions,
   } = useRequest();
+  const [searchType, setSearchType] = useState(true);
+  const [query, setQuery] = useState(false);
+  const [page] = useState(1);
 
   useEffect(() => {
-    setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=1&limit=4` });
+    setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=${page}&limit=4&query=${query}` });
   }, []);
+
+  const handlerChangeSearchType = useCallback(value => () => {
+    setSearchType(value);
+  }, []);
+
+  const handlerSearchBarRequest = (value) => {
+    setQuery(value);
+  };
+  console.log(query);
 
   return (
     <Main>
       <Container>
         <FriendsPageContentContainer>
-          <StyledSearchBar placeholder="Искать друзей" />
+          <ButtonGroup variant="contained">
+            <StyledButton
+              color={searchType ? 'secondary' : 'white'}
+              onClick={handlerChangeSearchType(true)}
+            >
+              Друзья
+
+            </StyledButton>
+            <StyledButton
+              color={searchType ? 'white' : 'secondary'}
+              onClick={handlerChangeSearchType(false)}
+            >
+              Все пользователи
+
+            </StyledButton>
+          </ButtonGroup>
+          <StyledSearchBar onChange={handlerSearchBarRequest} placeholder={searchType ? 'Искать друзей' : 'Искать пользователей'} />
         </FriendsPageContentContainer>
         <FriendsPageContentContainer>
           {requestError && requestError.message}

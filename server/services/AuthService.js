@@ -22,6 +22,7 @@ class AuthService {
     await MailService.sendActivationMail(email, `${process.env.API_URL}/auth/activate/${activationLink}`);
 
     const userDto = new UserDto(user);
+
     const tokens = TokenService.generateTokens({ ...userDto });
     await TokenService.saveToken(userDto.id, tokens.refreshToken);
 
@@ -63,7 +64,8 @@ class AuthService {
 
     if (!userData || !tokenFromDb) throw ApiError.UnautorizedError();
 
-    const user = User.findById(userData.id);
+    const user = await User.findById(userData.userId);
+
     const userDto = new UserDto(user);
     const tokens = TokenService.generateTokens({ ...userDto });
     await TokenService.saveToken(userDto.id, tokens.refreshToken);

@@ -1,7 +1,7 @@
 module.exports = class UserDto {
   email;
 
-  id;
+  userId;
 
   isActivated;
 
@@ -19,7 +19,7 @@ module.exports = class UserDto {
 
   city;
 
-  birthDate;
+  birthday;
 
   constructor(model) {
     this.email = model.email;
@@ -32,6 +32,6 @@ module.exports = class UserDto {
     this.profession = model.profession;
     this.education = model.education;
     this.city = model.city;
-    this.birthDate = model.birthDate;
+    this.birthday = model.birthday;
   }
 };
