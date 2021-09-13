@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import useRequest from 'hooks/useRequest';
 import Preloader from 'components/Preloader';
+import { MessageBlock } from 'reusableStyles';
 
 import { useContextProfilePage } from '../context';
 import { StyledColumnBlockPosts } from './styles';
@@ -11,7 +12,7 @@ import SendPostBlock from './SendPostBlock';
 const PostsBlock = () => {
   const { getRequestOptions, profileId } = useContextProfilePage();
   const {
-    requestData, requestError, loading, setOptions,
+    requestData, loading, setOptions,
   } = useRequest();
 
   useEffect(() => {
@@ -21,10 +22,10 @@ const PostsBlock = () => {
   return (
     <StyledColumnBlockPosts>
       <SendPostBlock />
-      {requestError && <div>{requestError}</div>}
-      {loading ? <Preloader /> : requestData && requestData.content.map(({ body, time, _id }) => (
+      {loading ? <Preloader /> : requestData?.content.map(({ body, time, _id }) => (
         <PostBlock body={body} time={time} key={_id} />
       )).reverse()}
+      {requestData?.content.length === 0 && <MessageBlock>У вас пока нет постов</MessageBlock>}
     </StyledColumnBlockPosts>
   );
 };

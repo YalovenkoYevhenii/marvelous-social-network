@@ -14,7 +14,7 @@ const ChangeAvatarBlock = () => {
       </StyledSectionHeading>
       <StyledSettingsSection>
         <StyledSettingsAvatar src={imageUrl} alt="profile avatar" />
-        <EditAvatarButtons setImageUrl={setImageUrl} />
+        <EditAvatarButtons setImageUrl={setImageUrl} imageUrl={imageUrl} />
       </StyledSettingsSection>
     </>
   );

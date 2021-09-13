@@ -6,8 +6,8 @@ const Context = createContext(null);
 const useContextPage = () => useContext(Context);
 
 const Provider = ({ children }) => {
-  const { postRequestOptions } = useContextApp();
-  const data = { postRequestOptions };
+  const { deleteRequestOptions, user } = useContextApp();
+  const data = { deleteRequestOptions, user };
   return (
     <Context.Provider value={data}>
       {children}

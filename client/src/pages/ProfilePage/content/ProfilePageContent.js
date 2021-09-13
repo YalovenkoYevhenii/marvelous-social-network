@@ -10,10 +10,9 @@ import { ProfileHeaderImage, ProfileContentContainer } from './styles';
 import { useContextProfilePage } from '../context';
 
 const ProfilePageContent = () => {
-  const { requestData, requestError, loading } = useContextProfilePage();
+  const { requestData, loading } = useContextProfilePage();
   return (
     <Main>
-      {requestError && <div>Something went wrong. Please Try Again</div>}
       {loading ? <Preloader /> : requestData && (
         <>
           <ProfileHeaderImage />

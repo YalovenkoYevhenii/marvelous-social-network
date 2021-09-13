@@ -21,13 +21,13 @@ class PostsService {
   async getUserPosts(userId, page, limit) {
     const options = { userId };
 
-    const userPosts = await PaginationService.getPaginatedData(Post, options, page, limit);
+    const userPosts = await PaginationService.getPaginatedData(Post, options, page, limit, true, 'userId');
     return userPosts;
   }
 
   async editPost(userId, postId, body) {
     const post = await Post.findById(postId);
-    if (!post.userId === userId) throw ApiError.UnautorizedError();
+    if (post.userId !== userId) throw ApiError.UnautorizedError();
 
     post.body = body;
     await post.save();
@@ -35,7 +35,7 @@ class PostsService {
 
   async deletePost(userId, postId) {
     const post = await Post.findById(postId);
-    if (!post.userId === userId) throw ApiError.UnautorizedError();
+    if (post.userId !== userId) throw ApiError.UnautorizedError();
 
     await Post.deleteOne({ postId });
   }

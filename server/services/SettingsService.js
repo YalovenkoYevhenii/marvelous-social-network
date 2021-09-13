@@ -28,6 +28,12 @@ class SettingsService {
 
     await user.update(data);
   }
+
+  async deleteAvatar(userId, avatarName) {
+    await User.updateOne({ _id: userId }, { avatar: '' });
+
+    FileService.deleteFile(avatarName);
+  }
 }
 
 module.exports = new SettingsService();

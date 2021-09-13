@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Main, Container } from 'reusableStyles';
+import { Main, Container, MessageBlock } from 'reusableStyles';
 import PostBlock from 'components/PostBlock';
 import Preloader from 'components/Preloader';
 import useRequest from 'hooks/useRequest';
@@ -24,11 +24,16 @@ export const DashboardPageContent = () => {
         <DashboardContentContainer>
           { requestError && <div>{requestError.message}</div> }
           { loading ? <Preloader /> : (
-            requestData && requestData.content.map(({
+            requestData?.content.map(({
               body, time, _id, userId,
             }) => (
               <PostBlock body={body} time={time} userId={userId} key={_id} />
             )).reverse()
+          )}
+          {requestData?.content.length === 0 && (
+          <MessageBlock>
+            Вы пока не подписаны ни на чьи публикации
+          </MessageBlock>
           )}
         </DashboardContentContainer>
       </Container>

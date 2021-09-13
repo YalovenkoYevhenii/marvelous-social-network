@@ -32,6 +32,11 @@ export const StyledButton = styled(Button)`
   margin: 0.5rem;
 `;
 
+export const StyledSendButton = styled(Button)`
+  width: 10rem;
+  align-self: center;
+`;
+
 export const ProfileHeadingName = styled.div`
   font-size: 2rem;
   font-weight: 600;

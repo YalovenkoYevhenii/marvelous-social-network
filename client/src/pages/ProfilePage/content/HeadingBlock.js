@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { SETTINGS_PATH } from 'constants/routes';
+import useRedirectTo from 'hooks/useRedirectTo';
+
 import { useContextProfilePage } from '../context';
 
 import {
@@ -13,6 +16,11 @@ const HeadingBlock = () => {
     profileId,
     requestData: { firstName, lastName, avatar },
   } = useContextProfilePage();
+  const setPath = useRedirectTo();
+
+  const handlerRedirect = () => {
+    setPath(SETTINGS_PATH);
+  };
 
   return (
     <StyledProfileHeadingBlock>
@@ -24,7 +32,14 @@ const HeadingBlock = () => {
       </ProfileHeadingUser>
       <ProfileHeadingButtons>
         {userId === profileId ? (
-          <StyledButton color="secondary" variant="contained"> Настройки </StyledButton>
+          <StyledButton
+            color="secondary"
+            variant="contained"
+            onClick={handlerRedirect}
+          >
+            Настройки
+
+          </StyledButton>
         ) : (
           <>
             <StyledButton color="secondary" variant="contained">

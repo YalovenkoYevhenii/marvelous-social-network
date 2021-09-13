@@ -2,9 +2,14 @@ const User = require('../models/User');
 const PaginationService = require('./PaginationService');
 
 class FriendsService {
-  async getFriends(userId, page, limit) {
+  async getFriends(userId, page, limit, query) {
     const { friends } = await User.findById(userId);
-    const options = { _id: { $in: friends } };
+    const options = query ? {
+      _id: { $in: friends },
+      $or: [{ firstName: { $search: query } }, { lastName: { $search: query } }],
+    } : {
+      _id: { $in: friends },
+    };
 
     const friendsList = await PaginationService
       .getPaginatedData(User, options, page, limit);

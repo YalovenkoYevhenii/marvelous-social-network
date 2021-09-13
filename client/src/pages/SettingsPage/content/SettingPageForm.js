@@ -20,7 +20,7 @@ const SettingPageForm = () => {
   const handlerSubmitSettingsForm = (e) => {
     e.preventDefault();
 
-    axiosAPI.post('http://localhost:7000/settings', new FormData(e.target));
+    axiosAPI.patch('http://localhost:7000/settings', new FormData(e.target));
   };
 
   return (

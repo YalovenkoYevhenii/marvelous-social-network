@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-import { Main, Container } from 'reusableStyles';
+import { Main, Container, MessageBlock } from 'reusableStyles';
 import FriendBlock from 'components/FriendBlock';
 import useRequest from 'hooks/useRequest';
 import Preloader from 'components/Preloader';
@@ -15,7 +15,7 @@ const FriendsPageContent = () => {
     requestData, requestError, loading, setOptions,
   } = useRequest();
   const [searchType, setSearchType] = useState(true);
-  const [query, setQuery] = useState(false);
+  const [query, setQuery] = useState(null);
   const [page] = useState(1);
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const FriendsPageContent = () => {
   const handlerSearchBarRequest = (value) => {
     setQuery(value);
   };
-  console.log(query);
 
   return (
     <Main>
@@ -66,6 +65,11 @@ const FriendsPageContent = () => {
               key={_id}
             />
           ))}
+          {requestData?.content.length === 0 && (
+          <MessageBlock>
+            Пользователей не найдено
+          </MessageBlock>
+          )}
         </FriendsPageContentContainer>
       </Container>
     </Main>

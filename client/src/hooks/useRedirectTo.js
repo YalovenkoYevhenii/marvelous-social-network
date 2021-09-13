@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const useRedirectTo = (PATH) => {
+const useRedirectTo = () => {
+  const [path, setPath] = useState(null);
   const history = useHistory();
-  history.push(PATH);
+  if (path) history.push(path);
+
+  return setPath;
 };
 
 export default useRedirectTo;

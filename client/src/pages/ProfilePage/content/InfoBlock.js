@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BlockWrapper, BlockRow } from 'reusableStyles';
+import { BlockWrapper, BlockRow, AbsenceMessage } from 'reusableStyles';
 import { useContextProfilePage } from '../context';
 
 import {
@@ -10,7 +10,7 @@ import {
 const ProfileInfoBlock = () => {
   const {
     requestData: {
-      profession, education, birthDate, city,
+      profession, education, birthday, city,
     },
   } = useContextProfilePage();
   return (
@@ -23,7 +23,7 @@ const ProfileInfoBlock = () => {
           Профессия:
         </InfoBlockRowElement>
         <InfoBlockRowElement>
-          {profession}
+          {profession || <AbsenceMessage>не указана</AbsenceMessage>}
         </InfoBlockRowElement>
       </BlockRow>
       <BlockRow>
@@ -31,7 +31,7 @@ const ProfileInfoBlock = () => {
           Образование:
         </InfoBlockRowElement>
         <InfoBlockRowElement>
-          {education}
+          {education || <AbsenceMessage>не указано</AbsenceMessage>}
         </InfoBlockRowElement>
       </BlockRow>
       <BlockRow>
@@ -39,7 +39,7 @@ const ProfileInfoBlock = () => {
           Родился:
         </InfoBlockRowElement>
         <InfoBlockRowElement>
-          {birthDate}
+          {birthday || <AbsenceMessage>не указана</AbsenceMessage>}
         </InfoBlockRowElement>
       </BlockRow>
       <BlockRow>
@@ -47,7 +47,7 @@ const ProfileInfoBlock = () => {
           Город:
         </InfoBlockRowElement>
         <InfoBlockRowElement>
-          {city}
+          {city || <AbsenceMessage>не указан</AbsenceMessage>}
         </InfoBlockRowElement>
       </BlockRow>
     </BlockWrapper>

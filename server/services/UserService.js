@@ -1,10 +1,17 @@
+const PaginationService = require('./PaginationService');
 const User = require('../models/User');
 const UserDto = require('../dtos/UserDto');
 
 class UserService {
-  async getUsers(userId) {
-    const users = await User.find({ _id: { $ne: userId } });
-    return users.map(user => new UserDto(user));
+  async getUsers(userId, page, limit, query) {
+    const options = query ? {
+      _id: { $ne: userId },
+      $or: [{ firstName: { $search: query } }, { lastName: { $search: query } }],
+    } : { _id: { $ne: userId } };
+
+    const userList = await PaginationService.getPaginatedData(User, options, page, limit);
+
+    return userList;
   }
 
   async getUser(userId) {

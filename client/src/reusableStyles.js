@@ -43,6 +43,18 @@ export const BlockWrapper = styled.article`
   align-self: stretch;
 `;
 
+export const MessageBlock = styled.div`
+  background-color: #fff;
+  border-radius: 0.3rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+  margin: 1rem;
+  padding: 1rem;
+  align-self: stretch;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+`;
+
 export const BlockRow = styled.div`
   display: flex;
   justify-content: space-between;
@@ -121,4 +133,9 @@ export const FriendBlockInfo = styled.div`
 export const FriendBlockInfoName = styled.div`
   font-size: 2rem;
   font-weight: 600;
+`;
+
+export const AbsenceMessage = styled.div`
+  color: grey;
+  font-weight: 400;
 `;

@@ -4,8 +4,8 @@ class FriendsController {
   async getFriends(req, res, next) {
     try {
       const { userId } = req.user;
-      const { page = 1, limit = 5 } = req.query;
-      const friendsList = await FriendsService.getFriends(userId, page, limit);
+      const { page = 1, limit = 5, query = false } = req.query;
+      const friendsList = await FriendsService.getFriends(userId, page, limit, query);
       res.status(200).json(friendsList);
     } catch (e) {
       next(e);

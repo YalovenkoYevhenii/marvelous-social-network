@@ -4,7 +4,8 @@ class UserController {
   async getUsers(req, res, next) {
     try {
       const { userId } = req.user;
-      const users = await UserService.getUsers(userId);
+      const { page = 1, limit = 5, query = false } = req.query;
+      const users = await UserService.getUsers(userId, page, limit, query);
       return res.status(200).json(users);
     } catch (e) {
       next(e);
