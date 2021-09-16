@@ -11,6 +11,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import useRequest from 'hooks/useRequest';
+import useToggler from 'hooks/useToggler';
 
 import { useContextAuthentificationPage } from '../context';
 import { StyledErrorMessage } from './styles';
@@ -31,15 +32,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SignIn = ({ icon, handlerShowPassword, setIcon }) => {
+const SignIn = () => {
   const [signInError, setSignInError] = useState('');
   const { paper, form, submit } = useStyles();
   const { requestData, requestError, setOptions } = useRequest();
+  const { value: icon, handlerToggle } = useToggler();
   const { setUser, postRequestOptions } = useContextAuthentificationPage();
 
-  useEffect(() => {
-    setIcon(false);
-  }, []);
+  const handlerShowPassword = () => {
+    handlerToggle();
+  };
 
   const handlerGetUser = (e) => {
     e.preventDefault();

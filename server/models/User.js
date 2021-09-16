@@ -9,6 +9,8 @@ const schema = new Schema({
   activationLink: { type: String },
   avatar: { type: String, default: '' },
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  incomingFriendsRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  outgoingFriendsRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   profession: { type: String, required: false, default: '' },
   education: { type: String, required: false, default: '' },
   city: { type: String, required: false, default: '' },

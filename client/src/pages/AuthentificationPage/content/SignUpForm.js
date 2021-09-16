@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -11,20 +11,23 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import useRequest from 'hooks/useRequest';
+import useToggler from 'hooks/useToggler';
+
 import { useContextAuthentificationPage } from '../context';
 
-const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
+const SignUp = () => {
   const {
     validateForm, initInputErrors, initUserData, classes, setUser,
   } = useContextAuthentificationPage();
 
+  const { value: icon, handlerToggle } = useToggler();
   const { setOptions, requestData } = useRequest();
   const [userData, setUserData] = useState(initUserData);
   const [inputErrors, setInputErrors] = useState(initInputErrors);
 
-  useEffect(() => {
-    setIcon(false);
-  }, []);
+  const handlerShowPassword = () => {
+    handlerToggle();
+  };
 
   const handlerInputValues = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -36,8 +39,6 @@ const SignUp = ({ icon, handlerShowPassword, setIcon }) => {
     validateForm(userData)
       .then((res) => {
         if (!Array.isArray(res)) {
-          console.log(res);
-
           return setOptions(res);
         }
 

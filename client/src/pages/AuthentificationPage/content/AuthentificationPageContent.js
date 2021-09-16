@@ -25,7 +25,6 @@ const SignUpTheme = createTheme({
 });
 
 const AuthentificationPageContent = () => {
-  const [icon, setIcon] = useState(false);
   const [form, setForm] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('');
 
@@ -39,8 +38,6 @@ const AuthentificationPageContent = () => {
     handlerThemeForm(value);
   }, []);
 
-  const handlerShowPassword = () => setIcon(prev => !prev);
-
   return (
     <AuthMain>
       <ButtonGroupOfTwo
@@ -49,19 +46,7 @@ const AuthentificationPageContent = () => {
         form={form}
       />
       <ThemeProvider theme={currentTheme}>
-        { form ? (
-          <SignIn
-            setIcon={setIcon}
-            icon={icon}
-            handlerShowPassword={handlerShowPassword}
-          />
-        ) : (
-          <SignUp
-            setIcon={setIcon}
-            icon={icon}
-            handlerShowPassword={handlerShowPassword}
-          />
-        ) }
+        { form ? <SignIn /> : <SignUp />}
       </ThemeProvider>
     </AuthMain>
   );

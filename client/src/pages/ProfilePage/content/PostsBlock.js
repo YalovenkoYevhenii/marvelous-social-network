@@ -18,7 +18,6 @@ const PostsBlock = () => {
   useEffect(() => {
     setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_POSTS}/${profileId}` });
   }, []);
-  console.log('posts', requestData);
   return (
     <StyledColumnBlockPosts>
       <SendPostBlock />

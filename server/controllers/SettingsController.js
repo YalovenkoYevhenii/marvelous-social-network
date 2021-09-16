@@ -1,4 +1,5 @@
 const SettingsService = require('../services/SettingsService');
+const config = require('../config');
 
 class SettingsController {
   async changeProperties(req, res, next) {
@@ -8,7 +9,7 @@ class SettingsController {
 
       await SettingsService.changeProperties(userId, body, files?.avatar);
 
-      res.status(200).json({ message: 'Your personal properties were successfully changed' });
+      res.status(200).json({ message: config.s200settingsEdited });
     } catch (e) {
       next(e);
     }
@@ -21,7 +22,7 @@ class SettingsController {
 
       await SettingsService.deleteAvatar(userId, avatar);
 
-      res.status(200).json({ message: 'Your avatar has been deleted' });
+      res.status(200).json({ message: config.s200settingsDeleted });
     } catch (e) {
       next(e);
     }

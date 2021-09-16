@@ -27,6 +27,35 @@ class FriendsService {
     await friend.save();
   }
 
+  async sendFriendsRequest(userId, friendId) {
+    const user = await User.findById(userId);
+    user.outgoingFriendsRequests.push(friendId);
+
+    const friend = await User.findById(friendId);
+    friend.incomingFriendsRequests.push(userId);
+
+    await user.save();
+    await friend.save();
+  }
+
+  async declineFriendsRequest(userId, friendId) {
+    const user = await User.findById(userId);
+    const friend = await User.findById(friendId);
+
+    const doCancelMyRequest = user.outgoingFriendsRequests.find(id => id === friendId);
+    if (doCancelMyRequest) {
+      user.outgoingFriendsRequests.pull(friendId);
+      friend.incomingFriendsRequests.pull(userId);
+    }
+    if (!doCancelMyRequest) {
+      user.incomingFriendsRequests.pull(friendId);
+      friend.outgoingFriendsRequests.pull(userId);
+    }
+
+    await user.save();
+    await friend.save();
+  }
+
   async removeFriend(userId, friendId) {
     const user = await User.findById(userId);
     user.friends.pull(friendId);

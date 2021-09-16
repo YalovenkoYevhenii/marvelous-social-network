@@ -1,6 +1,8 @@
 const uuid = require('uuid');
 const path = require('path');
 const fs = require('fs');
+
+const config = require('../config');
 const ApiError = require('../exceptions/ApiError');
 
 class FileService {
@@ -11,17 +13,16 @@ class FileService {
       file.mv(filePath);
       return fileName;
     } catch (e) {
-      ApiError.BadRequest('Can not find specified path');
+      ApiError.BadRequest(config.s400incorrectPath);
     }
   }
 
   deleteFile(fileName) {
     try {
       const filePath = path.resolve('static', fileName);
-      console.log('filepath ==>', filePath);
       fs.unlinkSync(filePath);
     } catch (e) {
-      ApiError.BadRequest('Can not find specified path');
+      ApiError.BadRequest(config.s400incorrectPath);
     }
   }
 }

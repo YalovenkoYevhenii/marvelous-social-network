@@ -1,4 +1,5 @@
 const PostsService = require('../services/PostsService');
+const config = require('../config');
 
 class PostsController {
   async getFriendsPosts(req, res, next) {
@@ -30,7 +31,7 @@ class PostsController {
       const { body, time } = req.body;
       const { userId } = req.user;
       await PostsService.addPost(userId, body, time);
-      return res.status(201).send('Successfully created');
+      return res.status(201).send(config.s201postsCreated);
     } catch (e) {
       next(e);
     }
@@ -41,7 +42,7 @@ class PostsController {
       const { userId } = req.user;
       const { postId, body } = req.body;
       await PostsService.editPost(userId, postId, body);
-      return res.status(200).send('Post has been edited successfully');
+      return res.status(200).send(config.s200postsEdited);
     } catch (e) {
       next(e);
     }
@@ -52,7 +53,7 @@ class PostsController {
       const { userId } = req.user;
       const { postId } = req.body;
       await PostsService.deletePost(userId, postId);
-      return res.status(200).send('Post has been deleted successfully');
+      return res.status(200).send(config.s200postsDeleted);
     } catch (e) {
       next(e);
     }

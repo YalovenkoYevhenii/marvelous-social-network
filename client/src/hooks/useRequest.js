@@ -20,10 +20,10 @@ axiosAPI.interceptors.response.use(config => config, async (err) => {
       localStorage.setItem('token', res.data.accessToken);
       return axiosAPI.request(originalRequest);
     } catch (e) {
-      return console.log(err);
+      return err;
     }
   }
-  return console.log(err);
+  return err;
 });
 
 const useRequest = () => {

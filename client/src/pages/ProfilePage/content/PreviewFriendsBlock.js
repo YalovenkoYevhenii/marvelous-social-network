@@ -19,7 +19,7 @@ const PreviewFriendsBlock = () => {
   useEffect(() => {
     setOptions({ ...getRequestOptions, url: process.env.REACT_APP_URL_FRIENDS });
   }, []);
-  console.log(requestData);
+
   return (
     <BlockWrapper>
       <BlockRow>

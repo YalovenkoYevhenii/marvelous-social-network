@@ -1,3 +1,5 @@
+const config = require('../config');
+
 module.exports = class ApiError extends Error {
   status;
 
@@ -10,7 +12,7 @@ module.exports = class ApiError extends Error {
   }
 
   static UnautorizedError() {
-    return new ApiError(401, 'User is unautorized');
+    return new ApiError(401, config.s401errorMessage);
   }
 
   static BadRequest(message, errors = []) {

@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 
+const config = require('../config');
 const UserDto = require('../dtos/UserDto');
 const User = require('../models/User');
 const ApiError = require('../exceptions/ApiError');
@@ -11,7 +12,7 @@ const TokenService = require('./TokenService');
 class AuthService {
   async signUp(firstName, lastName, email, password) {
     const candidate = await User.findOne({ email });
-    if (candidate) throw ApiError.BadRequest('User with this email already exists');
+    if (candidate) throw ApiError.BadRequest(config.s400userAlreadyExist);
 
     const hashedPassword = await bcrypt.hash(password, 8);
     const activationLink = uuid.v4();
@@ -31,7 +32,7 @@ class AuthService {
 
   async activate(activationLink) {
     const user = await User.findOne({ activationLink });
-    if (!user) throw new ApiError.BadRequest('We are sorry. But it seems you have got incorrect activation link');
+    if (!user) throw new ApiError.BadRequest(config.s400incorrectActivationLink);
 
     user.isActivated = true;
     await user.save();
@@ -39,10 +40,10 @@ class AuthService {
 
   async signIn(email, password) {
     const user = await User.findOne({ email });
-    if (!user) throw ApiError.BadRequest('Invalid email or password');
+    if (!user) throw ApiError.BadRequest(config.s400invalidEntriesSignIn);
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) throw ApiError.BadRequest('Invalid email or password');
+    if (!isMatch) throw ApiError.BadRequest(config.s400invalidEntriesSignIn);
 
     const userDto = new UserDto(user);
     const tokens = TokenService.generateTokens({ ...userDto });
