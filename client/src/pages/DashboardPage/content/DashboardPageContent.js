@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Main, Container, MessageBlock } from 'reusableStyles';
 import PostBlock from 'components/PostBlock';
 import Preloader from 'components/Preloader';
+import Toast from 'components/Toast';
 import useRequest from 'hooks/useRequest';
 import { useContextDashboardPage } from '../context';
 
@@ -37,6 +38,7 @@ export const DashboardPageContent = () => {
           )}
         </DashboardContentContainer>
       </Container>
+      <Toast isOpen message="check this out" type="error" />
     </Main>
   );
 };
