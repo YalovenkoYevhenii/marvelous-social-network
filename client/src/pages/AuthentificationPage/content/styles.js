@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { Main } from '../../../reusableStyles';
+
+import { Main } from 'reusableStyles';
+import COLORS from 'constants/styles';
 
 export const StyledErrorMessage = styled.div`
   color: red;
-  background-color: #FFCDD2;
+  background-color: ${COLORS.lightRedErr};
   padding: 1rem;
   font-size: 1rem;
   border-radius: .4rem;

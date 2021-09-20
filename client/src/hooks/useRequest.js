@@ -41,7 +41,7 @@ const useRequest = () => {
       axiosAPI(options)
         .then((res) => {
           if (!cancel) setRequestData(res.data);
-          if (!res.ok) throw new Error(res.message || 'Something went wrong');
+          if (!res.statusText === 'OK') throw new Error(res.data.message || 'Something went wrong');
         })
         .catch((err) => {
           if (!cancel) setRequestError(err.message);

@@ -34,6 +34,9 @@ const deleteRequestOptions = {
 
 const Provider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [type, setType] = useState('success');
+  const [message, setMessage] = useState('');
 
   const { setOptions, requestData } = useRequest();
 
@@ -59,6 +62,12 @@ const Provider = ({ children }) => {
     putRequestOptions,
     patchRequestOptions,
     deleteRequestOptions,
+    isOpen,
+    type,
+    message,
+    setIsOpen,
+    setType,
+    setMessage,
   };
   return (
     <Context.Provider value={data}>

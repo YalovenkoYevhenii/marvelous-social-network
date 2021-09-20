@@ -10,7 +10,15 @@ import { useContextDashboardPage } from '../context';
 import { DashboardContentContainer } from './styles';
 
 export const DashboardPageContent = () => {
-  const { getRequestOptions } = useContextDashboardPage();
+  const {
+    getRequestOptions,
+    isOpen,
+    type,
+    message,
+    setIsOpen,
+    setType,
+    setMessage,
+  } = useContextDashboardPage();
   const {
     requestData, requestError, loading, setOptions,
   } = useRequest();
@@ -18,12 +26,18 @@ export const DashboardPageContent = () => {
   useEffect(() => {
     setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_POSTS}` });
   }, []);
+  useEffect(() => {
+    if (requestError) {
+      setIsOpen(true);
+      setType('error');
+      setMessage(requestError);
+    }
+  }, [requestError]);
 
   return (
     <Main>
       <Container>
         <DashboardContentContainer>
-          { requestError && <div>{requestError.message}</div> }
           { loading ? <Preloader /> : (
             requestData?.content.map(({
               body, time, _id, userId,
@@ -38,7 +52,7 @@ export const DashboardPageContent = () => {
           )}
         </DashboardContentContainer>
       </Container>
-      <Toast isOpen message="check this out" type="error" />
+      <Toast isOpen={isOpen} setIsOpen={setIsOpen} message={message} type={type} />
     </Main>
   );
 };

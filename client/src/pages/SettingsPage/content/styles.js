@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button, Avatar } from '@material-ui/core';
 
 import { PageContentContainer, BlockWrapper } from 'reusableStyles';
+import COLORS from 'constants/styles';
 
 export const SettingsPageContentContainer = styled(PageContentContainer)`
   flex-direction: column;
@@ -14,7 +15,7 @@ export const SettingsPageContentContainer = styled(PageContentContainer)`
 
 export const SettingPageHeading = styled.h1`
   padding: .5rem;
-  color: #1d1d1d;
+  color: ${COLORS.dimBlack};
   text-transform: uppercase;
   margin: 0 auto;
 `;
@@ -45,7 +46,7 @@ export const StyledSettingsSection = styled.section`
   display: flex;
   justify-content: flex-start;
   padding: 1rem;
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid ${COLORS.lightGrayBg};
   
 `;
 

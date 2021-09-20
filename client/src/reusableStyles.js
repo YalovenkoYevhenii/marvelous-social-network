@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 
+import COLORS from 'constants/styles';
+
 export const Container = styled.div`
   width: 80vw;
   margin: 0 auto;
@@ -11,10 +13,10 @@ export const Container = styled.div`
 export const StyledLink = styled(Link)`
   text-decoration: none;
   display: block;
-  color: #3949AB;
+  color: ${COLORS.secondary};
   font-size: 1rem;
   &:hover {
-    color: #FF4447;
+    color: ${COLORS.active};
   }
 `;
 
@@ -23,7 +25,7 @@ export const Main = styled.main`
 `;
 
 export const PageContentContainer = styled.div`
-  background-color: #f0f2f5;
+  background-color: ${COLORS.lightGrayBg};
   padding: 2rem 1rem;
   border-radius: .5rem;
   display: flex;

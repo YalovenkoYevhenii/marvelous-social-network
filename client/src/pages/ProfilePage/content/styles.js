@@ -4,8 +4,8 @@ import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import TextField from '@material-ui/core/TextField';
 
-import background from '../../../assets/img/background.jpg';
-import { Container, StyledLink, PageContentContainer } from '../../../reusableStyles';
+import background from 'assets/img/background.jpg';
+import { Container, StyledLink, PageContentContainer } from 'reusableStyles';
 
 // ProfileHeading
 

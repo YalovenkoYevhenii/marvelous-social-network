@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { PageContentContainer } from '../../../reusableStyles';
+import { PageContentContainer } from 'reusableStyles';
 
 export const DashboardContentContainer = styled(PageContentContainer)`
   flex-direction: column;
