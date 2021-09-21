@@ -38,6 +38,7 @@ const useRequest = () => {
     const fetchData = () => {
       setLoading(true);
       setRequestError(null);
+      setRequestData(null);
       axiosAPI(options)
         .then((res) => {
           if (!cancel) setRequestData(res.data);

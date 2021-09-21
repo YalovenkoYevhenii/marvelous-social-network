@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
 import SendIcon from '@material-ui/icons/Send';
 
 import useRequest from 'hooks/useRequest';
@@ -8,10 +9,10 @@ import { StyledTextField, SendPostHeading, StyledSendButton } from './styles';
 
 import { useContextProfilePage } from '../context';
 
-const SendPostBlock = () => {
+const SendPostBlock = ({ setDoRepeat, avatar }) => {
   const { postRequestOptions } = useContextProfilePage();
   const [postBody, setPostBody] = useState();
-  const { setOptions } = useRequest();
+  const { setOptions, requestData } = useRequest();
 
   const handlerPostInput = (e) => {
     setPostBody(e.target.value);
@@ -26,7 +27,12 @@ const SendPostBlock = () => {
         time: new Date().toLocaleDateString(),
       },
     });
+    setPostBody('');
   };
+
+  useEffect(() => {
+    setDoRepeat(prev => prev + 1);
+  }, [requestData]);
 
   return (
     <BlockWrapper>
@@ -34,7 +40,7 @@ const SendPostBlock = () => {
         <SendPostHeading>Добавить пост</SendPostHeading>
       </BlockRow>
       <BlockRow>
-        <PostAvatar />
+        <PostAvatar src={avatar ? `${process.env.REACT_APP_URL}/${avatar}` : `${process.env.REACT_APP_URL}/default.png`} />
         <StyledTextField
           label="Напиши что-то умное"
           variant="outlined"
@@ -49,7 +55,7 @@ const SendPostBlock = () => {
       <StyledSendButton
         variant="contained"
         color="secondary"
-        startIcon={<SendIcon />}
+        endIcon={<SendIcon />}
         onClick={handlerSendPost}
       >
         Отправить

@@ -20,7 +20,7 @@ const ProfilePageContent = () => {
             <HeadingBlock />
             <ProfileContentContainer>
               <AdditionalBlock />
-              <PostsBlock />
+              <PostsBlock avatar={requestData.avatar} />
             </ProfileContentContainer>
           </Container>
         </>

@@ -80,6 +80,7 @@ export const PostUserName = styled.div`
 
 export const PostContent = styled.p`
   font-size: 1rem;
+  overflow-wrap: anywhere;
 `;
 
 export const PostDate = styled.time`

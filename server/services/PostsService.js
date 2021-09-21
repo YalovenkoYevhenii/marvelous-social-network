@@ -20,8 +20,10 @@ class PostsService {
 
   async getUserPosts(userId, page, limit) {
     const options = { userId };
+    const populateOptions = ['userId', { firstName: 1, lastName: 2, avatar: 3 }];
 
-    const userPosts = await PaginationService.getPaginatedData(Post, options, page, limit, true, 'userId');
+    const userPosts = await PaginationService
+      .getPaginatedData(Post, options, page, limit, true, populateOptions);
     return userPosts;
   }
 
