@@ -29,7 +29,7 @@ class PostsService {
 
   async editPost(userId, postId, body) {
     const post = await Post.findById(postId);
-    if (post.userId !== userId) throw ApiError.UnautorizedError();
+    if (!post.userId.equals(userId)) throw ApiError.UnautorizedError();
 
     post.body = body;
     await post.save();
@@ -37,9 +37,10 @@ class PostsService {
 
   async deletePost(userId, postId) {
     const post = await Post.findById(postId);
-    if (post.userId !== userId) throw ApiError.UnautorizedError();
 
-    await Post.deleteOne({ postId });
+    if (!post.userId.equals(userId)) throw ApiError.UnautorizedError();
+
+    await Post.deleteOne({ _id: post._id });
   }
 }
 

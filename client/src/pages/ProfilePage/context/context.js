@@ -10,7 +10,7 @@ export const useContextPage = () => useContext(Context);
 
 export const Provider = ({ children }) => {
   const {
-    getRequestOptions, postRequestOptions, user,
+    getRequestOptions, postRequestOptions, deleteRequestOptions, patchRequestOptions, user,
   } = useContextApp();
   const { profileId } = useParams();
   const {
@@ -21,7 +21,15 @@ export const Provider = ({ children }) => {
   }, []);
 
   const data = {
-    getRequestOptions, postRequestOptions, user, requestData, requestError, loading, profileId,
+    getRequestOptions,
+    postRequestOptions,
+    deleteRequestOptions,
+    patchRequestOptions,
+    user,
+    requestData,
+    requestError,
+    loading,
+    profileId,
   };
 
   return (

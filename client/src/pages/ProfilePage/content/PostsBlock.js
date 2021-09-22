@@ -27,7 +27,14 @@ const PostsBlock = ({ avatar }) => {
       {loading ? <Preloader /> : requestData?.content.map(({
         body, time, userId, _id,
       }) => (
-        <PostBlock body={body} time={time} userData={userId} key={_id} setDoRepeat={setDoRepeat} />
+        <PostBlock
+          body={body}
+          time={time}
+          userData={userId}
+          key={_id}
+          postId={_id}
+          setDoRepeat={setDoRepeat}
+        />
       )).reverse()}
       {requestData?.content.length === 0 && <MessageBlock>У вас пока нет постов</MessageBlock>}
     </StyledColumnBlockPosts>

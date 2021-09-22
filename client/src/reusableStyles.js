@@ -142,3 +142,7 @@ export const AbsenceMessage = styled.div`
   color: grey;
   font-weight: 400;
 `;
+
+export const StyledPostBlockMenu = styled.div`
+  align-self: center;
+`;
