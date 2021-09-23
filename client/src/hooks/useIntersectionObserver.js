@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 
-const useLazyLoad = () => {
+const useIntersectionObserver = () => {
   const targetRef = useRef(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [isRanOut, setIsRanOut] = useState(false);
@@ -9,15 +9,18 @@ const useLazyLoad = () => {
     const observer = new IntersectionObserver(([entry]) => {
       setIsIntersecting(entry.isIntersecting);
     }, { threshold: 1.0 });
+    if (targetRef.current) observer.observe(targetRef.current);
 
-    if (targetRef) observer.observe(targetRef);
+    if (isRanOut) observer.unobserve(targetRef.current);
 
-    if (isRanOut) observer.unobserve(targetRef);
-
-    return () => isRanOut || observer.unobserve(targetRef);
+    return () => {
+      if (targetRef.current) observer.unobserve(targetRef.current);
+    };
   }, []);
 
-  return { targetRef, isIntersecting, setIsRanOut };
+  return {
+    targetRef, isIntersecting, isRanOut, setIsRanOut,
+  };
 };
 
-export default useLazyLoad;
+export default useIntersectionObserver;

@@ -150,6 +150,7 @@ export const StyledColumnBlockPosts = styled(StyledColumnBlock)`
 `;
 
 export const StyledTextField = styled(TextField)`
+  flex: 1;
   margin: 1rem 1rem 1rem 0;
 `;
 

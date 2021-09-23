@@ -8,6 +8,8 @@ import {
   PostUserName, PostContent, PostDate,
 } from 'reusableStyles';
 
+import { StyledTextField } from './styles';
+
 import { useContextProfilePage } from '../context';
 
 import IconDropdownMenu from './IconDropdownMenu';
@@ -19,16 +21,23 @@ const PostBlock = ({
   const { setOptions: setDeleteOptions, requestData: deleteRequestData } = useRequest();
   const { setOptions: setUpdateOptions, requestData: updateRequestData } = useRequest();
   const [postAction, setPostAction] = useState('');
+  const [editPostBody, setEditPostBody] = useState(body);
 
-  if (postAction === 'edit') {
-    setUpdateOptions({
-      ...patchRequestOptions,
-      url: process.env.REACT_APP_URL_POSTS_EDIT_POST,
-      data: { postId, body },
-    });
-    setDoRepeat(prev => prev + 1);
-    setPostAction('');
-  }
+  const handlerEditPost = (e) => {
+    setEditPostBody(e.target.value);
+  };
+
+  const handlerSendEditedPost = (e) => {
+    if (e.key === 'Enter') {
+      setUpdateOptions({
+        ...patchRequestOptions,
+        url: process.env.REACT_APP_URL_POSTS_EDIT_POST,
+        data: { postId, body: editPostBody },
+      });
+
+      setPostAction('');
+    }
+  };
 
   if (postAction === 'delete') {
     setDeleteOptions({
@@ -38,6 +47,7 @@ const PostBlock = ({
     });
     setPostAction('');
   }
+  if (updateRequestData) setDoRepeat(prev => prev + 1);
   if (deleteRequestData) return null;
 
   return (
@@ -52,9 +62,22 @@ const PostBlock = ({
         <IconDropdownMenu setPostAction={setPostAction} />
       </BlockRow>
       <BlockRow>
-        <PostContent>
-          {body}
-        </PostContent>
+        {postAction === 'edit' ? (
+          <StyledTextField
+            label="Редактирование"
+            variant="outlined"
+            color="secondary"
+            multiline
+            rows={4}
+            value={editPostBody}
+            onChange={handlerEditPost}
+            onKeyDown={handlerSendEditedPost}
+          />
+        ) : (
+          <PostContent>
+            {body}
+          </PostContent>
+        )}
       </BlockRow>
       <hr />
       <BlockRow>

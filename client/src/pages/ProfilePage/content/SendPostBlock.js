@@ -29,6 +29,12 @@ const SendPostBlock = ({ setDoRepeat, avatar }) => {
     });
     setPostBody('');
   };
+  const handlerSendPostOnEnter = (e) => {
+    if (e.key === 'Enter') {
+      handlerSendPost();
+      e.target.blur();
+    }
+  };
 
   useEffect(() => {
     setDoRepeat(prev => prev + 1);
@@ -47,6 +53,7 @@ const SendPostBlock = ({ setDoRepeat, avatar }) => {
           color="secondary"
           value={postBody}
           onChange={handlerPostInput}
+          onKeyPress={handlerSendPostOnEnter}
           fullWidth
           multiline
           rows={4}

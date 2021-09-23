@@ -3,8 +3,10 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import { Main, Container, MessageBlock } from 'reusableStyles';
 import FriendBlock from 'components/FriendBlock';
-import useRequest from 'hooks/useRequest';
 import Preloader from 'components/Preloader';
+
+import useRequest from 'hooks/useRequest';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
 
 import { useContextFriendsPage } from '../context';
 import { FriendsPageContentContainer, StyledSearchBar, StyledButton } from './styles';
@@ -14,20 +16,54 @@ const FriendsPageContent = () => {
   const {
     requestData, requestError, loading, setOptions,
   } = useRequest();
+  const {
+    targetRef, isIntersecting, isRanOut, setIsRanOut,
+  } = useIntersectionObserver();
   const [searchType, setSearchType] = useState(true);
-  const [query, setQuery] = useState(null);
-  const [page] = useState(1);
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=${page}&limit=4&query=${query}` });
-  }, []);
+    if (requestData?.isRanOut) {
+      setIsRanOut(true);
+    }
+  }, [requestData]);
+
+  useEffect(() => {
+    if (searchType) {
+      if (!isRanOut && isIntersecting) {
+        setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=${page}&limit=4&query=${query}` });
+        setPage(prev => prev + 1);
+      }
+    }
+
+    if (!searchType) {
+      if (!isRanOut && isIntersecting) {
+        setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_USERS}/?page=${page}&limit=4&query=${query}` });
+        setPage(prev => prev + 1);
+      }
+    }
+  }, [isIntersecting, searchType]);
 
   const handlerChangeSearchType = useCallback(value => () => {
     setSearchType(value);
+    setPage(1);
   }, []);
 
   const handlerSearchBarRequest = (value) => {
     setQuery(value);
+  };
+
+  const handlerFireSearch = () => {
+    setPage(1);
+    if (searchType) {
+      setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=${page}&limit=4&query=${query}` });
+      setPage(prev => prev + 1);
+    }
+    if (!searchType) {
+      setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_USERS}/?page=${page}&limit=4&query=${query}` });
+      setPage(prev => prev + 1);
+    }
   };
 
   return (
@@ -50,9 +86,13 @@ const FriendsPageContent = () => {
 
             </StyledButton>
           </ButtonGroup>
-          <StyledSearchBar onChange={handlerSearchBarRequest} placeholder={searchType ? 'Искать друзей' : 'Искать пользователей'} />
+          <StyledSearchBar
+            onChange={handlerSearchBarRequest}
+            placeholder={searchType ? 'Искать друзей' : 'Искать пользователей'}
+            onRequestSearch={handlerFireSearch}
+          />
         </FriendsPageContentContainer>
-        <FriendsPageContentContainer>
+        <FriendsPageContentContainer ref={targetRef}>
           {requestError && requestError.message}
           {loading ? <Preloader /> : requestData && requestData.content.map(({
             firstName, lastName, _id, avatar,

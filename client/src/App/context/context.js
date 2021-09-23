@@ -23,7 +23,7 @@ const putRequestOptions = {
   data: {},
 };
 const patchRequestOptions = {
-  method: 'put',
+  method: 'patch',
   url: process.env.REACT_APP_URL_AUTH_USERS,
   data: {},
 };
