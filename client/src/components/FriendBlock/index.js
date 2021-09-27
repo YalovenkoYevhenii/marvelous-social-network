@@ -11,7 +11,7 @@ const FriendBlock = ({
 }) => (
   <FriendBlockWrapper>
     <FriendBlockLink to={`${PROFILE_PATH}/${userId}`}>
-      <FriendBlockAvatar src={avatar && `${process.env.REACT_APP_URL}/${avatar}`} alt="profile_photo" />
+      <FriendBlockAvatar src={avatar ? `${process.env.REACT_APP_URL}/${avatar}` : `${process.env.REACT_APP_URL}/default.png`} alt="profile_photo" />
       <FriendBlockInfo>
         <FriendBlockInfoName>
           {`${firstName} ${lastName}`}

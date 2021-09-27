@@ -12,8 +12,14 @@ class FriendsService {
       _id: { $in: friends },
       $expr: {
         $regexMatch: {
-          input: { $concat: ['$firstName', ' ', '$lastName'] },
-          regex: `(${first}|${second})`,
+          input: {
+            $concat: [
+              '$firstName',
+              ' ',
+              '$lastName',
+            ],
+          },
+          regex: { $in: [`/${first}/i`, `/${second}/i`] },
           options: 'i',
         },
       },
@@ -23,7 +29,6 @@ class FriendsService {
 
     const friendsList = await PaginationService
       .getPaginatedData(User, options, page, limit);
-
     return friendsList;
   }
 

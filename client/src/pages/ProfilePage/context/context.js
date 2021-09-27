@@ -18,7 +18,7 @@ export const Provider = ({ children }) => {
   } = useRequest();
   useEffect(() => {
     setOptions({ ...getRequestOptions, url: `/${profileId}` });
-  }, []);
+  }, [profileId]);
 
   const data = {
     getRequestOptions,

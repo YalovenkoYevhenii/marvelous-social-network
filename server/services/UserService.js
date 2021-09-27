@@ -5,22 +5,17 @@ const UserDto = require('../dtos/UserDto');
 class UserService {
   async getUsers(userId, page, limit, query) {
     const arrQuery = query.split(' ');
-    const first = arrQuery[0];
-    const second = arrQuery[1] || '';
+
+    console.log(arrQuery);
 
     const options = query ? {
       _id: { $ne: userId },
-      $expr: {
-        $regexMatch: {
-          input: { $concat: ['$firstName', ' ', '$lastName'] },
-          regex: `(${first}|${second})`,
-          options: 'i',
-        },
-      },
+      $or: [{ firstName: { $in: arrQuery } }, { lastName: { $in: arrQuery } }],
     } : { _id: { $ne: userId } };
     console.log('options ==>', options);
 
     const userList = await PaginationService.getPaginatedData(User, options, page, limit);
+    console.log('userЫList -->', userList);
 
     return userList;
   }

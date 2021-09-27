@@ -19,34 +19,39 @@ const FriendsPageContent = () => {
   const {
     targetRef, isIntersecting, isRanOut, setIsRanOut,
   } = useIntersectionObserver();
+  const [usersData, setUsersData] = useState(null);
   const [searchType, setSearchType] = useState(true);
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (requestData?.isRanOut) {
-      setIsRanOut(true);
+    if (requestData) {
+      setUsersData((prev) => {
+        if (!prev) return requestData.content;
+        return [...prev, ...requestData.content];
+      });
+
+      setIsRanOut(requestData.isRanOut);
     }
   }, [requestData]);
 
   useEffect(() => {
-    if (searchType) {
-      if (!isRanOut && isIntersecting) {
-        setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=${page}&limit=4&query=${query}` });
-        setPage(prev => prev + 1);
+    if (!isRanOut && isIntersecting) {
+      if (searchType) {
+        setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=${page}&limit=3&query=${query}` });
       }
-    }
 
-    if (!searchType) {
-      if (!isRanOut && isIntersecting) {
-        setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_USERS}/?page=${page}&limit=4&query=${query}` });
-        setPage(prev => prev + 1);
+      if (!searchType) {
+        setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_USERS}/?page=${page}&limit=3&query=${query}` });
       }
+      setPage(prev => prev + 1);
     }
   }, [isIntersecting, searchType]);
 
   const handlerChangeSearchType = useCallback(value => () => {
     setSearchType(value);
+    setUsersData(null);
+    setIsRanOut(false);
     setPage(1);
   }, []);
 
@@ -54,16 +59,20 @@ const FriendsPageContent = () => {
     setQuery(value);
   };
 
+  console.log('usersData ===> ', usersData);
+  console.log('requestData ===> ', requestData);
+  console.log('page ===> ', page);
+
   const handlerFireSearch = () => {
-    setPage(1);
     if (searchType) {
-      setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=${page}&limit=4&query=${query}` });
-      setPage(prev => prev + 1);
+      setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=1&limit=3&query=${query}` });
     }
     if (!searchType) {
-      setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_USERS}/?page=${page}&limit=4&query=${query}` });
-      setPage(prev => prev + 1);
+      setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_USERS}/?page=1&limit=3&query=${query}` });
     }
+
+    setUsersData(null);
+    setPage(2);
   };
 
   return (
@@ -94,7 +103,7 @@ const FriendsPageContent = () => {
         </FriendsPageContentContainer>
         <FriendsPageContentContainer ref={targetRef}>
           {requestError && requestError.message}
-          {loading ? <Preloader /> : requestData && requestData.content.map(({
+          {loading ? <Preloader /> : usersData?.map(({
             firstName, lastName, _id, avatar,
           }) => (
             <FriendBlock
@@ -105,7 +114,7 @@ const FriendsPageContent = () => {
               key={_id}
             />
           ))}
-          {requestData?.content.length === 0 && (
+          {usersData?.length === 0 && (
           <MessageBlock>
             Пользователей не найдено
           </MessageBlock>

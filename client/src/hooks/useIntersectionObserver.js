@@ -4,17 +4,17 @@ const useIntersectionObserver = () => {
   const targetRef = useRef(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [isRanOut, setIsRanOut] = useState(false);
+  const observer = new IntersectionObserver(([entry]) => {
+    setIsIntersecting(entry.isIntersecting);
+  }, { threshold: 1.0 });
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsIntersecting(entry.isIntersecting);
-    }, { threshold: 1.0 });
     if (targetRef.current) observer.observe(targetRef.current);
 
     if (isRanOut) observer.unobserve(targetRef.current);
 
     return () => {
-      if (targetRef.current) observer.unobserve(targetRef.current);
+      observer.disconnect();
     };
   }, []);
 
