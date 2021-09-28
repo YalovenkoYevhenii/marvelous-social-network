@@ -38,7 +38,7 @@ const Provider = ({ children }) => {
   const [type, setType] = useState('success');
   const [message, setMessage] = useState('');
 
-  const { setOptions, requestData } = useRequest();
+  const { setOptions, requestData, loading: userLoading } = useRequest();
 
   const handlerSignOut = useCallback(() => {
     setUser(false);
@@ -55,6 +55,7 @@ const Provider = ({ children }) => {
 
   const data = {
     user,
+    userLoading,
     setUser,
     handlerSignOut,
     postRequestOptions,

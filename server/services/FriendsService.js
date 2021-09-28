@@ -4,25 +4,11 @@ const PaginationService = require('./PaginationService');
 class FriendsService {
   async getFriends(userId, page, limit, query) {
     const { friends } = await User.findById(userId);
-    const arrQuery = query.split(' ');
-    const first = arrQuery[0];
-    const second = arrQuery[1] || '';
+    const arrQuery = query && query.split(' ');
 
     const options = query ? {
       _id: { $in: friends },
-      $expr: {
-        $regexMatch: {
-          input: {
-            $concat: [
-              '$firstName',
-              ' ',
-              '$lastName',
-            ],
-          },
-          regex: { $in: [`/${first}/i`, `/${second}/i`] },
-          options: 'i',
-        },
-      },
+      $or: [{ firstName: { $in: arrQuery } }, { lastName: { $in: arrQuery } }],
     } : {
       _id: { $in: friends },
     };
@@ -35,9 +21,11 @@ class FriendsService {
   async addFriend(userId, friendId) {
     const user = await User.findById(userId);
     user.friends.push(friendId);
+    user.incomingFriendsRequests.pull(friendId);
 
     const friend = await User.findById(friendId);
     friend.friends.push(userId);
+    friend.outgoingFriendsRequests.pull(userId);
 
     await user.save();
     await friend.save();

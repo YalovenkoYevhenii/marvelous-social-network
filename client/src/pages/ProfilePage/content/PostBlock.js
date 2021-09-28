@@ -17,7 +17,9 @@ import IconDropdownMenu from './IconDropdownMenu';
 const PostBlock = ({
   body, time, userData: { firstName, lastName, avatar }, setDoRepeat, postId,
 }) => {
-  const { deleteRequestOptions, patchRequestOptions } = useContextProfilePage();
+  const {
+    deleteRequestOptions, patchRequestOptions, user, profileId,
+  } = useContextProfilePage();
   const { setOptions: setDeleteOptions, requestData: deleteRequestData } = useRequest();
   const { setOptions: setUpdateOptions, requestData: updateRequestData } = useRequest();
   const [postAction, setPostAction] = useState('');
@@ -59,7 +61,7 @@ const PostBlock = ({
             {`${firstName} ${lastName}`}
           </PostUserName>
         </PostBlockUserBlock>
-        <IconDropdownMenu setPostAction={setPostAction} />
+        {user.userId === profileId && <IconDropdownMenu setPostAction={setPostAction} />}
       </BlockRow>
       <BlockRow>
         {postAction === 'edit' ? (

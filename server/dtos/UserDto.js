@@ -21,6 +21,10 @@ module.exports = class UserDto {
 
   birthday;
 
+  incomingFriendsRequests;
+
+  outgoingFriendsRequests;
+
   constructor(model) {
     this.email = model.email;
     this.userId = model._id;
@@ -33,5 +37,7 @@ module.exports = class UserDto {
     this.education = model.education;
     this.city = model.city;
     this.birthday = model.birthday;
+    this.incomingFriendsRequests = model.incomingFriendsRequests;
+    this.outgoingFriendsRequests = model.outgoingFriendsRequests;
   }
 };

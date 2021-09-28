@@ -21,3 +21,8 @@ export const StyledButton = styled(Button)`
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 `;
+
+export const StyledIncomingFriendsRequestsHeading = styled.h2`
+  align-self: center;
+  margin: .1rem;
+`;

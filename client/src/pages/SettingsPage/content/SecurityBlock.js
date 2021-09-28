@@ -12,7 +12,7 @@ import {
 } from './styles';
 
 const SecurityBlock = ({
-  firstInput, setFirstInput, secondInput, setSecondInput,
+  firstInput, setFirstInput, secondInput, setSecondInput, areEqual,
 }) => {
   const { value: icon1, handlerToggle: handlerToggle1 } = useToggler();
   const { value: icon2, handlerToggle: handlerToggle2 } = useToggler();
@@ -54,6 +54,8 @@ const SecurityBlock = ({
         <StyledTextField
           value={firstInput}
           onChange={handlerNewPassword}
+          error={!areEqual}
+          helperText={!areEqual && 'Пароли не совпадают'}
           variant="outlined"
           label="Новый пароль"
           name="newPassword"
@@ -71,6 +73,8 @@ const SecurityBlock = ({
         <StyledTextField
           value={secondInput}
           onChange={handlerCheckNewPassword}
+          error={!areEqual}
+          helperText={!areEqual && 'Пароли не совпадают'}
           variant="outlined"
           label="Повторите новый пароль"
           name="newPasswordCheck"

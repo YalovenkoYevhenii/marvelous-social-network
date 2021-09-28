@@ -6,9 +6,9 @@ const Context = createContext(null);
 const useContextPage = () => useContext(Context);
 
 const Provider = ({ children }) => {
-  const { user } = useContextApp();
+  const { user, getRequestOptions, patchRequestOptions } = useContextApp();
 
-  const data = { user };
+  const data = { user, getRequestOptions, patchRequestOptions };
   return (
     <Context.Provider value={data}>
       {children}

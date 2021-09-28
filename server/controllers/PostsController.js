@@ -5,7 +5,7 @@ class PostsController {
   async getFriendsPosts(req, res, next) {
     try {
       const { userId } = req.user;
-      const { page = 1, limit = 5 } = req.query;
+      const { page = 1, limit = 50 } = req.query;
 
       const friendsPosts = await PostsService.getFriendsPosts(userId, page, limit);
 
@@ -18,7 +18,7 @@ class PostsController {
   async getUserPosts(req, res, next) {
     try {
       const { userId } = req.params;
-      const { page = 1, limit = 5 } = req.query;
+      const { page = 1, limit = 15 } = req.query;
       const userPosts = await PostsService.getUserPosts(userId, page, limit);
       return res.status(200).json(userPosts);
     } catch (e) {

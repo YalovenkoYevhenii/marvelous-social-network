@@ -56,6 +56,7 @@ const SettingPageForm = () => {
         setFirstInput={setFirstInput}
         secondInput={secondInput}
         setSecondInput={setSecondInput}
+        areEqual={areEqual}
       />
       <StyledButtonSubmit
         type="submit"

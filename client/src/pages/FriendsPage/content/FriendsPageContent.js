@@ -10,9 +10,10 @@ import useIntersectionObserver from 'hooks/useIntersectionObserver';
 
 import { useContextFriendsPage } from '../context';
 import { FriendsPageContentContainer, StyledSearchBar, StyledButton } from './styles';
+/* import IncomingFriendsRequests from './IncomingFriendsRequests'; */
 
 const FriendsPageContent = () => {
-  const { getRequestOptions } = useContextFriendsPage();
+  const { getRequestOptions /* user */ } = useContextFriendsPage();
   const {
     requestData, requestError, loading, setOptions,
   } = useRequest();
@@ -23,6 +24,7 @@ const FriendsPageContent = () => {
   const [searchType, setSearchType] = useState(true);
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
+  const [isSearchCanceled, setIsSearchCanceled] = useState(false);
 
   useEffect(() => {
     if (requestData) {
@@ -46,7 +48,7 @@ const FriendsPageContent = () => {
       }
       setPage(prev => prev + 1);
     }
-  }, [isIntersecting, searchType]);
+  }, [isIntersecting, searchType, isSearchCanceled]);
 
   const handlerChangeSearchType = useCallback(value => () => {
     setSearchType(value);
@@ -59,20 +61,25 @@ const FriendsPageContent = () => {
     setQuery(value);
   };
 
-  console.log('usersData ===> ', usersData);
-  console.log('requestData ===> ', requestData);
-  console.log('page ===> ', page);
-
   const handlerFireSearch = () => {
+    setUsersData(null);
+    setIsRanOut(true);
+
     if (searchType) {
       setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_FRIENDS}/?page=1&limit=3&query=${query}` });
     }
     if (!searchType) {
       setOptions({ ...getRequestOptions, url: `${process.env.REACT_APP_URL_USERS}/?page=1&limit=3&query=${query}` });
     }
-
-    setUsersData(null);
     setPage(2);
+  };
+
+  const handlerCancelSearch = () => {
+    setIsSearchCanceled(true);
+    setUsersData(null);
+    setIsRanOut(false);
+    setPage(1);
+    setQuery('');
   };
 
   return (
@@ -99,11 +106,15 @@ const FriendsPageContent = () => {
             onChange={handlerSearchBarRequest}
             placeholder={searchType ? 'Искать друзей' : 'Искать пользователей'}
             onRequestSearch={handlerFireSearch}
+            onCancelSearch={handlerCancelSearch}
           />
         </FriendsPageContentContainer>
+        {/*         {user.incomingFriendsRequests.length !== 0 && (
+          <IncomingFriendsRequests requests={user.incomingFriendsRequests} />
+        )} */}
         <FriendsPageContentContainer ref={targetRef}>
           {requestError && requestError.message}
-          {loading ? <Preloader /> : usersData?.map(({
+          {usersData?.map(({
             firstName, lastName, _id, avatar,
           }) => (
             <FriendBlock
@@ -114,6 +125,7 @@ const FriendsPageContent = () => {
               key={_id}
             />
           ))}
+          {loading && <Preloader />}
           {usersData?.length === 0 && (
           <MessageBlock>
             Пользователей не найдено

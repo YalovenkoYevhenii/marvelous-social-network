@@ -146,3 +146,7 @@ export const AbsenceMessage = styled.div`
 export const StyledPostBlockMenu = styled.div`
   align-self: center;
 `;
+
+export const StyledSectionHeading = styled.div`
+  align-self: center;
+`;

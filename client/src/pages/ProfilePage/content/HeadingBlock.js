@@ -1,26 +1,20 @@
 import React from 'react';
 
-import { SETTINGS_PATH } from 'constants/routes';
-import useRedirectTo from 'hooks/useRedirectTo';
-
+import ProfileHeadingButtonsGroup from './ProfileHeadingButtonsGroup';
 import { useContextProfilePage } from '../context';
 
 import {
-  StyledProfileHeadingBlock, ProfileHeadingButtons, StyledImage,
-  StyledButton, ProfileHeadingName, ProfileHeadingUser,
+  StyledProfileHeadingBlock, StyledImage, ProfileHeadingName, ProfileHeadingUser,
 } from './styles';
 
 const HeadingBlock = () => {
   const {
-    user: { userId },
+    user: {
+      userId, incomingFriendsRequests, outgoingFriendsRequests, friends,
+    },
     profileId,
     requestData: { firstName, lastName, avatar },
   } = useContextProfilePage();
-  const setPath = useRedirectTo();
-
-  const handlerRedirect = () => {
-    setPath(SETTINGS_PATH);
-  };
 
   return (
     <StyledProfileHeadingBlock>
@@ -30,28 +24,13 @@ const HeadingBlock = () => {
           {`${firstName} ${lastName}`}
         </ProfileHeadingName>
       </ProfileHeadingUser>
-      <ProfileHeadingButtons>
-        {userId === profileId ? (
-          <StyledButton
-            color="secondary"
-            variant="contained"
-            onClick={handlerRedirect}
-          >
-            Настройки
-
-          </StyledButton>
-        ) : (
-          <>
-            <StyledButton color="secondary" variant="contained">
-              Отправить сообщение
-            </StyledButton>
-            <StyledButton color="secondary" variant="contained">
-              Добавить в друзья
-            </StyledButton>
-          </>
-        )}
-
-      </ProfileHeadingButtons>
+      <ProfileHeadingButtonsGroup
+        userId={userId}
+        profileId={profileId}
+        incomingFriendsRequests={incomingFriendsRequests}
+        outgoingFriendsRequests={outgoingFriendsRequests}
+        friends={friends}
+      />
     </StyledProfileHeadingBlock>
   );
 };

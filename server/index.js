@@ -33,6 +33,7 @@ async function start() {
       useFindAndModify: false,
       useUnifiedTopology: true,
     });
+
     app.listen(PORT, () => console.log('I am alive at ', __dirname));
   } catch (err) {
     process.exit(1);

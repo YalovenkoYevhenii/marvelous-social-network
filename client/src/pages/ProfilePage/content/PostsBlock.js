@@ -12,7 +12,7 @@ import PostBlock from './PostBlock';
 import SendPostBlock from './SendPostBlock';
 
 const PostsBlock = ({ avatar }) => {
-  const { getRequestOptions, profileId } = useContextProfilePage();
+  const { getRequestOptions, profileId, user } = useContextProfilePage();
   const {
     requestData, loading, setOptions,
   } = useRequest();
@@ -23,8 +23,8 @@ const PostsBlock = ({ avatar }) => {
   }, [doRepeat]);
   return (
     <StyledColumnBlockPosts>
-      <SendPostBlock setDoRepeat={setDoRepeat} avatar={avatar} />
-      {loading ? <Preloader /> : requestData?.content.map(({
+      {user.userId === profileId && <SendPostBlock setDoRepeat={setDoRepeat} avatar={avatar} />}
+      {requestData?.content.map(({
         body, time, userId, _id,
       }) => (
         <PostBlock
@@ -36,6 +36,7 @@ const PostsBlock = ({ avatar }) => {
           setDoRepeat={setDoRepeat}
         />
       )).reverse()}
+      {loading && <Preloader /> }
       {requestData?.content.length === 0 && <MessageBlock>У вас пока нет постов</MessageBlock>}
     </StyledColumnBlockPosts>
   );
